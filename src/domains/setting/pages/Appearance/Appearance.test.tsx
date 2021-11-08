@@ -15,7 +15,6 @@ import { AppearanceSettings } from "./Appearance";
 describe("Appearance Settings", () => {
 	let profile: Contracts.IProfile;
 	let history: MemoryHistory;
-	let historyGoSpy: jest.SpyInstance;
 
 	beforeAll(async () => {
 		profile = env.profiles().findById(getDefaultProfileId());
@@ -27,8 +26,6 @@ describe("Appearance Settings", () => {
 		history = createMemoryHistory({
 			initialEntries: [`/profiles/${profile.id()}/settings/appearance`],
 		});
-
-		historyGoSpy = jest.spyOn(history, "go").mockImplementation();
 	});
 
 	const renderPage = () =>
