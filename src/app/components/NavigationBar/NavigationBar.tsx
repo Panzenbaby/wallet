@@ -233,7 +233,6 @@ export const NavigationBar: FC<NavigationBarProperties> = ({ title, isBackDisabl
 
 					{selectedWallet && (
 						<ReceiveFunds
-							isOpen={true}
 							address={selectedWallet.address}
 							name={selectedWallet.name}
 							network={selectedWallet.network}

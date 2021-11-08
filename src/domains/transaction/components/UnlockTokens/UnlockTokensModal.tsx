@@ -4,7 +4,7 @@ import { Form } from "app/components/Form";
 import { Modal } from "app/components/Modal";
 import { useEnvironmentContext, useLedgerContext } from "app/contexts";
 import { ErrorStep } from "domains/transaction/components/ErrorStep";
-import { useTransactionBuilder, useWalletSignatory } from "domains/transaction/hooks";
+import { useTransactionBuilder } from "domains/transaction/hooks";
 import { handleBroadcastError } from "domains/transaction/utils";
 import React, { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -29,7 +29,6 @@ export const UnlockTokensModal: React.FC<Properties> = ({ profile, wallet, onClo
 
 	const abortReference = useRef<AbortController | undefined>();
 	const transactionBuilder = useTransactionBuilder();
-	const { sign } = useWalletSignatory(wallet);
 
 	const { hasDeviceAvailable, isConnected, transport, connect } = useLedgerContext();
 
@@ -54,7 +53,7 @@ export const UnlockTokensModal: React.FC<Properties> = ({ profile, wallet, onClo
 
 	const submit: SubmitHandler<UnlockTokensFormState> = async ({ selectedObjects, ...authenticationData }) => {
 		try {
-			const signatory = await sign(authenticationData);
+			const signatory = await wallet.signatoryFactory().make(authenticationData);
 
 			const input: Services.UnlockTokenInput = {
 				data: { objects: selectedObjects },

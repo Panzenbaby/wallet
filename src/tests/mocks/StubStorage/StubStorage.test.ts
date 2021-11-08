@@ -20,7 +20,7 @@ describe("StubStorage", () => {
 	it("should return set and get an entry into storage", async () => {
 		await stubStorage.set("item", "bleh");
 
-		await expect(stubStorage.get("item")).tresolves.oEqual("bleh");
+		await expect(stubStorage.get("item")).resolves.toEqual("bleh");
 	});
 
 	it("should check if the storage has a key", async () => {

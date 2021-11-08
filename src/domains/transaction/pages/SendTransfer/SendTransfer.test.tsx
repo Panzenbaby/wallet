@@ -733,7 +733,7 @@ describe("SendTransfer", () => {
 		// Change network
 		// Unselect
 		fireEvent.click(screen.getByTestId("NetworkIcon-ARK-ark.devnet"));
-		await waitFor(() => expect(screen.getByTestId("SelectNetworkInput__input")).toBeEmpty());
+		await waitFor(() => expect(screen.getByTestId("SelectNetworkInput__input")).not.toHaveValue());
 		// Select
 		fireEvent.click(screen.getByTestId("NetworkIcon-ARK-ark.devnet"));
 		await waitFor(() => expect(screen.getByTestId("SelectNetworkInput__input")).toHaveValue("ARK Devnet"));
@@ -745,7 +745,7 @@ describe("SendTransfer", () => {
 		await screen.findByTestId("SendTransfer__form-step");
 
 		// Memo
-		expect(screen.getByTestId("Input__memo")).toBeEmpty();
+		expect(screen.getByTestId("Input__memo")).not.toHaveValue();
 
 		// Fee
 		expect(screen.getAllByRole("radio")[0]).not.toBeChecked();
@@ -1052,7 +1052,7 @@ describe("SendTransfer", () => {
 		goSpy.mockRestore();
 	});
 
-	it.each(["with keyboard", "without keyboard"])("should send a single transfer", async (inputMethod) => {
+	it.each(["with keyboard", "without keyboard"])("should send a single transfer %s", async (inputMethod) => {
 		const transferURL = `/profiles/${fixtureProfileId}/wallets/${wallet.id()}/send-transfer`;
 
 		const history = createMemoryHistory();
@@ -1594,22 +1594,19 @@ describe("SendTransfer", () => {
 	});
 
 	it("should send a single transfer with a ledger wallet", async () => {
-		jest.useFakeTimers();
-		const isLedgerSpy = jest.spyOn(wallet, "isLedger").mockImplementation(() => true);
+		jest.spyOn(wallet, "isLedger").mockImplementation(() => true);
 		jest.spyOn(wallet.coin(), "__construct").mockImplementation();
-		const isNanoXMock = jest.spyOn(wallet.ledger(), "isNanoX").mockResolvedValue(true);
+		jest.spyOn(wallet.ledger(), "isNanoX").mockResolvedValue(true);
 
-		const getPublicKeySpy = jest
-			.spyOn(wallet.coin().ledger(), "getPublicKey")
-			.mockResolvedValue("0335a27397927bfa1704116814474d39c2b933aabb990e7226389f022886e48deb");
+		jest.spyOn(wallet.coin().ledger(), "getPublicKey").mockResolvedValue(
+			"0335a27397927bfa1704116814474d39c2b933aabb990e7226389f022886e48deb",
+		);
 
-		const signTransactionSpy = jest
-			.spyOn(wallet.transaction(), "signTransfer")
-			.mockReturnValue(Promise.resolve(transactionFixture.data.id));
+		jest.spyOn(wallet.transaction(), "signTransfer").mockReturnValue(Promise.resolve(transactionFixture.data.id));
 
-		const transactionMock = createTransactionMock(wallet);
+		createTransactionMock(wallet);
 
-		const broadcastMock = jest.spyOn(wallet.transaction(), "broadcast").mockResolvedValue({
+		jest.spyOn(wallet.transaction(), "broadcast").mockResolvedValue({
 			accepted: [transactionFixture.data.id],
 			errors: {},
 			rejected: [],
@@ -1667,7 +1664,7 @@ describe("SendTransfer", () => {
 		const balance = wallet.balance();
 		const derivationPath = "m/44'/1'/1'/0/0";
 
-		const mockWalletData = jest.spyOn(wallet.data(), "get").mockImplementation((key) => {
+		jest.spyOn(wallet.data(), "get").mockImplementation((key) => {
 			if (key == Contracts.WalletData.Address) {
 				return address;
 			}
@@ -1692,13 +1689,7 @@ describe("SendTransfer", () => {
 		// Auto broadcast
 		await findByTestId("TransactionSuccessful");
 
-		getPublicKeySpy.mockRestore();
-		broadcastMock.mockRestore();
-		isLedgerSpy.mockRestore();
-		signTransactionSpy.mockRestore();
-		transactionMock.mockRestore();
-		mockWalletData.mockRestore();
-		isNanoXMock.mockRestore();
+		jest.restoreAllMocks();
 	});
 
 	it("should return to form step by cancelling fee warning", async () => {
@@ -2622,7 +2613,7 @@ describe("SendTransfer", () => {
 		fireEvent.click(within(screen.getByTestId("InputFee")).getByText(transactionTranslations.FEES.SLOW));
 		await waitFor(() => expect(screen.getAllByRole("radio")[0]).toBeChecked());
 
-		expect(screen.getAllByRole("radio")[0]).toHaveTextContent("0.00357");
+		await waitFor(() => expect(screen.getAllByRole("radio")[0]).toHaveTextContent("0.00357"));
 
 		// Step 2
 		await waitFor(() => expect(getByTestId("StepNavigation__continue-button")).not.toBeDisabled());

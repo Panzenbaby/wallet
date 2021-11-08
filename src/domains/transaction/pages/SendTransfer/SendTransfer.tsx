@@ -13,12 +13,7 @@ import { AuthenticationStep } from "domains/transaction/components/Authenticatio
 import { ConfirmSendTransaction } from "domains/transaction/components/ConfirmSendTransaction";
 import { ErrorStep } from "domains/transaction/components/ErrorStep";
 import { FeeWarning } from "domains/transaction/components/FeeWarning";
-import {
-	useFeeConfirmation,
-	useTransaction,
-	useTransactionBuilder,
-	useWalletSignatory,
-} from "domains/transaction/hooks";
+import { useFeeConfirmation, useTransaction, useTransactionBuilder } from "domains/transaction/hooks";
 import { handleBroadcastError } from "domains/transaction/utils";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -110,7 +105,6 @@ export const SendTransfer = () => {
 	const [lastEstimatedExpiration, setLastEstimatedExpiration] = useState<number | undefined>();
 	const abortReference = useRef(new AbortController());
 	const transactionBuilder = useTransactionBuilder();
-	const { sign } = useWalletSignatory(wallet!);
 	const { fetchWalletUnconfirmedTransactions } = useTransaction();
 
 	useKeydown("Enter", () => {
@@ -275,16 +269,18 @@ export const SendTransfer = () => {
 			wif,
 			privateKey,
 			secret,
+			secondSecret,
 		} = getValues();
 		const isMultiPayment = recipients.length > 1;
 		const transactionType = isMultiPayment ? "multiPayment" : "transfer";
 
 		try {
-			const signatory = await sign({
+			const signatory = await wallet.signatoryFactory().make({
 				encryptionPassword,
 				mnemonic,
 				privateKey,
 				secondMnemonic,
+				secondSecret,
 				secret,
 				wif,
 			});

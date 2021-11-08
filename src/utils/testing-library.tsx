@@ -1,5 +1,6 @@
 // @ts-ignore
-import { createTransportReplayer, RecordStore } from "@ledgerhq/hw-transport-mocker";
+import Transport, { Observer } from "@ledgerhq/hw-transport";
+import { TransportReplayer } from "@ledgerhq/hw-transport-mocker/lib/openTransportReplayer";
 import { Contracts, Environment } from "@payvo/profiles";
 import { ARK } from "@payvo/sdk-ark";
 import { render, RenderResult } from "@testing-library/react";
@@ -127,7 +128,31 @@ export const getDefaultProfileId = () => Object.keys(fixtureData.profiles)[0];
 export const getPasswordProtectedProfileId = () => Object.keys(fixtureData.profiles)[1];
 export const getDefaultWalletId = () => Object.keys(Object.values(fixtureData.profiles)[0].wallets)[0];
 export const getDefaultWalletMnemonic = () => "master dizzy era math peanut crew run manage better flame tree prevent";
-export const getDefaultLedgerTransport = () => createTransportReplayer(RecordStore.fromString(""));
+export const getDefaultLedgerTransport = () => TransportReplayer;
+
+// Ledger observer spy helper
+export const ledgerObserverSpy = () => {
+	//@ts-ignore
+	let observer: Observer<any> = undefined;
+	const unsubscribe = jest.fn();
+
+	const mockTransportListen = (transport: typeof Transport) =>
+		jest.spyOn(transport, "listen").mockImplementationOnce((obv) => {
+			observer = obv;
+			return { unsubscribe };
+		});
+
+	return {
+		mockTransportListen,
+		observer: {
+			complete: () => observer.complete(),
+			error: (e: any) => observer.error(e),
+			next: (property: { descriptor: string; deviceModel: { id: string }; type: string }) =>
+				observer.error(property),
+		},
+		unsubscribe,
+	};
+};
 
 //@ts-ignore
 export const getDefaultPassword = () => TestingPasswords?.profiles[getPasswordProtectedProfileId()]?.password;
@@ -153,6 +178,8 @@ export const defaultNetMocks = () => {
 		.reply(200, require("../tests/fixtures/coins/ark/devnet/wallets/D5sRKWckH4rE1hQ9eeMeHAepgyC3cvJtwb.json"))
 		.get("/api/wallets/DABCrsfEqhtdzmBrE2AU5NNmdUFCGXKEkr")
 		.reply(200, require("../tests/fixtures/coins/ark/devnet/wallets/DABCrsfEqhtdzmBrE2AU5NNmdUFCGXKEkr.json"))
+		.get("/api/wallets/DNTwQTSp999ezQ425utBsWetcmzDuCn2pN")
+		.reply(200, require("../tests/fixtures/coins/ark/devnet/wallets/DNTwQTSp999ezQ425utBsWetcmzDuCn2pN.json"))
 		.get("/api/wallets/DJXg9Vqg2tofRNrMAvMzhZTkegu8QyyNQq")
 		.reply(200, require("../tests/fixtures/coins/ark/devnet/wallets/DJXg9Vqg2tofRNrMAvMzhZTkegu8QyyNQq.json"))
 		.get("/api/wallets/D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib")

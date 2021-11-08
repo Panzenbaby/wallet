@@ -100,35 +100,6 @@ describe("Wallet Transactions Hook", () => {
 		);
 	});
 
-	it("should run periodically", async () => {
-		jest.useFakeTimers();
-		const spySync = jest.spyOn(wallet.transaction(), "sync");
-
-		const Component = () => {
-			const {
-				pendingTransactions,
-				startSyncingPendingTransactions,
-				stopSyncingPendingTransactions,
-			} = useWalletTransactions(wallet);
-
-			useEffect(() => {
-				startSyncingPendingTransactions();
-				return () => stopSyncingPendingTransactions();
-			}, []);
-
-			return <h1>{pendingTransactions}</h1>;
-		};
-
-		render(<Component />);
-
-		jest.advanceTimersByTime(5000);
-
-		await waitFor(() => expect(spySync).not.toHaveBeenCalledTimes(0));
-
-		spySync.mockRestore();
-		jest.useRealTimers();
-	});
-
 	it("should sync pending transfers", async () => {
 		mockPendingTransfers(wallet);
 
@@ -258,5 +229,34 @@ describe("Wallet Transactions Hook", () => {
 		render(<Component />);
 
 		await waitFor(() => expect(allPendingTransactions).toHaveLength(0));
+	});
+
+	it("should run periodically", async () => {
+		jest.useFakeTimers();
+		const spySync = jest.spyOn(wallet.transaction(), "sync");
+
+		const Component = () => {
+			const {
+				pendingTransactions,
+				startSyncingPendingTransactions,
+				stopSyncingPendingTransactions,
+			} = useWalletTransactions(wallet);
+
+			useEffect(() => {
+				startSyncingPendingTransactions();
+				return () => stopSyncingPendingTransactions();
+			}, []);
+
+			return <h1>{pendingTransactions}</h1>;
+		};
+
+		render(<Component />);
+
+		jest.advanceTimersByTime(5000);
+
+		await waitFor(() => expect(spySync).not.toHaveBeenCalledTimes(0));
+
+		spySync.mockRestore();
+		jest.useRealTimers();
 	});
 });

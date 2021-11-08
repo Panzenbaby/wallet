@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/require-await */
-import Transport, { Observer } from "@ledgerhq/hw-transport";
-import { createTransportReplayer, RecordStore } from "@ledgerhq/hw-transport-mocker";
 import { Contracts } from "@payvo/profiles";
 import { LedgerProvider } from "app/contexts/Ledger/Ledger";
 import { toasts } from "app/services";
@@ -9,7 +7,18 @@ import { translations as walletTranslations } from "domains/wallet/i18n";
 import { createMemoryHistory } from "history";
 import React from "react";
 import { Route } from "react-router-dom";
-import { act, env, fireEvent, getDefaultProfileId, MNEMONICS, render, screen, waitFor } from "utils/testing-library";
+import {
+	act,
+	env,
+	fireEvent,
+	getDefaultLedgerTransport,
+	getDefaultProfileId,
+	ledgerObserverSpy,
+	MNEMONICS,
+	render,
+	screen,
+	waitFor,
+} from "utils/testing-library";
 
 import { SignedStep } from "./SignedStep";
 import { SignMessage } from "./SignMessage";
@@ -21,9 +30,8 @@ let profile: Contracts.IProfile;
 let wallet: Contracts.IReadWriteWallet;
 let secondWallet: Contracts.IReadWriteWallet;
 
+const transport = getDefaultLedgerTransport();
 const mnemonic = MNEMONICS[0];
-
-let transport: typeof Transport;
 
 describe("SignMessage", () => {
 	beforeAll(async () => {
@@ -45,16 +53,6 @@ describe("SignMessage", () => {
 
 		walletUrl = `/profiles/${profile.id()}/wallets/${wallet.id()}`;
 		history.push(walletUrl);
-	});
-
-	beforeEach(() => {
-		jest.useFakeTimers();
-
-		transport = createTransportReplayer(RecordStore.fromString(""));
-	});
-
-	afterEach(() => {
-		jest.useRealTimers();
 	});
 
 	it("should render", async () => {
@@ -341,20 +339,26 @@ describe("SignMessage", () => {
 	});
 
 	it("should sign message with ledger wallet", async () => {
-		jest.spyOn(wallet.coin(), "__construct").mockImplementation();
 		const isLedgerMock = jest.spyOn(wallet, "isLedger").mockReturnValue(true);
-
-		const unsubscribe = jest.fn();
-		let observer: Observer<any>;
-
-		const listenSpy = jest.spyOn(transport, "listen").mockImplementationOnce((obv) => {
-			observer = obv;
-			return { unsubscribe };
-		});
 
 		const signMessageSpy = jest
 			.spyOn(wallet.coin().ledger(), "signMessage")
 			.mockImplementation(() => new Promise((resolve) => setTimeout(() => resolve("signature"), 300)));
+
+		const publicKeyPaths = new Map([
+			["m/44'/111'/0'/0/0", "027716e659220085e41389efc7cf6a05f7f7c659cf3db9126caabce6cda9156582"],
+			["m/44'/111'/1'/0/0", wallet.publicKey()!],
+			["m/44'/111'/2'/0/0", "020aac4ec02d47d306b394b79d3351c56c1253cd67fe2c1a38ceba59b896d584d1"],
+		]);
+
+		const getPublicKeyMock = jest
+			.spyOn(wallet.coin().ledger(), "getPublicKey")
+			.mockResolvedValue(publicKeyPaths.values().next().value);
+
+		const getVersionMock = jest.spyOn(wallet.coin().ledger(), "getVersion").mockResolvedValue("2.1.0");
+
+		const { observer, mockTransportListen } = ledgerObserverSpy();
+		const ledgerListenMock = mockTransportListen(transport);
 
 		render(
 			<Route path="/profiles/:profileId/wallets/:walletId">
@@ -382,48 +386,37 @@ describe("SignMessage", () => {
 
 		fireEvent.click(screen.getByTestId("SignMessage__submit-button"));
 
-		await screen.findByTestId("LedgerWaitingDevice-loading_message");
-
 		act(() => {
-			observer!.next({ descriptor: "", type: "add" });
+			observer.next({ descriptor: "", deviceModel: { id: "nanoX" }, type: "add" });
 		});
 
-		await screen.findByTestId("LedgerWaitingApp-loading_message");
-
-		const getPublicKeySpy = jest.spyOn(wallet.coin(), "ledger").mockImplementation(() => ({
-			getPublicKey: () => Promise.resolve(wallet.publicKey()),
-		}));
-
-		await waitFor(() => expect(getPublicKeySpy).toHaveBeenCalled());
+		await waitFor(() => expect(getPublicKeyMock).toHaveBeenCalled());
 
 		signMessageSpy.mockRestore();
 		isLedgerMock.mockRestore();
-		listenSpy.mockRestore();
-		getPublicKeySpy.mockRestore();
+		ledgerListenMock.mockRestore();
+		getVersionMock.mockRestore();
+		getPublicKeyMock.mockRestore();
 	});
 
 	it("should display error toast if user rejects", async () => {
 		const toastSpy = jest.spyOn(toasts, "error");
-
 		const isLedgerMock = jest.spyOn(wallet, "isLedger").mockReturnValue(true);
 
-		const unsubscribe = jest.fn();
-		let observer: Observer<any>;
-
-		const listenSpy = jest.spyOn(transport, "listen").mockImplementationOnce((obv) => {
-			observer = obv;
-			return { unsubscribe };
-		});
+		const { observer, mockTransportListen } = ledgerObserverSpy();
+		const ledgerListenMock = mockTransportListen(transport);
 
 		const consoleErrorMock = jest.spyOn(console, "error").mockImplementation(() => undefined);
-		const signMessageSpy = jest
-			.spyOn(wallet.coin().ledger(), "signMessage")
-			.mockImplementation(
-				() =>
-					new Promise((_, reject) =>
-						setTimeout(() => reject(new Error("Condition of use not satisfied")), 300),
-					),
-			);
+
+		const signMessageSpy = jest.spyOn(wallet.coin().ledger(), "signMessage").mockImplementation(() => {
+			throw new Error("Condition of use not satisfied");
+		});
+
+		const getVersionMock = jest.spyOn(wallet.coin().ledger(), "getVersion").mockResolvedValue("2.1.0");
+
+		const getPublicKeySpy = jest
+			.spyOn(wallet.coin().ledger(), "getPublicKey")
+			.mockResolvedValue(wallet.publicKey()!);
 
 		render(
 			<Route path="/profiles/:profileId/wallets/:walletId">
@@ -445,19 +438,11 @@ describe("SignMessage", () => {
 
 		await waitFor(() => expect(screen.getByTestId("SignMessage__submit-button")).toBeEnabled());
 
-		fireEvent.click(screen.getByTestId("SignMessage__submit-button"));
-
-		await screen.findByTestId("LedgerWaitingDevice-loading_message");
-
 		act(() => {
-			observer!.next({ descriptor: "", type: "add" });
+			observer.next({ descriptor: "", deviceModel: { id: "nanoX" }, type: "add" });
 		});
 
-		await screen.findByTestId("LedgerWaitingApp-loading_message");
-
-		const getPublicKeySpy = jest
-			.spyOn(wallet.coin().ledger(), "getPublicKey")
-			.mockResolvedValue(wallet.publicKey()!);
+		fireEvent.click(screen.getByTestId("SignMessage__submit-button"));
 
 		await waitFor(() =>
 			expect(toastSpy).toHaveBeenCalledWith(transactionTranslations.LEDGER_CONFIRMATION.REJECTED),
@@ -466,19 +451,20 @@ describe("SignMessage", () => {
 		toastSpy.mockRestore();
 		signMessageSpy.mockRestore();
 		isLedgerMock.mockRestore();
-		listenSpy.mockRestore();
+		ledgerListenMock.mockRestore();
 		getPublicKeySpy.mockRestore();
 		consoleErrorMock.mockRestore();
+		getVersionMock.mockRestore();
 	});
 
 	it("should display error toast if ledger is not found in time", async () => {
 		const toastSpy = jest.spyOn(toasts, "error");
 
 		const isLedgerMock = jest.spyOn(wallet, "isLedger").mockReturnValue(true);
+		const consoleErrorMock = jest.spyOn(console, "error").mockImplementation(() => undefined);
 
-		const unsubscribe = jest.fn();
-
-		const listenSpy = jest.spyOn(transport, "listen").mockImplementationOnce(() => ({ unsubscribe }));
+		const { mockTransportListen } = ledgerObserverSpy();
+		const ledgerListenMock = mockTransportListen(transport);
 
 		render(
 			<Route path="/profiles/:profileId/wallets/:walletId">
@@ -492,11 +478,9 @@ describe("SignMessage", () => {
 			},
 		);
 
-		const transportSpy = jest
-			.spyOn(transport, "open")
-			.mockImplementation(
-				() => new Promise((_, reject) => setTimeout(() => reject(new Error("no device found")), 300)),
-			);
+		const transportSpy = jest.spyOn(transport, "open").mockImplementation(() => {
+			throw new Error("no device found");
+		});
 
 		await screen.findByText(walletTranslations.MODAL_SIGN_MESSAGE.FORM_STEP.TITLE);
 
@@ -520,7 +504,8 @@ describe("SignMessage", () => {
 		toastSpy.mockRestore();
 		transportSpy.mockRestore();
 		isLedgerMock.mockRestore();
-		listenSpy.mockRestore();
+		ledgerListenMock.mockRestore();
+		consoleErrorMock.mockRestore();
 	});
 
 	it("should render with a custom message", async () => {

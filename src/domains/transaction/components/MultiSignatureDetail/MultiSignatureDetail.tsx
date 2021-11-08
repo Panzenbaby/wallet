@@ -5,12 +5,7 @@ import { TabPanel, Tabs } from "app/components/Tabs";
 import { useEnvironmentContext, useLedgerContext } from "app/contexts";
 import { useLedgerModelStatus } from "app/hooks";
 import { ErrorStep } from "domains/transaction/components/ErrorStep";
-import {
-	SignInput,
-	useMultiSignatureRegistration,
-	useMultiSignatureStatus,
-	useWalletSignatory,
-} from "domains/transaction/hooks";
+import { useMultiSignatureRegistration, useMultiSignatureStatus } from "domains/transaction/hooks";
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -51,7 +46,6 @@ export const MultiSignatureDetail = ({
 
 	const [activeStep, setActiveStep] = useState<MultiSignatureDetailStep>(MultiSignatureDetailStep.SummaryStep);
 
-	const { sign } = useWalletSignatory(wallet);
 	const { addSignature, broadcast } = useMultiSignatureRegistration();
 	const { canBeBroadcasted, canBeSigned, isAwaitingFinalSignature } = useMultiSignatureStatus({
 		transaction,
@@ -72,18 +66,27 @@ export const MultiSignatureDetail = ({
 	}, [wallet, transaction, persist, broadcast]);
 
 	const sendSignature = useCallback(
-		async ({ encryptionPassword, mnemonic, privateKey, secondMnemonic, secret, wif }: SignInput) => {
+		async ({
+			encryptionPassword,
+			mnemonic,
+			privateKey,
+			secondMnemonic,
+			secondSecret,
+			secret,
+			wif,
+		}: Contracts.SignatoryInput) => {
 			try {
 				if (wallet.isLedger()) {
 					await connect(profile, wallet.coinId(), wallet.networkId());
 					await wallet.ledger().connect(transport);
 				}
 
-				const signatory = await sign({
+				const signatory = await wallet.signatoryFactory().make({
 					encryptionPassword,
 					mnemonic,
 					privateKey,
 					secondMnemonic,
+					secondSecret,
 					secret,
 					wif,
 				});
@@ -104,7 +107,7 @@ export const MultiSignatureDetail = ({
 				setActiveStep(MultiSignatureDetailStep.ErrorStep);
 			}
 		},
-		[transaction, wallet, sign, addSignature, connect, profile, transport, persist, broadcastMultiSignature],
+		[transaction, wallet, addSignature, connect, profile, transport, persist, broadcastMultiSignature],
 	);
 
 	const handleSend = () => {

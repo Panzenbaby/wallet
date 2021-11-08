@@ -284,7 +284,9 @@ describe("Exchange", () => {
 		render(
 			<Route path="/profiles/:profileId/exchange">
 				<ExchangeProvider>
-					<Exchange />
+					<Wrapper>
+						<Exchange />
+					</Wrapper>
 				</ExchangeProvider>
 			</Route>,
 			{
@@ -328,7 +330,9 @@ describe("Exchange", () => {
 		render(
 			<Route path="/profiles/:profileId/exchange">
 				<ExchangeProvider>
-					<Exchange />
+					<Wrapper>
+						<Exchange />
+					</Wrapper>
 				</ExchangeProvider>
 			</Route>,
 			{

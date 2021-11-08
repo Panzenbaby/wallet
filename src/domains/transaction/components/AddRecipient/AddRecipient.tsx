@@ -159,16 +159,16 @@ export const AddRecipient = ({
 	}, [recipients, withDeeplink]);
 
 	useEffect(() => {
-		if (network && recipientAddress) {
-			trigger("recipientAddress");
-		}
-	}, [network, recipientAddress, trigger]);
-
-	useEffect(() => {
 		register("amount", sendTransfer.amount(network, remainingNetBalance!, addedRecipients, isSingle));
 		register("displayAmount");
 		register("recipientAddress", sendTransfer.recipientAddress(profile, network, addedRecipients, isSingle));
 	}, [register, network, sendTransfer, addedRecipients, isSingle, profile, remainingNetBalance]);
+
+	useEffect(() => {
+		if (network && recipientAddress) {
+			trigger("recipientAddress");
+		}
+	}, [network, recipientAddress, trigger]);
 
 	useEffect(() => {
 		if (getValues("displayAmount")) {

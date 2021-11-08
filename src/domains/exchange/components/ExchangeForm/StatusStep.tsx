@@ -8,6 +8,7 @@ import { useExchangeContext } from "domains/exchange/contexts/Exchange";
 import { useOrderStatus } from "domains/exchange/hooks/use-order-status";
 import React, { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { delay } from "utils/delay";
 
 import { ExchangeStatus } from "./StatusStep.blocks";
 
@@ -41,7 +42,7 @@ export const StatusStep = ({ exchangeTransaction, onUpdate }: StatusStepProperti
 
 				// fetch again if pending
 				if (orderStatus.status < Contracts.ExchangeTransactionStatus.Finished) {
-					timeout = setTimeout(fetchStatus, 15_000);
+					timeout = delay(fetchStatus, 15_000);
 				}
 			}
 		};

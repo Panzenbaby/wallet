@@ -203,9 +203,6 @@ describe("WalletDetails", () => {
 	it("should render pending transactions and view details in modal", async () => {
 		mockPendingTransfers(wallet);
 
-		walletUrl = `/profiles/${profile.id()}/wallets/${wallet.id()}`;
-		history.push(walletUrl);
-
 		const { getByTestId, findByTestId } = await renderPage();
 		await findByTestId("PendingTransactions");
 
@@ -222,9 +219,6 @@ describe("WalletDetails", () => {
 	it("should remove pending multisignature transactions", async () => {
 		mockPendingTransfers(wallet);
 
-		walletUrl = `/profiles/${profile.id()}/wallets/${wallet.id()}`;
-		history.push(walletUrl);
-
 		const { getByTestId, findByTestId } = await renderPage();
 		await findByTestId("PendingTransactions");
 
@@ -240,8 +234,7 @@ describe("WalletDetails", () => {
 		nock("https://ark-test-musig.payvo.com/").get("/api/wallets/DDA5nM7KEqLeTtQKv5qGgcnc6dpNBKJNTS").reply(200, []);
 		nock("https://ark-test-musig.payvo.com")
 			.post("/")
-			.reply(200, { result: { id: "03df6cd794a7d404db4f1b25816d8976d0e72c5177d17ac9b19a92703b62cdbbbc" } })
-			.persist();
+			.reply(200, { result: { id: "03df6cd794a7d404db4f1b25816d8976d0e72c5177d17ac9b19a92703b62cdbbbc" } });
 
 		const toastsMock = jest.spyOn(toasts, "success");
 
@@ -256,9 +249,6 @@ describe("WalletDetails", () => {
 
 	it("should render pending multiSignatures and view details in modal", async () => {
 		mockPendingTransfers(wallet);
-
-		walletUrl = `/profiles/${profile.id()}/wallets/${wallet.id()}`;
-		history.push(walletUrl);
 
 		const { getByTestId, findByTestId } = await renderPage();
 		await findByTestId("PendingTransactions");

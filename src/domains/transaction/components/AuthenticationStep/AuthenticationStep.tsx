@@ -108,7 +108,8 @@ export const AuthenticationStep = ({
 		wallet.actsWithWifWithEncryption() ||
 		wallet.actsWithSecretWithEncryption();
 
-	const requireSecondMnemonic = wallet.isSecondSignature() && !wallet.actsWithMnemonicWithEncryption();
+	const requireSecondMnemonic = wallet.isSecondSignature() && wallet.actsWithMnemonic();
+	const requireSecondSecret = wallet.isSecondSignature() && wallet.actsWithSecret();
 
 	return (
 		<div data-testid="AuthenticationStep" className="space-y-6">
@@ -192,6 +193,17 @@ export const AuthenticationStep = ({
 						data-testid="AuthenticationStep__second-mnemonic"
 						disabled={!getValues("mnemonic") || errors.mnemonic}
 						ref={register(authentication.secondMnemonic(wallet.coin(), wallet.secondPublicKey()!))}
+					/>
+				</FormField>
+			)}
+
+			{requireSecondSecret && (
+				<FormField name="secondSecret">
+					<FormLabel>{t("TRANSACTION.SECOND_SECRET")}</FormLabel>
+					<InputPassword
+						data-testid="AuthenticationStep__second-secret"
+						disabled={!getValues("secret") || errors.secret}
+						ref={register(authentication.secondSecret(wallet.coin(), wallet.secondPublicKey()!))}
 					/>
 				</FormField>
 			)}

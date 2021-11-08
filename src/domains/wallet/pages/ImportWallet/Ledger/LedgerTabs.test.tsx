@@ -1,20 +1,15 @@
 import Transport from "@ledgerhq/hw-transport";
-import { createTransportReplayer, RecordStore } from "@ledgerhq/hw-transport-mocker";
 import { Contracts } from "@payvo/profiles";
-import { renderHook } from "@testing-library/react-hooks";
 import userEvent from "@testing-library/user-event";
 import { LedgerProvider, minVersionList } from "app/contexts";
 import * as scanner from "app/contexts/Ledger/hooks/scanner.state";
 import nock from "nock";
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { Route } from "react-router-dom";
-import { env, getDefaultProfileId, render, screen, waitFor } from "utils/testing-library";
+import { env, getDefaultLedgerTransport, getDefaultProfileId, render, screen, waitFor } from "utils/testing-library";
 
 import { LedgerTabs } from "./LedgerTabs";
-
-jest.setTimeout(20_000);
 
 describe("LedgerTabs", () => {
 	let profile: Contracts.IProfile;
@@ -55,7 +50,7 @@ describe("LedgerTabs", () => {
 			});
 	});
 
-	beforeEach(async () => {
+	beforeAll(async () => {
 		profile = env.profiles().findById(getDefaultProfileId());
 		await env.profiles().restore(profile);
 		await profile.sync();
@@ -70,7 +65,9 @@ describe("LedgerTabs", () => {
 
 		onClickEditWalletName = jest.fn();
 
-		transport = createTransportReplayer(RecordStore.fromString(""));
+		transport = getDefaultLedgerTransport();
+		jest.spyOn(transport, "listen").mockImplementationOnce(() => ({ unsubscribe: jest.fn() }));
+
 		publicKeyPaths = new Map([
 			["m/44'/1'/0'/0/0", "027716e659220085e41389efc7cf6a05f7f7c659cf3db9126caabce6cda9156582"],
 			["m/44'/1'/0'/0/1", "03d3fdad9c5b25bf8880e6b519eb3611a5c0b31adebc8455f0e096175b28321aff"],
@@ -84,18 +81,8 @@ describe("LedgerTabs", () => {
 			["m/44'/1'/4'/0/0", "03d3c6889608074b44155ad2e6577c3368e27e6e129c457418eb3e5ed029544e8d"],
 		]);
 
-		jest.spyOn(transport, "listen").mockImplementationOnce(() => ({ unsubscribe: jest.fn() }));
-
 		jest.spyOn(wallet.coin(), "__construct").mockImplementation();
 		jest.spyOn(wallet.coin().ledger(), "getExtendedPublicKey").mockResolvedValue(wallet.publicKey()!);
-
-		jest.useFakeTimers();
-	});
-
-	afterEach(() => {
-		jest.clearAllMocks();
-		jest.runOnlyPendingTimers();
-		jest.useRealTimers();
 	});
 
 	afterAll(() => {
@@ -113,13 +100,50 @@ describe("LedgerTabs", () => {
 	const nextSelector = () => screen.getByTestId("Paginator__continue-button");
 	const backSelector = () => screen.getByTestId("Paginator__back-button");
 
-	it("should render connection step", async () => {
-		const { result } = renderHook(() => useTranslation());
-		const { t } = result.current;
-
+	it("should render scan step", async () => {
+		jest.useRealTimers();
 		const getPublicKeySpy = jest
 			.spyOn(wallet.coin().ledger(), "getPublicKey")
-			.mockRejectedValue(new Error(t("WALLETS.MODAL_LEDGER_WALLET.GENERIC_CONNECTION_ERROR")));
+			.mockImplementation((path) => Promise.resolve(publicKeyPaths.get(path)!));
+
+		const Component = () => {
+			const form = useForm({
+				defaultValues: {
+					network: wallet.network(),
+				},
+				mode: "onChange",
+			});
+
+			const { register } = form;
+
+			useEffect(() => {
+				register("network");
+			}, [register]);
+
+			return (
+				<FormProvider {...form}>
+					<BaseComponent activeIndex={2} />
+				</FormProvider>
+			);
+		};
+
+		render(<Component />, { routes: [`/profiles/${profile.id()}`] });
+
+		await screen.findByTestId("LedgerConnectionStep");
+
+		// Auto redirect to next step
+		await screen.findByTestId("LedgerScanStep");
+		await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(6), { timeout: 3000 });
+
+		await waitFor(() => expect(screen.getAllByRole("checkbox")).toHaveLength(2), { timeout: 4000 });
+
+		getPublicKeySpy.mockReset();
+	});
+
+	it("should render connection step", async () => {
+		const getPublicKeySpy = jest
+			.spyOn(wallet.coin().ledger(), "getPublicKey")
+			.mockResolvedValue(publicKeyPaths.values().next().value);
 
 		let formReference: ReturnType<typeof useForm>;
 		const Component = () => {
@@ -162,59 +186,11 @@ describe("LedgerTabs", () => {
 		userEvent.click(nextSelector());
 
 		await screen.findByTestId("LedgerConnectionStep");
-		// eslint-disable-next-line
-		await waitFor(
-			() =>
-				expect(
-					// eslint-disable-next-line
-					screen.queryByText(t("WALLETS.MODAL_LEDGER_WALLET.GENERIC_CONNECTION_ERROR")),
-				).toBeInTheDocument(),
-			{ timeout: 10_000 },
-		);
 
 		userEvent.click(backSelector());
 
 		await screen.findByTestId("SelectNetwork");
 		await waitFor(() => expect(nextSelector()).toBeEnabled());
-
-		getPublicKeySpy.mockReset();
-	});
-
-	it("should render scan step", async () => {
-		const getPublicKeySpy = jest
-			.spyOn(wallet.coin().ledger(), "getPublicKey")
-			.mockImplementation((path) => Promise.resolve(publicKeyPaths.get(path)!));
-
-		const Component = () => {
-			const form = useForm({
-				defaultValues: {
-					network: wallet.network(),
-				},
-				mode: "onChange",
-			});
-
-			const { register } = form;
-
-			useEffect(() => {
-				register("network");
-			}, [register]);
-
-			return (
-				<FormProvider {...form}>
-					<BaseComponent activeIndex={2} />
-				</FormProvider>
-			);
-		};
-
-		render(<Component />, { routes: [`/profiles/${profile.id()}`] });
-
-		await screen.findByTestId("LedgerConnectionStep");
-
-		// Auto redirect to next step
-		await screen.findByTestId("LedgerScanStep");
-		await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(6), { timeout: 3000 });
-
-		await waitFor(() => expect(screen.getAllByRole("checkbox")).toHaveLength(2));
 
 		getPublicKeySpy.mockReset();
 	});

@@ -109,6 +109,11 @@ export const translations = {
 				DESCRIPTION: "You can copy or download your mnemonic, but store it safely.",
 				TITLE: "Copy or Download Mnemonic Passphrase",
 			},
+			ENCRYPTION: {
+				DESCRIPTION:
+					"This will allow you to set an encryption password during creation to use instead of your mnemonic.",
+				TITLE: "Use Wallet Encryption",
+			},
 			TITLE: "Your Passphrase",
 			WARNING:
 				"You are responsible for storing and protecting this mnemonic passphrase offline. The Payvo Wallet cannot reveal this to you at a later time. If you lose this mnemonic passphrase, you will lose your funds.",
@@ -125,11 +130,10 @@ export const translations = {
 	PAGE_IMPORT_WALLET: {
 		ENCRYPT_PASSWORD_STEP: {
 			CONFIRM_PASSWORD_LABEL: "Confirm Encryption Password",
-			OPTIONAL: "optional",
 			PASSWORD_LABEL: "Encryption Password",
 			TITLE: "Encryption Password",
 			WARNING:
-				"You can optionally encrypt your mnemonic passphrase on your local device. Then, you can sign transactions with the password instead. If you lose your local device, you CANNOT restore your funds with the encryption password. Make sure your mnemonic passphrase is stored safely to protect your funds.",
+				"Your mnemonic passphrase will be encrypted on your local device. Make sure it is backed up and stored safely before continuing. Should you lose your local device, you will <strong>not</strong> be able to restore your funds with the encryption password.",
 		},
 
 		LEDGER_CONNECTION_STEP: {
@@ -148,6 +152,12 @@ export const translations = {
 		},
 
 		METHOD_STEP: {
+			ENCRYPTION: {
+				DESCRIPTION:
+					"This will allow you to set an encryption password during creation to use instead of your mnemonic.",
+				NOT_AVAILABLE: "Encryption not available for this import type",
+				TITLE: "Use Wallet Encryption",
+			},
 			SUBTITLE: "Select the import method by which you want to import the address to your Profile.",
 			TITLE: "Import Wallet",
 			TYPE: "Import Type",
@@ -163,7 +173,7 @@ export const translations = {
 			TITLE: "Confirm your passphrase",
 		},
 
-		PROCESS_COMPLETED_STEP: {
+		SUCCESS_STEP: {
 			SUBTITLE: "Wallet import is complete. Now you can use it.",
 			TITLE: "Completed",
 		},

@@ -349,7 +349,9 @@ describe("SendVote", () => {
 
 		await waitFor(() => expect(getByTestId("StepNavigation__send-button")).not.toBeDisabled());
 
-		fireEvent.click(getByTestId("StepNavigation__send-button"));
+		await act(async () => {
+			fireEvent.click(getByTestId("StepNavigation__send-button"));
+		});
 
 		act(() => {
 			jest.advanceTimersByTime(1000);
@@ -441,7 +443,7 @@ describe("SendVote", () => {
 			},
 		);
 
-		expect(getByTestId("SendVote__form-step")).toBeTruthy();
+		expect(getByTestId("SendVote__form-step")).toBeInTheDocument();
 
 		await waitFor(() => expect(getByTestId("SendVote__form-step")).toHaveTextContent(delegateData[0].username));
 
@@ -451,12 +453,12 @@ describe("SendVote", () => {
 		fireEvent.click(getByTestId("StepNavigation__continue-button"));
 
 		// Review Step
-		expect(getByTestId("SendVote__review-step")).toBeTruthy();
+		expect(getByTestId("SendVote__review-step")).toBeInTheDocument();
 
 		fireEvent.click(getByTestId("StepNavigation__continue-button"));
 
 		// AuthenticationStep
-		expect(getByTestId("AuthenticationStep")).toBeTruthy();
+		expect(getByTestId("AuthenticationStep")).toBeInTheDocument();
 
 		const signUnvoteMock = jest
 			.spyOn(wallet.transaction(), "signVote")
@@ -466,17 +468,7 @@ describe("SendVote", () => {
 			errors: {},
 			rejected: [],
 		});
-		const transactionUnvoteMock = createVoteTransactionMock(wallet);
-
-		const signVoteMock = jest
-			.spyOn(wallet.transaction(), "signVote")
-			.mockReturnValue(Promise.resolve(voteFixture.data.id));
-		const broadcastVoteMock = jest.spyOn(wallet.transaction(), "broadcast").mockResolvedValue({
-			accepted: [voteFixture.data.id],
-			errors: {},
-			rejected: [],
-		});
-		const transactionVoteMock = createVoteTransactionMock(wallet);
+		const transactionUnvoteMock = createUnvoteTransactionMock(wallet);
 
 		const passwordInput = getByTestId("AuthenticationStep__mnemonic");
 		fireEvent.input(passwordInput, { target: { value: passphrase } });
@@ -487,7 +479,9 @@ describe("SendVote", () => {
 
 		const splitVotingMethodMock = jest.spyOn(wallet.network(), "votingMethod").mockReturnValue("split");
 
-		fireEvent.click(getByTestId("StepNavigation__send-button"));
+		await act(async () => {
+			fireEvent.click(getByTestId("StepNavigation__send-button"));
+		});
 
 		act(() => {
 			jest.advanceTimersByTime(1000);
@@ -501,17 +495,25 @@ describe("SendVote", () => {
 			jest.runOnlyPendingTimers();
 		});
 
+		await waitFor(() => expect(setInterval).toHaveBeenCalledTimes(1));
+		await waitFor(() => expect(signUnvoteMock).toHaveBeenCalled());
+		await waitFor(() => expect(broadcastUnvoteMock).toHaveBeenCalled());
+
+		const signVoteMock = jest
+			.spyOn(wallet.transaction(), "signVote")
+			.mockReturnValue(Promise.resolve(voteFixture.data.id));
+		const broadcastVoteMock = jest.spyOn(wallet.transaction(), "broadcast").mockResolvedValue({
+			accepted: [voteFixture.data.id],
+			errors: {},
+			rejected: [],
+		});
+
+		const transactionVoteMock = createVoteTransactionMock(wallet);
+
+		await waitFor(() => expect(signVoteMock).toHaveBeenCalled());
+		await waitFor(() => expect(broadcastVoteMock).toHaveBeenCalled());
+
 		await findByTestId("TransactionSuccessful");
-		await waitFor(() => expect(setInterval).toHaveBeenCalledTimes(2));
-
-		const historySpy = jest.spyOn(history, "push");
-
-		// Go back to wallet
-		fireEvent.click(getByTestId("StepNavigation__back-to-wallet-button"));
-
-		expect(historySpy).toHaveBeenCalledWith(`/profiles/${profile.id()}/wallets/${wallet.id()}`);
-
-		historySpy.mockRestore();
 
 		signUnvoteMock.mockRestore();
 		broadcastUnvoteMock.mockRestore();
@@ -613,7 +615,9 @@ describe("SendVote", () => {
 		userEvent.keyboard("{enter}");
 		await waitFor(() => expect(getByTestId("StepNavigation__send-button")).not.toBeDisabled());
 
-		fireEvent.click(getByTestId("StepNavigation__send-button"));
+		await act(async () => {
+			fireEvent.click(getByTestId("StepNavigation__send-button"));
+		});
 
 		act(() => {
 			jest.advanceTimersByTime(1000);
@@ -826,7 +830,9 @@ describe("SendVote", () => {
 
 		await waitFor(() => expect(getByTestId("StepNavigation__send-button")).not.toBeDisabled());
 
-		fireEvent.click(getByTestId("StepNavigation__send-button"));
+		await act(async () => {
+			fireEvent.click(getByTestId("StepNavigation__send-button"));
+		});
 
 		act(() => {
 			jest.advanceTimersByTime(1000);
@@ -1019,6 +1025,8 @@ describe("SendVote", () => {
 	});
 
 	it("should show error step and go back", async () => {
+		jest.useRealTimers();
+
 		const history = createMemoryHistory();
 		const voteURL = `/profiles/${fixtureProfileId}/wallets/${wallet.id()}/send-vote`;
 
@@ -1078,7 +1086,6 @@ describe("SendVote", () => {
 		await waitFor(() => expect(passwordInput).toHaveValue(passphrase));
 
 		const historyMock = jest.spyOn(history, "push").mockReturnValue();
-
 		await waitFor(() => expect(getByTestId("StepNavigation__send-button")).not.toBeDisabled());
 
 		fireEvent.click(getByTestId("StepNavigation__send-button"));
@@ -1155,7 +1162,9 @@ describe("SendVote", () => {
 
 		await waitFor(() => expect(getByTestId("StepNavigation__continue-button")).not.toBeDisabled());
 
-		fireEvent.click(getByTestId("StepNavigation__continue-button"));
+		await act(async () => {
+			fireEvent.click(getByTestId("StepNavigation__continue-button"));
+		});
 
 		act(() => {
 			jest.advanceTimersByTime(1000);
@@ -1274,7 +1283,9 @@ describe("SendVote", () => {
 
 		await waitFor(() => expect(getByTestId("StepNavigation__continue-button")).not.toBeDisabled());
 
-		fireEvent.click(getByTestId("StepNavigation__continue-button"));
+		await act(async () => {
+			fireEvent.click(getByTestId("StepNavigation__continue-button"));
+		});
 
 		act(() => {
 			jest.advanceTimersByTime(1000);
@@ -1291,6 +1302,8 @@ describe("SendVote", () => {
 	});
 
 	it("should send a vote transaction using encryption password", async () => {
+		jest.useRealTimers();
+
 		const actsWithMnemonicMock = jest.spyOn(wallet, "actsWithMnemonic").mockReturnValue(false);
 		const actsWithWifWithEncryptionMock = jest.spyOn(wallet, "actsWithWifWithEncryption").mockReturnValue(true);
 		const wifGetMock = jest.spyOn(wallet.signingKey(), "get").mockReturnValue(passphrase);
@@ -1368,13 +1381,11 @@ describe("SendVote", () => {
 
 		await waitFor(() => expect(getByTestId("StepNavigation__send-button")).not.toBeDisabled());
 
-		fireEvent.click(getByTestId("StepNavigation__send-button"));
-
-		act(() => {
-			jest.advanceTimersByTime(1000);
+		await act(async () => {
+			fireEvent.click(getByTestId("StepNavigation__send-button"));
 		});
 
-		await findByTestId("TransactionSuccessful");
+		await findByTestId("TransactionSuccessful", undefined, { timeout: 4000 });
 
 		signMock.mockRestore();
 		broadcastMock.mockRestore();
