@@ -173,9 +173,7 @@ describe("Password Settings", () => {
 			expect(getByTestId("Password-settings__submit-button")).toBeEnabled();
 		});
 
-		expect(toastSpy).toHaveBeenCalledWith(
-			`${translations.SETTINGS.PASSWORD.ERROR.MISMATCH}`,
-		);
+		expect(toastSpy).toHaveBeenCalledWith(`${translations.SETTINGS.PASSWORD.ERROR.MISMATCH}`);
 
 		expect(asFragment()).toMatchSnapshot();
 
@@ -375,11 +373,7 @@ describe("Password Settings", () => {
 
 		userEvent.click(screen.getByTestId("PasswordRemovalConfirmModal__confirm"));
 
-		await waitFor(() =>
-			expect(toastSpy).toHaveBeenCalledWith(
-				`${translations.SETTINGS.PASSWORD.ERROR.MISMATCH}`,
-			),
-		);
+		await waitFor(() => expect(toastSpy).toHaveBeenCalledWith(`${translations.SETTINGS.PASSWORD.ERROR.MISMATCH}`));
 
 		toastSpy.mockRestore();
 	});
