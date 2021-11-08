@@ -60,7 +60,7 @@ export const PasswordSettings = () => {
 				activeProfile.auth().setPassword(password);
 			}
 		} catch {
-			toasts.error(`${t("COMMON.ERROR")}: ${t("SETTINGS.PASSWORD.ERROR.MISMATCH")}`);
+			toasts.error(`${t("SETTINGS.PASSWORD.ERROR.MISMATCH")}`);
 			return;
 		}
 
@@ -84,7 +84,7 @@ export const PasswordSettings = () => {
 
 			toasts.success(t("SETTINGS.PASSWORD.REMOVAL.SUCCESS"));
 		} catch {
-			toasts.error(`${t("COMMON.ERROR")}: ${t("SETTINGS.PASSWORD.ERROR.MISMATCH")}`);
+			toasts.error(`${t("SETTINGS.PASSWORD.ERROR.MISMATCH")}`);
 		}
 	};
 
