@@ -69,10 +69,6 @@ describe("General Settings", () => {
 
 		// Reload
 		history.replace(`/profiles/${profile.id()}/settings`);
-
-		await waitFor(() => expect(screen.getByTestId("General-settings__cancel-button")).toBeEnabled());
-
-		fireEvent.click(screen.getByTestId("General-settings__cancel-button"));
 	});
 
 	it("should render", async () => {

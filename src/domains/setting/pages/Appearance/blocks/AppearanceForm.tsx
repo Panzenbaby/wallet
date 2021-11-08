@@ -1,4 +1,5 @@
 import { Contracts } from "@payvo/profiles";
+import { Button } from "app/components/Button";
 import { Form } from "app/components/Form";
 import { ListDivided } from "app/components/ListDivided";
 import { useEnvironmentContext } from "app/contexts";
@@ -12,7 +13,6 @@ import { Prompt } from "react-router-dom";
 
 import { AppearanceSettingsState } from "../Appearance.contracts";
 import { useAppearanceItems, useAppearanceSettings } from "../Appearance.helpers";
-import { AppearanceFooterButtons } from "./AppearanceFooterButtons";
 
 interface Properties {
 	profile: Contracts.IProfile;
@@ -31,7 +31,7 @@ export const AppearanceForm: React.FC<Properties> = ({ profile }: Properties) =>
 	});
 
 	const { formState, register, reset } = form;
-	const { dirtyFields, isDirty, isValid } = formState;
+	const { dirtyFields, isDirty, isSubmitting, isValid } = formState;
 
 	const { persist } = useEnvironmentContext();
 	const { getPromptMessage } = useSettingsPrompt({ dirtyFields, isDirty });
@@ -62,7 +62,15 @@ export const AppearanceForm: React.FC<Properties> = ({ profile }: Properties) =>
 		<Form data-testid="AppearanceForm" context={form as any} onSubmit={save as any} className="mt-8">
 			<ListDivided items={items} />
 
-			<AppearanceFooterButtons isSaveDisabled={!isValid} />
+			<div className="flex justify-end mt-8 space-x-3 w-full">
+				<Button
+					data-testid="AppearanceFooterButtons__save"
+					disabled={isSubmitting || isDirty ? !isValid : true}
+					type="submit"
+				>
+					{t("COMMON.SAVE")}
+				</Button>
+			</div>
 
 			<Prompt message={getPromptMessage} />
 		</Form>

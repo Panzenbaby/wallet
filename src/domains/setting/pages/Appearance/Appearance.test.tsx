@@ -50,17 +50,6 @@ describe("Appearance Settings", () => {
 		expect(asFragment()).toMatchSnapshot();
 	});
 
-	it("should go back when cancel button is clicked", async () => {
-		renderPage();
-
-		expect(screen.getByTestId("AppearanceFooterButtons__cancel")).toBeInTheDocument();
-
-		userEvent.click(screen.getByTestId("AppearanceFooterButtons__cancel"));
-
-		expect(historyGoSpy).toHaveBeenCalledTimes(1);
-		expect(historyGoSpy).toHaveBeenCalledWith(-1);
-	});
-
 	it("should allow to change the accent color", async () => {
 		const toastSuccess = jest.spyOn(toasts, "success");
 
@@ -71,6 +60,8 @@ describe("Appearance Settings", () => {
 		expect(blueRadioButton).not.toBeChecked();
 		expect(profile.settings().get(Contracts.ProfileSetting.AccentColor)).not.toBe("blue");
 
+		expect(screen.getByTestId("AppearanceFooterButtons__save")).toBeDisabled();
+
 		userEvent.click(blueRadioButton);
 
 		await waitFor(() => {
@@ -79,7 +70,7 @@ describe("Appearance Settings", () => {
 
 		expect(profile.settings().get(Contracts.ProfileSetting.AccentColor)).not.toBe("blue");
 
-		expect(screen.getByTestId("AppearanceFooterButtons__save")).not.toBeDisabled();
+		expect(screen.getByTestId("AppearanceFooterButtons__save")).toBeEnabled();
 
 		userEvent.click(screen.getByTestId("AppearanceFooterButtons__save"));
 
@@ -115,7 +106,7 @@ describe("Appearance Settings", () => {
 
 		expect(profile.settings().get(Contracts.ProfileSetting.Theme)).not.toBe("dark");
 
-		expect(screen.getByTestId("AppearanceFooterButtons__save")).not.toBeDisabled();
+		expect(screen.getByTestId("AppearanceFooterButtons__save")).toBeEnabled();
 
 		userEvent.click(screen.getByTestId("AppearanceFooterButtons__save"));
 
@@ -150,7 +141,7 @@ describe("Appearance Settings", () => {
 
 		expect(profile.settings().get(key)).toBe(true);
 
-		expect(screen.getByTestId("AppearanceFooterButtons__save")).not.toBeDisabled();
+		expect(screen.getByTestId("AppearanceFooterButtons__save")).toBeEnabled();
 
 		userEvent.click(screen.getByTestId("AppearanceFooterButtons__save"));
 
