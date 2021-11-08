@@ -1,12 +1,11 @@
-import Transport, { Observer } from "@ledgerhq/hw-transport";
-import { createTransportReplayer, RecordStore } from "@ledgerhq/hw-transport-mocker";
+import { Observer } from "@ledgerhq/hw-transport";
 import { LedgerProvider } from "app/contexts/Ledger/Ledger";
 import React from "react";
-import { act, fireEvent, render } from "utils/testing-library";
+import { act, fireEvent, getDefaultLedgerTransport, render } from "utils/testing-library";
 
 import { LedgerWaitingDevice } from "./LedgerWaitingDevice";
 
-const transport: typeof Transport = createTransportReplayer(RecordStore.fromString(""));
+const transport = getDefaultLedgerTransport();
 
 describe("LedgerWaitingDevice", () => {
 	it("should call the onClose callback if given", () => {

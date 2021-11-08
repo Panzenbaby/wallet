@@ -67,15 +67,10 @@ export class PluginController {
 		const pluginAPI = container.services().api(this, profile);
 		const guard = applyPluginMiddlewares({ plugin: this, profile }, [isPluginEnabled]);
 
-		try {
-			// @ts-ignore
-			const function_ = this.#callback?.default || this.#callback;
-			guard(function_?.(pluginAPI));
-			this.#hooks.emit("activated");
-		} catch (error) {
-			console.error(`Failed to run the plugin "${this.config().name()}": ${error.message}`);
-			throw error;
-		}
+		// @ts-ignore
+		const function_ = this.#callback?.default || this.#callback;
+		guard(function_?.(pluginAPI));
+		this.#hooks.emit("activated");
 	}
 
 	dispose() {

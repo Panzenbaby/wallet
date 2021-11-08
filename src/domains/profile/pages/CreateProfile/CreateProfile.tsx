@@ -138,6 +138,7 @@ export const CreateProfile = () => {
 										<InputDefault
 											ref={register(createProfile.name())}
 											onBlur={() => {
+												/* istanbul ignore else */
 												if (!avatarImage || isSvg) {
 													setAvatarImage(
 														formattedName ? Helpers.Avatar.make(formattedName) : "",

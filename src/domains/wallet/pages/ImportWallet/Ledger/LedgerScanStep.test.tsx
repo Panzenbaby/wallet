@@ -1,16 +1,21 @@
 import Transport from "@ledgerhq/hw-transport";
-import { createTransportReplayer, RecordStore } from "@ledgerhq/hw-transport-mocker";
 import { Contracts } from "@payvo/profiles";
 import userEvent from "@testing-library/user-event";
 import { LedgerProvider } from "app/contexts/Ledger/Ledger";
 import nock from "nock";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { env, fireEvent, getDefaultProfileId, render, screen, waitFor } from "utils/testing-library";
+import {
+	env,
+	fireEvent,
+	getDefaultLedgerTransport,
+	getDefaultProfileId,
+	render,
+	screen,
+	waitFor,
+} from "utils/testing-library";
 
 import { LedgerScanStep } from "./LedgerScanStep";
-
-jest.setTimeout(10_000);
 
 describe("LedgerScanStep", () => {
 	let profile: Contracts.IProfile;
@@ -58,7 +63,8 @@ describe("LedgerScanStep", () => {
 		wallet = profile.wallets().first();
 		await wallet.synchroniser().identity();
 
-		transport = createTransportReplayer(RecordStore.fromString(""));
+		transport = getDefaultLedgerTransport();
+		jest.spyOn(transport, "listen").mockImplementationOnce(() => ({ unsubscribe: jest.fn() }));
 
 		publicKeyPaths = new Map([
 			["m/44'/1'/0'/0/0", "027716e659220085e41389efc7cf6a05f7f7c659cf3db9126caabce6cda9156582"],
@@ -74,20 +80,11 @@ describe("LedgerScanStep", () => {
 			["m/44'/1'/4'/0/0", "03d3c6889608074b44155ad2e6577c3368e27e6e129c457418eb3e5ed029544e8d"],
 		]);
 
-		jest.spyOn(transport, "listen").mockImplementationOnce(() => ({ unsubscribe: jest.fn() }));
-
 		jest.spyOn(wallet.coin().ledger(), "getPublicKey").mockImplementation((path) =>
 			Promise.resolve(publicKeyPaths.get(path)!),
 		);
+
 		jest.spyOn(wallet.coin().ledger(), "getExtendedPublicKey").mockResolvedValue(wallet.publicKey()!);
-
-		jest.useFakeTimers();
-	});
-
-	afterEach(() => {
-		jest.clearAllMocks();
-		jest.runOnlyPendingTimers();
-		jest.useRealTimers();
 	});
 
 	it("should handle select", async () => {
@@ -112,7 +109,7 @@ describe("LedgerScanStep", () => {
 
 		render(<Component />);
 
-		await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(6), { timeout: 5000 });
+		await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(6));
 
 		fireEvent.click(screen.getByTestId("LedgerScanStep__select-all"));
 
@@ -156,7 +153,7 @@ describe("LedgerScanStep", () => {
 
 		const { container } = render(<Component />);
 
-		await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(6), { timeout: 6000 });
+		await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(6));
 		await screen.findByText("DQseW3VJ1db5xN5xZi4Qhn6AFWtcwSwzpG");
 
 		await waitFor(() => expect(screen.getAllByRole("checkbox")).toHaveLength(2));

@@ -4,7 +4,7 @@ import { Contracts } from "@payvo/profiles";
 import { createMemoryHistory } from "history";
 import React from "react";
 import { Route } from "react-router-dom";
-import { env, fireEvent, getDefaultProfileId, MNEMONICS, render, waitFor } from "utils/testing-library";
+import { env, fireEvent, getDefaultProfileId, MNEMONICS, render, screen, waitFor } from "utils/testing-library";
 
 import { CreateWallet } from "./CreateWallet";
 
@@ -34,7 +34,7 @@ describe("EncryptionPasswordStep", () => {
 		const createURL = `/profiles/${fixtureProfileId}/wallets/create`;
 		history.push(createURL);
 
-		const { queryAllByText, getByTestId, getByText, getAllByTestId, findByTestId } = render(
+		render(
 			<Route path="/profiles/:profileId/wallets/create">
 				<CreateWallet />
 			</Route>,
@@ -44,15 +44,15 @@ describe("EncryptionPasswordStep", () => {
 			},
 		);
 
-		await findByTestId("NetworkStep");
+		await screen.findByTestId("NetworkStep");
 
-		const selectNetworkInput = getByTestId("SelectNetworkInput__input");
-		const continueButton = getByTestId("CreateWallet__continue-button");
-		const backButton = getByTestId("CreateWallet__back-button");
+		const selectNetworkInput = screen.getByTestId("SelectNetworkInput__input");
+		const continueButton = screen.getByTestId("CreateWallet__continue-button");
+		const backButton = screen.getByTestId("CreateWallet__back-button");
 
 		const historySpy = jest.spyOn(history, "push").mockImplementation();
 
-		expect(backButton).not.toHaveAttribute("disabled");
+		expect(backButton).toBeEnabled();
 
 		fireEvent.click(backButton);
 
@@ -60,53 +60,54 @@ describe("EncryptionPasswordStep", () => {
 
 		fireEvent.change(selectNetworkInput, { target: { value: "Ark Dev" } });
 		fireEvent.keyDown(selectNetworkInput, { code: 13, key: "Enter" });
-		await waitFor(() => expect(continueButton).not.toHaveAttribute("disabled"));
+		await waitFor(() => expect(continueButton).toBeEnabled());
 
 		fireEvent.change(selectNetworkInput, { target: { value: "" } });
-		await waitFor(() => expect(continueButton).toHaveAttribute("disabled"));
+		await waitFor(() => expect(continueButton).toBeDisabled());
 
 		fireEvent.change(selectNetworkInput, { target: { value: "Ark Dev" } });
 		fireEvent.keyDown(selectNetworkInput, { code: 13, key: "Enter" });
 
-		await waitFor(() => expect(continueButton).not.toHaveAttribute("disabled"));
+		await waitFor(() => expect(continueButton).toBeEnabled());
 
 		fireEvent.click(continueButton);
 
 		await waitFor(() => expect(profile.wallets().values()).toHaveLength(0));
 
-		await findByTestId("CreateWallet__WalletOverviewStep");
+		await screen.findByTestId("CreateWallet__WalletOverviewStep");
 
 		fireEvent.click(backButton);
 
-		await findByTestId("NetworkStep");
+		await screen.findByTestId("NetworkStep");
 
 		fireEvent.click(continueButton);
 
-		await findByTestId("CreateWallet__WalletOverviewStep");
+		await screen.findByTestId("CreateWallet__WalletOverviewStep");
 
 		fireEvent.click(continueButton);
 
-		await findByTestId("CreateWallet__ConfirmPassphraseStep");
+		await screen.findByTestId("CreateWallet__ConfirmPassphraseStep");
 
 		fireEvent.click(backButton);
 
-		await findByTestId("CreateWallet__WalletOverviewStep");
+		await screen.findByTestId("CreateWallet__WalletOverviewStep");
+
+		fireEvent.click(screen.getByTestId("CreateWallet__encryption-toggle"));
 
 		fireEvent.click(continueButton);
 
-		await findByTestId("CreateWallet__ConfirmPassphraseStep");
+		await screen.findByTestId("CreateWallet__ConfirmPassphraseStep");
 
 		const walletMnemonic = passphrase.split(" ");
 		for (let index = 0; index < 3; index++) {
-			const wordNumber = Number.parseInt(getByText(/Select the/).innerHTML.replace(/Select the/, ""));
+			const wordNumber = Number.parseInt(screen.getByText(/Select the/).innerHTML.replace(/Select the/, ""));
 
-			fireEvent.click(getByText(walletMnemonic[wordNumber - 1]));
-
+			fireEvent.click(screen.getByText(walletMnemonic[wordNumber - 1]));
 			if (index < 2) {
-				await waitFor(() => expect(queryAllByText(/The #(\d+) word/).length === 2 - index));
+				await waitFor(() => expect(screen.queryAllByText(/The #(\d+) word/).length === 2 - index));
 			}
 		}
-		await waitFor(() => expect(continueButton).not.toHaveAttribute("disabled"));
+		await waitFor(() => expect(continueButton).toBeEnabled());
 
 		fireEvent.click(continueButton);
 
@@ -115,10 +116,10 @@ describe("EncryptionPasswordStep", () => {
 			fromMnemonicWithBIP39: () => Promise.reject(new Error("failed")),
 		}));
 
-		await findByTestId("EncryptPassword");
+		await screen.findByTestId("EncryptPassword");
 
-		const passwordInput = getAllByTestId("InputPassword")[0];
-		const confirmPassword = getAllByTestId("InputPassword")[1];
+		const passwordInput = screen.getAllByTestId("InputPassword")[0];
+		const confirmPassword = screen.getAllByTestId("InputPassword")[1];
 
 		fireEvent.input(passwordInput, { target: { value: "S3cUrePa$sword" } });
 
@@ -128,11 +129,11 @@ describe("EncryptionPasswordStep", () => {
 
 		await waitFor(() => expect(confirmPassword).toHaveValue("S3cUrePa$sword"));
 
-		fireEvent.click(getByTestId("CreateWallet__continue-encryption-button"));
+		fireEvent.click(screen.getByTestId("CreateWallet__continue-encryption-button"));
 
-		await findByTestId("CreateWallet__SuccessStep");
+		await screen.findByTestId("CreateWallet__SuccessStep");
 
-		fireEvent.click(getByTestId("CreateWallet__finish-button"));
+		fireEvent.click(screen.getByTestId("CreateWallet__finish-button"));
 
 		await waitFor(() => expect(walletSpy).toHaveBeenCalled());
 		walletSpy.mockRestore();
@@ -143,7 +144,7 @@ describe("EncryptionPasswordStep", () => {
 		const createURL = `/profiles/${fixtureProfileId}/wallets/create`;
 		history.push(createURL);
 
-		const { queryAllByText, getByTestId, getByText, getAllByTestId, findByTestId } = render(
+		render(
 			<Route path="/profiles/:profileId/wallets/create">
 				<CreateWallet />
 			</Route>,
@@ -153,15 +154,15 @@ describe("EncryptionPasswordStep", () => {
 			},
 		);
 
-		await findByTestId("NetworkStep");
+		await screen.findByTestId("NetworkStep");
 
-		const selectNetworkInput = getByTestId("SelectNetworkInput__input");
-		const continueButton = getByTestId("CreateWallet__continue-button");
-		const backButton = getByTestId("CreateWallet__back-button");
+		const selectNetworkInput = screen.getByTestId("SelectNetworkInput__input");
+		const continueButton = screen.getByTestId("CreateWallet__continue-button");
+		const backButton = screen.getByTestId("CreateWallet__back-button");
 
 		const historySpy = jest.spyOn(history, "push").mockImplementation();
 
-		expect(backButton).not.toHaveAttribute("disabled");
+		expect(backButton).toBeEnabled();
 
 		fireEvent.click(backButton);
 
@@ -169,50 +170,52 @@ describe("EncryptionPasswordStep", () => {
 
 		fireEvent.change(selectNetworkInput, { target: { value: "Ark Dev" } });
 		fireEvent.keyDown(selectNetworkInput, { code: 13, key: "Enter" });
-		await waitFor(() => expect(continueButton).not.toHaveAttribute("disabled"));
+		await waitFor(() => expect(continueButton).toBeEnabled());
 
 		fireEvent.change(selectNetworkInput, { target: { value: "" } });
-		await waitFor(() => expect(continueButton).toHaveAttribute("disabled"));
+		await waitFor(() => expect(continueButton).toBeDisabled());
 
 		fireEvent.change(selectNetworkInput, { target: { value: "Ark Dev" } });
 		fireEvent.keyDown(selectNetworkInput, { code: 13, key: "Enter" });
 
-		await waitFor(() => expect(continueButton).not.toHaveAttribute("disabled"));
+		await waitFor(() => expect(continueButton).toBeEnabled());
 
 		fireEvent.click(continueButton);
 
-		await findByTestId("CreateWallet__WalletOverviewStep");
+		await screen.findByTestId("CreateWallet__WalletOverviewStep");
 
 		fireEvent.click(backButton);
 
-		await findByTestId("NetworkStep");
+		await screen.findByTestId("NetworkStep");
 
 		fireEvent.click(continueButton);
 
-		await findByTestId("CreateWallet__WalletOverviewStep");
+		await screen.findByTestId("CreateWallet__WalletOverviewStep");
 
 		fireEvent.click(continueButton);
 
-		await findByTestId("CreateWallet__ConfirmPassphraseStep");
+		await screen.findByTestId("CreateWallet__ConfirmPassphraseStep");
 
 		fireEvent.click(backButton);
 
-		await findByTestId("CreateWallet__WalletOverviewStep");
+		await screen.findByTestId("CreateWallet__WalletOverviewStep");
+
+		fireEvent.click(screen.getByTestId("CreateWallet__encryption-toggle"));
 
 		fireEvent.click(continueButton);
 
-		await findByTestId("CreateWallet__ConfirmPassphraseStep");
+		await screen.findByTestId("CreateWallet__ConfirmPassphraseStep");
 
 		const walletMnemonic = passphrase.split(" ");
 		for (let index = 0; index < 3; index++) {
-			const wordNumber = Number.parseInt(getByText(/Select the/).innerHTML.replace(/Select the/, ""));
+			const wordNumber = Number.parseInt(screen.getByText(/Select the/).innerHTML.replace(/Select the/, ""));
 
-			fireEvent.click(getByText(walletMnemonic[wordNumber - 1]));
+			fireEvent.click(screen.getByText(walletMnemonic[wordNumber - 1]));
 			if (index < 2) {
-				await waitFor(() => expect(queryAllByText(/The #(\d+) word/).length === 2 - index));
+				await waitFor(() => expect(screen.queryAllByText(/The #(\d+) word/).length === 2 - index));
 			}
 		}
-		await waitFor(() => expect(continueButton).not.toHaveAttribute("disabled"));
+		await waitFor(() => expect(continueButton).toBeEnabled());
 
 		fireEvent.click(continueButton);
 
@@ -227,10 +230,10 @@ describe("EncryptionPasswordStep", () => {
 			fromMnemonicWithBIP39: () => Promise.resolve(sampleWallet),
 		}));
 
-		await findByTestId("EncryptPassword");
+		await screen.findByTestId("EncryptPassword");
 
-		const passwordInput = getAllByTestId("InputPassword")[0];
-		const confirmPassword = getAllByTestId("InputPassword")[1];
+		const passwordInput = screen.getAllByTestId("InputPassword")[0];
+		const confirmPassword = screen.getAllByTestId("InputPassword")[1];
 
 		fireEvent.input(passwordInput, { target: { value: "S3cUrePa$sword" } });
 
@@ -242,14 +245,14 @@ describe("EncryptionPasswordStep", () => {
 
 		expect(profile.wallets().values()).toHaveLength(0);
 
-		fireEvent.click(getByTestId("CreateWallet__continue-encryption-button"));
+		fireEvent.click(screen.getByTestId("CreateWallet__continue-encryption-button"));
 
-		await findByTestId("CreateWallet__SuccessStep");
+		await screen.findByTestId("CreateWallet__SuccessStep");
 
 		expect(profile.wallets().values()).toHaveLength(1);
 		expect(walletSpy).toHaveBeenCalled();
 
-		fireEvent.click(getByTestId("CreateWallet__finish-button"));
+		fireEvent.click(screen.getByTestId("CreateWallet__finish-button"));
 
 		const walletId = profile.wallets().first().id();
 

@@ -19,6 +19,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import { delay } from "utils/delay";
 
 import { ConfirmationStep } from "./ConfirmationStep";
 import { FormStep } from "./FormStep";
@@ -272,7 +273,7 @@ const ExchangeForm = ({ orderId, onReady }: { orderId?: string; onReady: () => v
 		let timeout: NodeJS.Timeout;
 
 		if (isFinished) {
-			timeout = setTimeout(handleNext, 5000);
+			timeout = delay(handleNext, 5000);
 		}
 
 		return () => clearTimeout(timeout);

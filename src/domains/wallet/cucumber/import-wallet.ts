@@ -2,7 +2,7 @@
 import { Selector } from "testcafe";
 
 import { buildTranslations } from "../../../app/i18n/helpers";
-import { cucumber, visitWelcomeScreen } from "../../../utils/e2e-utils";
+import { cucumber, mockMuSigRequest, mockRequest, visitWelcomeScreen } from "../../../utils/e2e-utils";
 import { goToProfile } from "../../profile/e2e/common";
 
 const translations = buildTranslations();
@@ -29,6 +29,7 @@ const preSteps = {
 			.ok();
 	},
 };
+
 cucumber("@importWallet-mnemonic", {
 	...preSteps,
 	"When she enters a valid mnemonic to import": async (t: TestController) => {
@@ -39,8 +40,6 @@ cucumber("@importWallet-mnemonic", {
 		await t.click(Selector("button").withExactText(translations.COMMON.CONTINUE));
 	},
 	"And completes the import wallet steps for mnemonic": async (t: TestController) => {
-		await t.expect(Selector("[data-testid=EncryptPassword]").exists).ok();
-		await t.click(Selector("[data-testid=ImportWallet__skip-button]"));
 		await t.click(Selector("[data-testid=ImportWallet__edit-alias]"));
 		const walletNameInput = Selector("input[name=name]");
 		await t.click(walletNameInput).pressKey("ctrl+a delete").typeText(walletNameInput, "Wallet Alias", {
@@ -52,6 +51,93 @@ cucumber("@importWallet-mnemonic", {
 		await t.click(Selector("button").withExactText(translations.COMMON.GO_TO_WALLET));
 	},
 });
+
+cucumber("@importWallet-mnemonic-withEncryption", {
+	...preSteps,
+	"When she chooses to encrypt the imported wallet": async (t: TestController) => {
+		await t.click(Selector('[data-testid="ImportWallet__encryption-toggle"]').parent());
+	},
+	"And enters a valid mnemonic to import": async (t: TestController) => {
+		const passphraseInput = Selector("[data-testid=ImportWallet__mnemonic-input]");
+		await t.typeText(passphraseInput, "buddy year cost vendor honey tonight viable nut female alarm duck symptom", {
+			paste: true,
+		});
+		await t.click(Selector("button").withExactText(translations.COMMON.CONTINUE));
+	},
+	"And enters the encryption passwords": async (t: TestController) => {
+		const passwordInputs = Selector("[data-testid=InputPassword]");
+
+		await t.typeText(passwordInputs.nth(0), "S3cUrePa$sword", { paste: true });
+		await t.typeText(passwordInputs.nth(1), "S3cUrePa$sword", { paste: true });
+
+		await t.hover(Selector("button").withExactText(translations.COMMON.CONTINUE));
+		await t.click(Selector("button").withExactText(translations.COMMON.CONTINUE));
+	},
+	"And completes the import wallet steps for mnemonic": async (t: TestController) => {
+		await t.click(Selector("[data-testid=ImportWallet__edit-alias]"));
+		const walletNameInput = Selector("input[name=name]");
+		await t.click(walletNameInput).pressKey("ctrl+a delete").typeText(walletNameInput, "Wallet Alias", {
+			paste: true,
+		});
+		await t.click(Selector("[data-testid=UpdateWalletName__submit]"));
+	},
+	"Then the wallet is imported to her profile": async (t: TestController) => {
+		await t.click(Selector("button").withExactText(translations.COMMON.GO_TO_WALLET));
+	},
+});
+
+cucumber(
+	"@importWallet-secret-withSecondSignatureAndEncryption",
+	{
+		...preSteps,
+		"When she changes the import type to secret": async (t: TestController) => {
+			await t.click('[data-testid="SelectDropdown__input"]');
+			await t.click(Selector(".select-list-option__label").withText(translations.COMMON.SECRET));
+		},
+		"And chooses to encrypt the imported wallet": async (t: TestController) => {
+			await t.click(Selector('[data-testid="ImportWallet__encryption-toggle"]').parent());
+		},
+		"And enters a valid secret to import": async (t: TestController) => {
+			const secretInput = Selector("[data-testid=ImportWallet__secret-input]");
+			await t.typeText(secretInput, "abc", {
+				paste: true,
+			});
+			await t.click(Selector("button").withExactText(translations.COMMON.CONTINUE));
+		},
+		"And enters the second secret": async (t: TestController) => {
+			const secondSecretInput = Selector("[data-testid=EncryptPassword__second-secret]");
+			await t.typeText(secondSecretInput, "abc", { paste: true });
+		},
+		"And enters the encryption passwords": async (t: TestController) => {
+			const passwordInputs = Selector("[data-testid=InputPassword]");
+
+			await t.typeText(passwordInputs.nth(0), "S3cUrePa$sword", { paste: true });
+			await t.typeText(passwordInputs.nth(1), "S3cUrePa$sword", { paste: true });
+
+			await t.hover(Selector("button").withExactText(translations.COMMON.CONTINUE));
+			await t.click(Selector("button").withExactText(translations.COMMON.CONTINUE));
+		},
+		"And completes the import wallet steps for secret": async (t: TestController) => {
+			await t.click(Selector("[data-testid=ImportWallet__edit-alias]"));
+			const walletNameInput = Selector("input[name=name]");
+			await t.click(walletNameInput).pressKey("ctrl+a delete").typeText(walletNameInput, "Wallet Alias", {
+				paste: true,
+			});
+			await t.click(Selector("[data-testid=UpdateWalletName__submit]"));
+		},
+		"Then the wallet is imported to her profile": async (t: TestController) => {
+			await t.click(Selector("button").withExactText(translations.COMMON.GO_TO_WALLET));
+		},
+	},
+	[
+		mockMuSigRequest("https://ark-test-musig.payvo.com", "list", { result: [] }),
+		mockRequest(
+			"https://ark-test.payvo.com/api/transactions?limit=30&address=DNTwQTSp999ezQ425utBsWetcmzDuCn2pN",
+			[],
+		),
+	],
+);
+
 cucumber("@importWallet-address", {
 	...preSteps,
 	"When she changes the import type to address": async (t: TestController) => {
@@ -77,6 +163,7 @@ cucumber("@importWallet-address", {
 		await t.click(Selector("button").withExactText(translations.COMMON.GO_TO_WALLET));
 	},
 });
+
 cucumber("@importWallet-invalidAddress", {
 	...preSteps,
 	"When she changes the import type to address": async (t: TestController) => {
@@ -96,6 +183,7 @@ cucumber("@importWallet-invalidAddress", {
 		await t.expect(Selector("button").withText(translations.COMMON.CONTINUE).hasAttribute("disabled")).ok();
 	},
 });
+
 cucumber("@importWallet-invalidMnemonic", {
 	...preSteps,
 	"When she enters an invalid mnemonic to import": async (t: TestController) => {
@@ -111,6 +199,7 @@ cucumber("@importWallet-invalidMnemonic", {
 		await t.expect(Selector("button").withText(translations.COMMON.CONTINUE).hasAttribute("disabled")).ok();
 	},
 });
+
 cucumber("@importWallet-duplicateAddress", {
 	...preSteps,
 	"And has imported a wallet": async (t: TestController) => {
@@ -119,8 +208,6 @@ cucumber("@importWallet-duplicateAddress", {
 			paste: true,
 		});
 		await t.click(Selector("button").withExactText(translations.COMMON.CONTINUE));
-		await t.expect(Selector("[data-testid=EncryptPassword]").exists).ok();
-		await t.click(Selector("[data-testid=ImportWallet__skip-button]"));
 		await t.click(Selector("[data-testid=ImportWallet__edit-alias]"));
 		const walletNameInput = Selector("input[name=name]");
 		await t.click(walletNameInput).pressKey("ctrl+a delete").typeText(walletNameInput, "Wallet Alias", {

@@ -58,7 +58,7 @@ describe("AuthenticationStep", () => {
 		jest.clearAllMocks();
 	});
 
-	it("should validate if second mnemonic match the wallet second public key", async () => {
+	it("should validate if second mnemonic matches the wallet second public key", async () => {
 		wallet = await profile.walletFactory().fromMnemonicWithBIP39({
 			coin: "ARK",
 			mnemonic: MNEMONICS[0],
@@ -103,6 +103,40 @@ describe("AuthenticationStep", () => {
 		jest.clearAllMocks();
 	});
 
+	it("should validate if second secret matches the wallet second public key", async () => {
+		wallet = await profile.walletFactory().fromSecret({
+			coin: "ARK",
+			network: "ark.devnet",
+			secret: "abc",
+		});
+
+		const { form } = renderWithForm(<AuthenticationStep wallet={wallet} />, {
+			withProviders: true,
+		});
+
+		fireEvent.input(screen.getByTestId("AuthenticationStep__secret"), {
+			target: {
+				value: "abc",
+			},
+		});
+
+		fireEvent.input(screen.getByTestId("AuthenticationStep__second-secret"), {
+			target: {
+				value: "wrong second secret",
+			},
+		});
+
+		await waitFor(() => expect(form()?.formState.isValid).toBeFalsy());
+
+		fireEvent.input(screen.getByTestId("AuthenticationStep__second-secret"), {
+			target: {
+				value: "abc",
+			},
+		});
+
+		await waitFor(() => expect(form()?.formState.isValid).toBeTruthy());
+	});
+
 	it("should request mnemonic if wallet was imported using mnemonic", async () => {
 		wallet = await profile.walletFactory().fromMnemonicWithBIP39({
 			coin: "ARK",
@@ -110,7 +144,7 @@ describe("AuthenticationStep", () => {
 			network: "ark.devnet",
 		});
 
-		jest.spyOn(wallet, "isSecondSignature").mockReturnValueOnce(false);
+		const isSecondSignatureMock = jest.spyOn(wallet, "isSecondSignature").mockReturnValue(false);
 
 		const { form, asFragment } = renderWithForm(<AuthenticationStep wallet={wallet} />, {
 			withProviders: true,
@@ -129,6 +163,8 @@ describe("AuthenticationStep", () => {
 		await waitFor(() => expect(form()?.getValues()).toEqual({ mnemonic: MNEMONICS[0] }));
 
 		expect(asFragment()).toMatchSnapshot();
+
+		isSecondSignatureMock.mockRestore();
 	});
 
 	it("should request secret if wallet was imported using secret", async () => {
@@ -138,7 +174,7 @@ describe("AuthenticationStep", () => {
 			secret: "secret",
 		});
 
-		jest.spyOn(wallet, "isSecondSignature").mockReturnValueOnce(false);
+		const isSecondSignatureMock = jest.spyOn(wallet, "isSecondSignature").mockReturnValue(false);
 
 		const { form, asFragment } = renderWithForm(<AuthenticationStep wallet={wallet} />, {
 			withProviders: true,
@@ -157,6 +193,8 @@ describe("AuthenticationStep", () => {
 		await waitFor(() => expect(form()?.getValues()).toEqual({ secret: "secret" }));
 
 		expect(asFragment()).toMatchSnapshot();
+
+		isSecondSignatureMock.mockRestore();
 	});
 
 	it("should request mnemonic if wallet was imported using address", async () => {
@@ -166,7 +204,7 @@ describe("AuthenticationStep", () => {
 			network: "ark.devnet",
 		});
 
-		jest.spyOn(wallet, "isSecondSignature").mockReturnValueOnce(false);
+		const isSecondSignatureMock = jest.spyOn(wallet, "isSecondSignature").mockReturnValue(false);
 
 		const { form, asFragment } = renderWithForm(<AuthenticationStep wallet={wallet} />, {
 			withProviders: true,
@@ -185,6 +223,8 @@ describe("AuthenticationStep", () => {
 		await waitFor(() => expect(form()?.getValues()).toEqual({ mnemonic: MNEMONICS[0] }));
 
 		expect(asFragment()).toMatchSnapshot();
+
+		isSecondSignatureMock.mockRestore();
 	});
 
 	it("should request private key if wallet was imported using private key", async () => {
@@ -253,6 +293,43 @@ describe("AuthenticationStep", () => {
 			expect(form()?.getValues()).toEqual({
 				mnemonic: MNEMONICS[0],
 				secondMnemonic: MNEMONICS[1],
+			}),
+		);
+
+		expect(asFragment()).toMatchSnapshot();
+	});
+
+	it("should request secret and second secret", async () => {
+		wallet = await profile.walletFactory().fromSecret({
+			coin: "ARK",
+			network: "ark.devnet",
+			secret: "abc",
+		});
+
+		const { form, asFragment } = renderWithForm(<AuthenticationStep wallet={wallet} />, {
+			withProviders: true,
+		});
+
+		await screen.findByTestId("AuthenticationStep__secret");
+
+		expect(screen.queryByTestId("AuthenticationStep__second-secret")).toBeInTheDocument();
+
+		fireEvent.change(screen.getByTestId("AuthenticationStep__secret"), {
+			target: {
+				value: "abc",
+			},
+		});
+
+		fireEvent.change(screen.getByTestId("AuthenticationStep__second-secret"), {
+			target: {
+				value: "abc",
+			},
+		});
+
+		await waitFor(() =>
+			expect(form()?.getValues()).toEqual({
+				secondSecret: "abc",
+				secret: "abc",
 			}),
 		);
 

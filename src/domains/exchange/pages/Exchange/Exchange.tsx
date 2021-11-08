@@ -16,6 +16,7 @@ import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { assertString } from "utils/assertions";
+import { delay } from "utils/delay";
 
 enum ExchangeView {
 	Exchanges = "EXCHANGES",
@@ -66,7 +67,7 @@ export const Exchange = () => {
 				}
 			}
 
-			timeout = setTimeout(fetchStatus, 15_000);
+			timeout = delay(fetchStatus, 15_000);
 		};
 
 		fetchStatus();

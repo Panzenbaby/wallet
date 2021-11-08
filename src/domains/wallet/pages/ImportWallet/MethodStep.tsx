@@ -1,12 +1,16 @@
+import { truncate } from "@arkecosystem/utils";
 import { Contracts } from "@payvo/profiles";
-import { Coins, Enums, Networks } from "@payvo/sdk";
+import { Coins, Networks } from "@payvo/sdk";
+import { Divider } from "app/components/Divider";
 import { FormField, FormLabel } from "app/components/Form";
 import { Header } from "app/components/Header";
 import { Input, InputAddress, InputPassword } from "app/components/Input";
 import { Select } from "app/components/SelectDropdown";
+import { Toggle } from "app/components/Toggle";
+import { Tooltip } from "app/components/Tooltip";
 import { OptionsValue, useImportOptions } from "domains/wallet/hooks/use-import-options";
 import { TFunction } from "i18next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { assertNetwork, assertString } from "utils/assertions";
@@ -112,9 +116,45 @@ const AddressField = ({ coin, profile }: { coin: Coins.Coin; profile: Contracts.
 	);
 };
 
+const PublicKeyField = ({ coin, profile }: { coin: Coins.Coin; profile: Contracts.IProfile }) => {
+	const { t } = useTranslation();
+	const { register } = useFormContext();
+
+	return (
+		<FormField name="value">
+			<FormLabel label={t("COMMON.PUBLIC_KEY")} />
+			<Input
+				ref={register({
+					required: t("COMMON.VALIDATION.FIELD_REQUIRED", {
+						field: t("COMMON.PUBLIC_KEY"),
+					}).toString(),
+					validate: {
+						duplicateAddress: async (value) => {
+							try {
+								const { address } = await coin.address().fromPublicKey(value);
+
+								if (profile.wallets().findByAddressWithNetwork(address, coin.network().id())) {
+									return t("COMMON.INPUT_PUBLIC_KEY.VALIDATION.PUBLIC_KEY_ALREADY_EXISTS", {
+										publicKey: truncate(value, { length: 15, omissionPosition: "middle" }),
+									}).toString();
+								}
+
+								return true;
+							} catch {
+								return t("WALLETS.PAGE_IMPORT_WALLET.VALIDATION.INVALID_PUBLIC_KEY").toString();
+							}
+						},
+					},
+				})}
+				data-testid="ImportWallet__publicKey-input"
+			/>
+		</FormField>
+	);
+};
+
 const ImportInputField = ({ type, coin, profile }: { type: string; coin: Coins.Coin; profile: Contracts.IProfile }) => {
 	const { t } = useTranslation();
-	const { register, getValues, errors } = useFormContext();
+	const { register, getValues } = useFormContext();
 
 	const network = getValues("network");
 	assertNetwork(network);
@@ -130,40 +170,14 @@ const ImportInputField = ({ type, coin, profile }: { type: string; coin: Coins.C
 			}
 		};
 
-		const allowsSecondSignature = network.allows(Enums.FeatureFlag.TransactionSecondSignature);
-
 		return (
-			<>
-				<MnemonicField
-					profile={profile}
-					label={t(`COMMON.MNEMONIC_TYPE.${(type as "bip39" | "bip44" | "bip49" | "bip84").toUpperCase()}`)}
-					data-testid="ImportWallet__mnemonic-input"
-					findAddress={findAddress}
-					network={network}
-				/>
-
-				{allowsSecondSignature && (
-					<FormField name="secondMnemonic">
-						<FormLabel label={t("COMMON.SECOND_MNEMONIC")} optional />
-
-						<InputPassword
-							disabled={!getValues("value") || errors.value}
-							data-testid="ImportWallet__secondMnemonic-input"
-							ref={register({
-								validate: (value) =>
-									validateAddress({
-										findAddress,
-										network,
-										optional: true,
-										profile,
-										t,
-										value,
-									}),
-							})}
-						/>
-					</FormField>
-				)}
-			</>
+			<MnemonicField
+				profile={profile}
+				label={t(`COMMON.MNEMONIC_TYPE.${(type as "bip39" | "bip44" | "bip49" | "bip84").toUpperCase()}`)}
+				data-testid="ImportWallet__mnemonic-input"
+				findAddress={findAddress}
+				network={network}
+			/>
 		);
 	}
 
@@ -172,23 +186,7 @@ const ImportInputField = ({ type, coin, profile }: { type: string; coin: Coins.C
 	}
 
 	if (type === OptionsValue.PUBLIC_KEY) {
-		return (
-			<MnemonicField
-				profile={profile}
-				label={t("COMMON.PUBLIC_KEY")}
-				data-testid="ImportWallet__publicKey-input"
-				findAddress={async (value) => {
-					try {
-						const { address } = await coin.address().fromPublicKey(value);
-						return address;
-					} catch {
-						/* istanbul ignore next */
-						throw new Error(t("WALLETS.PAGE_IMPORT_WALLET.VALIDATION.INVALID_PUBLIC_KEY"));
-					}
-				}}
-				network={network}
-			/>
-		);
+		return <PublicKeyField coin={coin} profile={profile} />;
 	}
 
 	if (type === OptionsValue.PRIVATE_KEY) {
@@ -283,7 +281,7 @@ const ImportInputField = ({ type, coin, profile }: { type: string; coin: Coins.C
 	throw new Error("Invalid import type. This looks like a bug.");
 };
 
-export const SecondStep = ({ profile }: { profile: Contracts.IProfile }) => {
+export const MethodStep = ({ profile }: { profile: Contracts.IProfile }) => {
 	const { t } = useTranslation();
 	const { getValues, watch, setValue, clearErrors } = useFormContext();
 
@@ -294,11 +292,25 @@ export const SecondStep = ({ profile }: { profile: Contracts.IProfile }) => {
 
 	const { options, defaultOption } = useImportOptions(network.importMethods());
 
+	const useEncryption = watch("useEncryption");
 	const importOption = watch("importOption") || defaultOption;
+
 	assertString(importOption.value);
 
+	const handleToggleEncryption = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setValue("useEncryption", event.target.checked);
+	};
+
+	const isUseEncryptionChecked = useEncryption ?? false;
+
+	useEffect(() => {
+		if (useEncryption && !importOption.canBeEncrypted) {
+			setValue("useEncryption", false);
+		}
+	}, [importOption.canBeEncrypted, useEncryption, setValue]);
+
 	return (
-		<section data-testid="ImportWallet__second-step">
+		<section data-testid="ImportWallet__method-step">
 			<Header
 				title={t("WALLETS.PAGE_IMPORT_WALLET.METHOD_STEP.TITLE")}
 				subtitle={t("WALLETS.PAGE_IMPORT_WALLET.METHOD_STEP.SUBTITLE")}
@@ -321,6 +333,35 @@ export const SecondStep = ({ profile }: { profile: Contracts.IProfile }) => {
 				</FormField>
 
 				<ImportInputField type={importOption.value} coin={coin} profile={profile} />
+
+				<Divider dashed />
+
+				<div className="flex flex-col space-y-2 w-full">
+					<div className="flex justify-between items-center space-x-5">
+						<span className="font-bold text-theme-secondary-text">
+							{t("WALLETS.PAGE_IMPORT_WALLET.METHOD_STEP.ENCRYPTION.TITLE")}
+						</span>
+
+						<Tooltip
+							className="mb-1 -ml-3"
+							content={t("WALLETS.PAGE_IMPORT_WALLET.METHOD_STEP.ENCRYPTION.NOT_AVAILABLE")}
+							disabled={importOption.canBeEncrypted}
+						>
+							<span data-testid="ImportWallet__encryption">
+								<Toggle
+									data-testid="ImportWallet__encryption-toggle"
+									disabled={!importOption.canBeEncrypted}
+									checked={isUseEncryptionChecked}
+									onChange={handleToggleEncryption}
+								/>
+							</span>
+						</Tooltip>
+					</div>
+
+					<span className="text-sm text-theme-secondary-500 mr-12">
+						{t("WALLETS.PAGE_IMPORT_WALLET.METHOD_STEP.ENCRYPTION.DESCRIPTION")}
+					</span>
+				</div>
 			</div>
 		</section>
 	);

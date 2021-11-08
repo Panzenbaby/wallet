@@ -21,6 +21,10 @@ let profile: Contracts.IProfile;
 const exchangeURL = `/profiles/${getDefaultProfileId()}/exchange/view`;
 let history: MemoryHistory;
 
+jest.mock("utils/delay", () => ({
+	delay: (callback: () => void) => setTimeout(callback, 200),
+}));
+
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	const { exchangeProviders, exchangeService, fetchProviders, provider, setProvider } = useExchangeContext();
 
@@ -39,13 +43,11 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	}, [exchangeProviders, exchangeService, provider]);
 
 	if (provider) {
-		return children;
+		return <>{children}</>;
 	}
 
 	return null;
 };
-
-jest.setTimeout(10_000);
 
 describe("ExchangeForm", () => {
 	beforeAll(() => {
@@ -63,8 +65,6 @@ describe("ExchangeForm", () => {
 		profile.exchangeTransactions().flush();
 
 		httpClient.clearCache();
-		jest.clearAllTimers();
-		jest.useRealTimers();
 	});
 
 	const renderComponent = (component: React.ReactNode) =>
@@ -87,7 +87,10 @@ describe("ExchangeForm", () => {
 				expect(screen.getAllByTestId("SelectDropdown__input")[0]).not.toBeDisabled();
 			});
 
+			await waitFor(() => expect(screen.getAllByTestId("SelectDropdown__input")[0]).toBeInTheDocument());
 			fireEvent.change(screen.getAllByTestId("SelectDropdown__input")[0], { target: { value: from.name } });
+
+			await waitFor(() => expect(screen.getAllByTestId("SelectDropdown__option--0")[0]).toBeInTheDocument());
 			fireEvent.click(screen.getAllByTestId("SelectDropdown__option--0")[0]);
 
 			await waitFor(() => {
@@ -104,8 +107,11 @@ describe("ExchangeForm", () => {
 				expect(screen.getAllByTestId("SelectDropdown__input")[1]).not.toBeDisabled();
 			});
 
+			await waitFor(() => expect(screen.getAllByTestId("SelectDropdown__input")[1]).toBeInTheDocument());
 			fireEvent.change(screen.getAllByTestId("SelectDropdown__input")[1], { target: { value: to.name } });
-			fireEvent.click(screen.getAllByTestId("SelectDropdown__option--0")[1]);
+
+			await waitFor(() => expect(screen.getAllByTestId("SelectDropdown__option--0")[0]).toBeInTheDocument());
+			fireEvent.click(screen.getAllByTestId("SelectDropdown__option--0")[0]);
 
 			await waitFor(() => {
 				expect(screen.getAllByTestId("SelectDropdown__input")[1]).toHaveValue(to.name);
@@ -242,6 +248,7 @@ describe("ExchangeForm", () => {
 			expect(screen.getByTestId("ExchangeForm")).toBeInTheDocument();
 		});
 
+		await waitFor(() => expect(screen.getAllByTestId("SelectDropdown__input")).toHaveLength(3));
 		const fromCurrencyDropdown = screen.getAllByTestId("SelectDropdown__input")[0];
 		const toCurrencyDropdown = screen.getAllByTestId("SelectDropdown__input")[1];
 
@@ -1078,8 +1085,6 @@ describe("ExchangeForm", () => {
 	});
 
 	it("should perform an exchange", async () => {
-		jest.useFakeTimers();
-
 		const baseStatus = {
 			amountFrom: 1,
 			amountTo: 100,
@@ -1093,7 +1098,7 @@ describe("ExchangeForm", () => {
 
 		nock("https://exchanges.payvo.com")
 			.post("/api/changenow/orders")
-			.reply(200, require("tests/fixtures/exchange/changenow/order.json"))
+			.reply(200, () => require("tests/fixtures/exchange/changenow/order.json"))
 			.get("/api/changenow/orders/182b657b2c259b")
 			.query(true)
 			.reply(200, { data: baseStatus })
@@ -1116,7 +1121,7 @@ describe("ExchangeForm", () => {
 
 		const onReady = jest.fn();
 
-		renderComponent(<ExchangeForm onReady={onReady} />);
+		const { findByTestId } = renderComponent(<ExchangeForm onReady={onReady} />);
 
 		await waitFor(() => {
 			expect(onReady).toHaveBeenCalled();
@@ -1191,6 +1196,7 @@ describe("ExchangeForm", () => {
 
 		// submit form
 		fireEvent.click(screen.getByTestId("ExchangeForm__continue-button"));
+
 		await waitFor(() => {
 			expect(screen.getByTestId("ExchangeForm__status-step")).toBeInTheDocument();
 		});
@@ -1208,7 +1214,7 @@ describe("ExchangeForm", () => {
 			() => {
 				expect(screen.getAllByTestId("StatusIcon__check-mark")).toHaveLength(3);
 			},
-			{ timeout: 5000 },
+			{ timeout: 4000 },
 		);
 
 		expect(() => screen.getAllByTestId("StatusIcon__spinner")).toThrow(/Unable to find an element by/);
@@ -1219,6 +1225,7 @@ describe("ExchangeForm", () => {
 		});
 
 		const historySpy = jest.spyOn(history, "push").mockImplementation();
+		await findByTestId("ExchangeForm__finish-button", undefined, { timeout: 4000 });
 		fireEvent.click(screen.getByTestId("ExchangeForm__finish-button"));
 
 		await waitFor(() => {
@@ -1330,9 +1337,6 @@ describe("StatusStep", () => {
 
 	afterEach(() => {
 		profile.exchangeTransactions().flush();
-
-		jest.clearAllTimers();
-		jest.useRealTimers();
 	});
 
 	it("should render", async () => {
@@ -1374,8 +1378,6 @@ describe("StatusStep", () => {
 	});
 
 	it("should execute onUpdate callback on status change", async () => {
-		jest.useFakeTimers();
-
 		const onUpdate = jest.fn();
 
 		const exchangeTransaction = profile.exchangeTransactions().create({

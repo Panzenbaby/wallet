@@ -32,6 +32,36 @@ describe("PluginDetails", () => {
 		jest.clearAllMocks();
 	});
 
+	it("should show configuration for plugins from npm", async () => {
+		const FetchComponent = () => {
+			const { fetchPluginPackages } = usePluginManagerContext();
+			return <button onClick={fetchPluginPackages}>Fetch Packages</button>;
+		};
+
+		const { container } = render(
+			<Route path="/profiles/:profileId/plugins/details">
+				<PluginManagerProvider manager={pluginManager} services={[]}>
+					<FetchComponent />
+					<PluginDetails />
+				</PluginManagerProvider>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}/plugins/details?pluginId=@dated/delegate-calculator-wallet-plugin`],
+				withPluginProvider: false,
+			},
+		);
+
+		await waitFor(() => expect(screen.getByTestId("PluginSpecs__size")).toHaveTextContent("N/A"));
+
+		fireEvent.click(screen.getByText("Fetch Packages"));
+
+		await waitFor(() => expect(screen.getAllByText("ARK Delegate Calculator").length).toBeGreaterThan(0));
+
+		await waitFor(() => expect(screen.getByTestId("PluginSpecs__size")).toHaveTextContent("123 kB"));
+
+		expect(container).toMatchSnapshot();
+	});
+
 	it("should render properly", async () => {
 		const plugin = new PluginController(
 			{ "desktop-wallet": { categories: ["other"] }, name: "test-plugin" },
@@ -99,36 +129,6 @@ describe("PluginDetails", () => {
 		fireEvent.click(screen.getByText("Fetch Package"));
 
 		await waitFor(() => expect(screen.getAllByText("Remote Plugin").length).toBeGreaterThan(0));
-
-		expect(container).toMatchSnapshot();
-	});
-
-	it("should show configuration for plugins from npm", async () => {
-		const FetchComponent = () => {
-			const { fetchPluginPackages } = usePluginManagerContext();
-			return <button onClick={fetchPluginPackages}>Fetch Packages</button>;
-		};
-
-		const { container } = render(
-			<Route path="/profiles/:profileId/plugins/details">
-				<PluginManagerProvider manager={pluginManager} services={[]}>
-					<FetchComponent />
-					<PluginDetails />
-				</PluginManagerProvider>
-			</Route>,
-			{
-				routes: [`/profiles/${profile.id()}/plugins/details?pluginId=@dated/delegate-calculator-wallet-plugin`],
-				withPluginProvider: false,
-			},
-		);
-
-		await waitFor(() => expect(screen.getByTestId("PluginSpecs__size")).toHaveTextContent("N/A"));
-
-		fireEvent.click(screen.getByText("Fetch Packages"));
-
-		await waitFor(() => expect(screen.getAllByText("ARK Delegate Calculator").length).toBeGreaterThan(0));
-
-		await waitFor(() => expect(screen.getByTestId("PluginSpecs__size")).toHaveTextContent("123 kB"));
 
 		expect(container).toMatchSnapshot();
 	});

@@ -44,7 +44,7 @@ export const CreateWallet = () => {
 	const { getValues, formState, register, setValue, watch } = form;
 	const { isDirty, isSubmitting, isValid } = formState;
 
-	const { encryptionPassword, confirmEncryptionPassword } = watch();
+	const { useEncryption, encryptionPassword, confirmEncryptionPassword } = watch();
 
 	const [isGeneratingWallet, setIsGeneratingWallet] = useState(false);
 	const [generationError, setGenerationError] = useState("");
@@ -54,6 +54,7 @@ export const CreateWallet = () => {
 		register("network", { required: true });
 		register("wallet");
 		register("mnemonic");
+		register("useEncryption");
 	}, [register]);
 
 	const handleFinish = () => {
@@ -88,7 +89,11 @@ export const CreateWallet = () => {
 	};
 
 	const handleNext = async (parameters: { encryptionPassword?: string } = {}) => {
-		const newIndex = activeTab + 1;
+		let newIndex = activeTab + 1;
+
+		if (newIndex === Step.EncryptPasswordStep && !useEncryption) {
+			newIndex = newIndex + 1;
+		}
 
 		if (newIndex === Step.WalletOverviewStep) {
 			setGenerationError("");
@@ -115,7 +120,7 @@ export const CreateWallet = () => {
 			assertString(mnemonic);
 			assertWallet(wallet);
 
-			if (parameters.encryptionPassword) {
+			if (useEncryption && parameters.encryptionPassword) {
 				setIsGeneratingWallet(true);
 
 				try {
@@ -178,7 +183,7 @@ export const CreateWallet = () => {
 			<Section className="flex-1">
 				<Form className="mx-auto max-w-xl" context={form} onSubmit={handleFinish}>
 					<Tabs activeId={activeTab}>
-						<StepIndicator size={5} activeIndex={activeTab} />
+						<StepIndicator size={useEncryption ? 5 : 4} activeIndex={activeTab} />
 
 						<div className="mt-8">
 							<TabPanel tabId={Step.NetworkStep}>
@@ -207,68 +212,54 @@ export const CreateWallet = () => {
 								<SuccessStep onClickEditAlias={() => setIsEditAliasModalOpen(true)} />
 							</TabPanel>
 
-							<div className="flex justify-between mt-8">
-								<div>
-									{activeTab === Step.EncryptPasswordStep && (
-										<Button
-											data-testid="CreateWallet__skip-button"
-											disabled={isGeneratingWallet}
-											onClick={() => handleNext()}
-										>
-											{t("COMMON.SKIP")}
-										</Button>
-									)}
-								</div>
+							<div className="flex justify-end mt-8 space-x-3">
+								{activeTab < Step.SuccessStep && (
+									<Button
+										data-testid="CreateWallet__back-button"
+										disabled={isGeneratingWallet}
+										variant="secondary"
+										onClick={handleBack}
+									>
+										{t("COMMON.BACK")}
+									</Button>
+								)}
 
-								<div className="flex justify-end space-x-3">
-									{activeTab < Step.SuccessStep && (
-										<Button
-											data-testid="CreateWallet__back-button"
-											disabled={isGeneratingWallet}
-											variant="secondary"
-											onClick={handleBack}
-										>
-											{t("COMMON.BACK")}
-										</Button>
-									)}
+								{activeTab < Step.EncryptPasswordStep && (
+									<Button
+										data-testid="CreateWallet__continue-button"
+										disabled={isDirty ? !isValid || isGeneratingWallet : true}
+										isLoading={isGeneratingWallet}
+										onClick={() => handleNext()}
+									>
+										{t("COMMON.CONTINUE")}
+									</Button>
+								)}
 
-									{activeTab < Step.EncryptPasswordStep && (
-										<Button
-											data-testid="CreateWallet__continue-button"
-											disabled={isDirty ? !isValid || isGeneratingWallet : true}
-											isLoading={isGeneratingWallet}
-											onClick={() => handleNext()}
-										>
-											{t("COMMON.CONTINUE")}
-										</Button>
-									)}
+								{activeTab === Step.EncryptPasswordStep && (
+									<Button
+										data-testid="CreateWallet__continue-encryption-button"
+										disabled={
+											!isValid ||
+											isGeneratingWallet ||
+											!encryptionPassword ||
+											!confirmEncryptionPassword
+										}
+										isLoading={isGeneratingWallet}
+										onClick={handlePasswordSubmit}
+									>
+										{t("COMMON.CONTINUE")}
+									</Button>
+								)}
 
-									{activeTab === Step.EncryptPasswordStep && (
-										<Button
-											data-testid="CreateWallet__continue-encryption-button"
-											disabled={
-												!isValid ||
-												isGeneratingWallet ||
-												!encryptionPassword ||
-												!confirmEncryptionPassword
-											}
-											isLoading={isGeneratingWallet}
-											onClick={handlePasswordSubmit}
-										>
-											{t("COMMON.CONTINUE")}
-										</Button>
-									)}
-
-									{activeTab === Step.SuccessStep && (
-										<Button
-											disabled={isSubmitting}
-											type="submit"
-											data-testid="CreateWallet__finish-button"
-										>
-											{t("COMMON.GO_TO_WALLET")}
-										</Button>
-									)}
-								</div>
+								{activeTab === Step.SuccessStep && (
+									<Button
+										disabled={isSubmitting}
+										type="submit"
+										data-testid="CreateWallet__finish-button"
+									>
+										{t("COMMON.GO_TO_WALLET")}
+									</Button>
+								)}
 							</div>
 						</div>
 					</Tabs>

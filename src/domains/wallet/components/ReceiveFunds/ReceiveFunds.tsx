@@ -17,11 +17,10 @@ interface ReceiveFundsProperties {
 	address: string;
 	name?: string;
 	network: Networks.Network;
-	isOpen: boolean;
 	onClose?: () => void;
 }
 
-export const ReceiveFunds = ({ address, name, network, isOpen, onClose }: ReceiveFundsProperties) => {
+export const ReceiveFunds = ({ address, name, network, onClose }: ReceiveFundsProperties) => {
 	const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
 
 	const { t } = useTranslation();
@@ -41,7 +40,7 @@ export const ReceiveFunds = ({ address, name, network, isOpen, onClose }: Receiv
 			size="lg"
 			title={t("WALLETS.MODAL_RECEIVE_FUNDS.TITLE")}
 			description={isFormOpen ? t("WALLETS.MODAL_RECEIVE_FUNDS.DESCRIPTION") : undefined}
-			isOpen={isOpen}
+			isOpen
 			onClose={onClose}
 		>
 			{name && (

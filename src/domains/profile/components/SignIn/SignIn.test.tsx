@@ -16,8 +16,6 @@ import { SignIn } from "./SignIn";
 
 let profile: Contracts.IProfile;
 
-jest.setTimeout(30_000);
-
 describe("SignIn", () => {
 	beforeEach(async () => {
 		profile = env.profiles().findById(getPasswordProtectedProfileId());
@@ -128,8 +126,11 @@ describe("SignIn", () => {
 		// wait for form to be updated
 		await findByTestId("SignIn__submit-button");
 
-		await waitFor(() => expect(getByTestId("Input__error")).toHaveAttribute("data-errortext", "Password invalid"), {
-			timeout: 10_000,
-		});
+		await waitFor(() =>
+			expect(getByTestId("Input__error")).toHaveAttribute(
+				"data-errortext",
+				expect.stringMatching(/Maximum sign in attempts/),
+			),
+		);
 	});
 });

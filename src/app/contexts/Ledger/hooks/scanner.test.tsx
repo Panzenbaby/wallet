@@ -1,17 +1,24 @@
-import Transport from "@ledgerhq/hw-transport";
-import { createTransportReplayer, RecordStore } from "@ledgerhq/hw-transport-mocker";
 import { Contracts } from "@payvo/profiles";
 import nock from "nock";
 import React from "react";
-import { env, fireEvent, getDefaultProfileId, render, screen, waitFor } from "utils/testing-library";
+import {
+	env,
+	fireEvent,
+	getDefaultLedgerTransport,
+	getDefaultProfileId,
+	render,
+	screen,
+	waitFor,
+} from "utils/testing-library";
 
 import { LedgerProvider, useLedgerContext } from "../Ledger";
 import { useLedgerScanner } from "./scanner";
 
+const transport = getDefaultLedgerTransport();
+
 describe("Use Ledger Scanner", () => {
 	let profile: Contracts.IProfile;
 	let wallet: Contracts.IReadWriteWallet;
-	let transport: typeof Transport;
 	let legacyPublicKeyPaths = new Map();
 
 	beforeAll(() => {
@@ -52,7 +59,6 @@ describe("Use Ledger Scanner", () => {
 	beforeEach(async () => {
 		profile = env.profiles().findById(getDefaultProfileId());
 		wallet = profile.wallets().first();
-		transport = createTransportReplayer(RecordStore.fromString(""));
 
 		await env.profiles().restore(profile);
 		await profile.sync();

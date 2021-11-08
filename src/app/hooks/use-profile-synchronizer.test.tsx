@@ -171,8 +171,6 @@ describe("useProfileSyncStatus", () => {
 
 describe("useProfileSynchronizer", () => {
 	beforeEach(async () => {
-		jest.useFakeTimers();
-
 		const profile = env.profiles().findById(getDefaultProfileId());
 		await env.profiles().restore(profile);
 		await profile.sync();
@@ -185,6 +183,7 @@ describe("useProfileSynchronizer", () => {
 
 	afterEach(() => {
 		jest.clearAllTimers();
+		jest.useRealTimers();
 	});
 
 	it("should clear last profile sync jobs", async () => {
@@ -368,7 +367,7 @@ describe("useProfileSynchronizer", () => {
 		await renderAct(async () => {
 			configuration.setConfiguration({ profileIsSyncingWallets: true });
 		});
-		await waitFor(() => expect(configuration.profileIsSyncingWallets).toBe(true));
+		await waitFor(() => expect(configuration.profileIsSyncingWallets).toBe(true), { timeout: 2000 });
 
 		await renderAct(async () => {
 			configuration.setConfiguration({ profileIsSyncingWallets: false });
@@ -378,6 +377,42 @@ describe("useProfileSynchronizer", () => {
 		await waitFor(() => expect(profileErroredNetworks).toHaveLength(1));
 
 		mockWalletSyncStatus.mockRestore();
+	});
+
+	it("should not start syncing for empty profile", async () => {
+		let configuration: any;
+		const onProfileSyncStart = jest.fn();
+
+		const emptyProfile = env.profiles().create("empty profile");
+
+		const dashboardURL = `/profiles/${emptyProfile.id()}/dashboard`;
+		history.push(dashboardURL);
+
+		const Component = () => {
+			configuration = useConfiguration();
+
+			useProfileSynchronizer({
+				onProfileSyncStart,
+			});
+
+			return <div data-testid="Dashboard">test</div>;
+		};
+
+		const { findByTestId } = render(
+			<Route path="/profiles/:profileId/dashboard">
+				<Component />
+			</Route>,
+			{
+				history,
+				routes: [dashboardURL],
+			},
+		);
+
+		await findByTestId("Dashboard");
+
+		await waitFor(() => expect(configuration.profileHasSyncedOnce).toBe(true));
+
+		expect(onProfileSyncStart).not.toHaveBeenCalled();
 	});
 
 	it("should reset sync profile wallets", async () => {
@@ -606,6 +641,7 @@ describe("useProfileRestore", () => {
 		jest.useFakeTimers();
 		process.env.TEST_PROFILES_RESTORE_STATUS = undefined;
 		process.env.REACT_APP_IS_E2E = undefined;
+
 		const profile = env.profiles().findById(getDefaultProfileId());
 		profile.status().reset();
 
@@ -628,7 +664,7 @@ describe("useProfileRestore", () => {
 
 		const historyMock = jest.spyOn(history, "push").mockReturnValue();
 
-		await findByTestId("ProfileRestored");
+		await findByTestId("ProfileRestored", undefined, { timeout: 4000 });
 
 		await waitFor(() => expect(historyMock).toHaveBeenCalled(), { timeout: 4000 });
 

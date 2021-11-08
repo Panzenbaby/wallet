@@ -28,7 +28,7 @@ cucumber("@signMessage", {
 	...preSteps,
 	"And submits the form with a valid mnemonic": async (t: TestController) => {
 		await t.typeText(Selector("input[name=message]"), "Hello World");
-		await t.typeText(Selector("input[name=mnemonic]"), mnemonic);
+		await t.typeText(Selector("input[name=mnemonic]"), mnemonic, { paste: true });
 		await t.click(Selector("[data-testid=SignMessage__submit-button]"));
 	},
 	"Then the message is successfully signed": async (t: TestController) => {
@@ -40,7 +40,7 @@ cucumber("@signMessage-invalidMnemonic", {
 	...preSteps,
 	"And completes the form with an invalid mnemonic": async (t: TestController) => {
 		await t.typeText(Selector("input[name=message]"), "Hello World");
-		await t.typeText(Selector("input[name=mnemonic]"), "invalid mnemonic");
+		await t.typeText(Selector("input[name=mnemonic]"), "invalid mnemonic", { paste: true });
 	},
 	"Then an error is displayed in the mnemonic field": async (t: TestController) => {
 		await t.expect(Selector('[data-testid="Input__error"]').exists).ok();
