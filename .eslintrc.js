@@ -59,10 +59,12 @@ module.exports = {
 		"@typescript-eslint/no-floating-promises": "warn",
 		"@typescript-eslint/no-misused-promises": "warn",
 		"@typescript-eslint/no-non-null-assertion": "warn",
+		"@typescript-eslint/no-unnecessary-condition": "warn", // @TODO: set to error and resolve issues
 		"@typescript-eslint/no-unsafe-assignment": "warn",
 		"@typescript-eslint/no-unsafe-call": "warn",
 		"@typescript-eslint/no-unsafe-member-access": "warn",
 		"@typescript-eslint/no-unsafe-return": "warn",
+		"@typescript-eslint/no-unsafe-argument": "warn", // @TODO: set to error and resolve issues
 		"@typescript-eslint/no-unused-expressions": "warn",
 		"@typescript-eslint/no-unused-vars": ["error"],
 		"@typescript-eslint/no-var-requires": "warn",
@@ -173,6 +175,14 @@ module.exports = {
 		"testing-library/prefer-screen-queries": "warn", // @TODO: set to error and fix
 		"testing-library/prefer-user-event": "warn", // @TODO: set to error and fix
 		"testing-library/prefer-wait-for": "error",
+		"testing-library/render-result-naming-convention": "warn", // @TODO: set to error and fix
+		"testing-library/no-container": "warn", // @TODO: set to error and fix
+		"testing-library/no-node-access": "warn", // @TODO: set to error and fix
+		"testing-library/no-promise-in-fire-event": "warn", // @TODO: set to error and fix
+		"testing-library/no-unnecessary-act": "warn", // @TODO: set to error and fix
+		"testing-library/no-wait-for-multiple-assertions": "warn", // @TODO: set to error and fix
+		"testing-library/no-wait-for-side-effects": "warn", // @TODO: set to error and fix
+		"testing-library/prefer-user-event": "warn", // @TODO: set to error and fix
 		"testing-library/render-result-naming-convention": "warn", // @TODO: set to error and fix
 		"unicorn/consistent-destructuring": "warn", // @TODO: set to error and fix resulting issues
 		"unicorn/consistent-function-scoping": "warn", // @TODO: set to error and fix resulting issues

@@ -88,6 +88,7 @@ describe("Votes", () => {
 		await env.profiles().restore(profile);
 		await syncDelegates(profile);
 		await wallet.synchroniser().votes();
+		await profile.sync();
 	});
 
 	it("should render", async () => {
@@ -134,8 +135,6 @@ describe("Votes", () => {
 	});
 
 	it("should toggle network selection from network filters", async () => {
-		await profile.sync();
-
 		const route = `/profiles/${profile.id()}/votes`;
 		const routePath = "/profiles/:profileId/votes";
 		const { asFragment, container } = renderPage(route, routePath);
@@ -195,8 +194,6 @@ describe("Votes", () => {
 	});
 
 	it("should select starred option in the wallets display type", async () => {
-		await profile.sync();
-
 		const route = `/profiles/${profile.id()}/votes`;
 		const routePath = "/profiles/:profileId/votes";
 		const { asFragment, container } = renderPage(route, routePath);
@@ -227,8 +224,6 @@ describe("Votes", () => {
 	});
 
 	it("should select ledger option in the wallets display type", async () => {
-		await profile.sync();
-
 		const route = `/profiles/${profile.id()}/votes`;
 		const routePath = "/profiles/:profileId/votes";
 		const { asFragment, container } = renderPage(route, routePath);
@@ -472,24 +467,25 @@ describe("Votes", () => {
 		const currentWallet = profile.wallets().findById("ac38fe6d-4b67-4ef1-85be-17c5f6841129");
 		const route = `/profiles/${profile.id()}/wallets/${currentWallet.id()}/votes`;
 
+		const walletRestoreMock = jest.spyOn(profile.wallets().first(), "hasSyncedWithNetwork").mockReturnValue(false);
+
 		const history = createMemoryHistory();
 		history.push(route);
 
 		const onProfileSyncError = jest.fn();
 		const Component = () => {
 			useProfileStatusWatcher({ env, onProfileSyncError, profile });
-			return <Votes />;
+			return (
+				<Route path="/profiles/:profileId/wallets/:walletId/votes">
+					<Votes />
+				</Route>
+			);
 		};
-		const { asFragment } = render(
-			<Route path="/profiles/:profileId/wallets/:walletId/votes">
-				<Component />
-			</Route>,
-			{
-				history,
-				routes: [route],
-				withProfileSynchronizer: true,
-			},
-		);
+		const { asFragment } = render(<Component />, {
+			history,
+			routes: [route],
+			withProfileSynchronizer: true,
+		});
 
 		await screen.findByTestId("DelegateTable");
 
@@ -498,11 +494,6 @@ describe("Votes", () => {
 		});
 
 		const selectDelegateButton = screen.getByTestId("DelegateRow__toggle-0");
-
-		const syncMock = jest.spyOn(profile, "sync").mockImplementationOnce(() => {
-			throw new Error("error syncing");
-		});
-		const walletRestoreMock = jest.spyOn(profile.wallets().first(), "hasSyncedWithNetwork").mockReturnValue(false);
 
 		fireEvent.click(selectDelegateButton);
 
@@ -513,7 +504,6 @@ describe("Votes", () => {
 
 		expect(asFragment()).toMatchSnapshot();
 
-		syncMock.mockRestore();
 		walletRestoreMock.mockRestore();
 	});
 

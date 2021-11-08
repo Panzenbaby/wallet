@@ -116,7 +116,6 @@ export const SignMessage = ({
 
 			setActiveTab("signed");
 		} catch (error) {
-			console.error(error);
 			/* istanbul ignore else */
 			if (isRejectionError(error)) {
 				toasts.error(t("TRANSACTION.LEDGER_CONFIRMATION.REJECTED"));

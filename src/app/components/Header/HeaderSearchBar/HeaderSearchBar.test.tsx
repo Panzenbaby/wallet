@@ -24,7 +24,7 @@ describe("HeaderSearchBar", () => {
 
 		fireEvent.click(screen.getByRole("button"));
 
-		const input = screen.getByTestId("Input") as HTMLInputElement;
+		const input = screen.getByTestId("Input");
 
 		expect(input.maxLength).toBe(32);
 
@@ -44,7 +44,7 @@ describe("HeaderSearchBar", () => {
 
 		fireEvent.click(screen.getByRole("button"));
 
-		const input = screen.getByTestId("Input") as HTMLInputElement;
+		const input = screen.getByTestId("Input");
 
 		fireEvent.change(input, {
 			target: {
@@ -101,7 +101,7 @@ describe("HeaderSearchBar", () => {
 
 		fireEvent.click(screen.getByRole("button"));
 
-		const input = screen.getByTestId("Input") as HTMLInputElement;
+		const input = screen.getByTestId("Input");
 
 		fireEvent.change(input, {
 			target: {

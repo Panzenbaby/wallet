@@ -370,13 +370,14 @@ export const WalletHeader = ({
 				profileId={profile.id()}
 			/>
 
-			<ReceiveFunds
-				isOpen={modal === "receive-funds"}
-				address={wallet.address()}
-				name={alias}
-				network={wallet.network()}
-				onClose={() => setModal(undefined)}
-			/>
+			{modal === "receive-funds" && (
+				<ReceiveFunds
+					address={wallet.address()}
+					name={alias}
+					network={wallet.network()}
+					onClose={() => setModal(undefined)}
+				/>
+			)}
 
 			{modal === "wallet-name" && (
 				<UpdateWalletName

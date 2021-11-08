@@ -81,10 +81,41 @@ describe("Authentication", () => {
 		);
 	});
 
-	it("should fail secret validation if an mnemonic is used", async () => {
+	it("should fail secret validation if a mnemonic is used", async () => {
 		const secret = authentication(translationMock).secret(wallet);
 
 		await expect(secret.validate(MNEMONICS[0])).resolves.toBe(
+			"COMMON.INPUT_PASSPHRASE.VALIDATION.SECRET_NOT_MATCH_WALLET",
+		);
+	});
+
+	it("should validate second secret", async () => {
+		const secondSecret = authentication(translationMock).secondSecret(
+			wallet.coin(),
+			"0223542d61708e3fc48ba78fbe8fcc983ba94a520bc33f82b8e45e51dbc47af272",
+		);
+
+		await expect(secondSecret.validate.matchSenderPublicKey("abc")).resolves.toBe(true);
+	});
+
+	it("should fail validation for second secret", async () => {
+		const secondSecret = authentication(translationMock).secondSecret(
+			wallet.coin(),
+			"0223542d61708e3fc48ba78fbe8fcc983ba94a520bc33f82b8e45e51dbc47af272",
+		);
+
+		await expect(secondSecret.validate.matchSenderPublicKey("cba")).resolves.toBe(
+			"COMMON.INPUT_PASSPHRASE.VALIDATION.SECRET_NOT_MATCH_WALLET",
+		);
+	});
+
+	it("should fail second secret validation if a mnemonic is used", async () => {
+		const secondSecret = authentication(translationMock).secondSecret(
+			wallet.coin(),
+			"0223542d61708e3fc48ba78fbe8fcc983ba94a520bc33f82b8e45e51dbc47af272",
+		);
+
+		await expect(secondSecret.validate.matchSenderPublicKey(MNEMONICS[0])).resolves.toBe(
 			"COMMON.INPUT_PASSPHRASE.VALIDATION.SECRET_NOT_MATCH_WALLET",
 		);
 	});

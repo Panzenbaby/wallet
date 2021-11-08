@@ -2,6 +2,8 @@
 import { Contracts } from "@payvo/profiles";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { EnvironmentProvider } from "app/contexts";
+import { translations as commonTranslations } from "app/i18n/common/i18n";
+import { toasts } from "app/services";
 import electron from "electron";
 import React from "react";
 import { env, getDefaultProfileId, waitFor } from "utils/testing-library";
@@ -88,7 +90,7 @@ describe("useUpdater hook", () => {
 	});
 
 	it("should handle failed update check in notifyForUpdates", async () => {
-		const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => undefined);
+		const toastSpy = jest.spyOn(toasts, "error");
 
 		jest.spyOn(electron.ipcRenderer, "invoke").mockRejectedValueOnce(new Error("Error!"));
 
@@ -99,9 +101,9 @@ describe("useUpdater hook", () => {
 			result.current.notifyForUpdates();
 		});
 
-		await waitFor(() => expect(consoleSpy).toHaveBeenCalledWith("Checking for update failed: Error!"));
+		await waitFor(() => expect(toastSpy).toHaveBeenCalledWith(commonTranslations.FAILED_UPDATE_CHECK));
 
-		consoleSpy.mockRestore();
+		toastSpy.mockRestore();
 	});
 
 	it("should handle notifyForUpdates and find newer version", async () => {

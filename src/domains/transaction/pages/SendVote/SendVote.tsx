@@ -11,7 +11,7 @@ import { useKeydown } from "app/hooks/use-keydown";
 import { AuthenticationStep } from "domains/transaction/components/AuthenticationStep";
 import { ErrorStep } from "domains/transaction/components/ErrorStep";
 import { FeeWarning } from "domains/transaction/components/FeeWarning";
-import { useFeeConfirmation, useTransactionBuilder, useWalletSignatory } from "domains/transaction/hooks";
+import { useFeeConfirmation, useTransactionBuilder } from "domains/transaction/hooks";
 import { handleBroadcastError } from "domains/transaction/utils";
 import { useVoteQueryParameters } from "domains/vote/hooks/use-vote-query-parameters";
 import { appendParameters } from "domains/vote/utils/url-parameters";
@@ -58,7 +58,6 @@ export const SendVote = () => {
 
 	const abortReference = useRef(new AbortController());
 	const transactionBuilder = useTransactionBuilder();
-	const { sign } = useWalletSignatory(activeWallet);
 
 	useEffect(() => {
 		register("network", sendVote.network());
@@ -218,15 +217,17 @@ export const SendVote = () => {
 			wif,
 			privateKey,
 			secret,
+			secondSecret,
 		} = getValues();
 		const abortSignal = abortReference.current?.signal;
 
 		try {
-			const signatory = await sign({
+			const signatory = await activeWallet.signatoryFactory().make({
 				encryptionPassword,
 				mnemonic,
 				privateKey,
 				secondMnemonic,
+				secondSecret,
 				secret,
 				wif,
 			});

@@ -292,9 +292,6 @@ exports[`CreateWallet should create a wallet 1`] = `
                 <li
                   class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
                 />
-                <li
-                  class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
-                />
               </ul>
               <div
                 class="mt-8"
@@ -337,7 +334,7 @@ exports[`CreateWallet should create a wallet 1`] = `
                       </label>
                       <div>
                         <div
-                          aria-expanded="true"
+                          aria-expanded="false"
                           aria-haspopup="listbox"
                           aria-owns="NetworkStep__network-menu"
                           data-testid="SelectNetwork"
@@ -588,36 +585,31 @@ exports[`CreateWallet should create a wallet 1`] = `
                   </section>
                 </div>
                 <div
-                  class="flex justify-between mt-8"
+                  class="flex justify-end mt-8 space-x-3"
                 >
-                  <div />
-                  <div
-                    class="flex justify-end space-x-3"
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
+                    data-testid="CreateWallet__back-button"
+                    type="button"
                   >
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
-                      data-testid="CreateWallet__back-button"
-                      type="button"
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Back
-                      </div>
-                    </button>
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 fyuekd"
-                      data-testid="CreateWallet__continue-button"
-                      disabled=""
-                      type="button"
+                      Back
+                    </div>
+                  </button>
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 fyuekd"
+                    data-testid="CreateWallet__continue-button"
+                    disabled=""
+                    type="button"
+                  >
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Continue
-                      </div>
-                    </button>
-                  </div>
+                      Continue
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -919,9 +911,6 @@ exports[`CreateWallet should create a wallet 2`] = `
                 <li
                   class="StepIndicator__StepStyled-sc-1kbqtlh-0 kcRpjv"
                 />
-                <li
-                  class="StepIndicator__StepStyled-sc-1kbqtlh-0 kcRpjv"
-                />
               </ul>
               <div
                 class="mt-8"
@@ -1070,24 +1059,19 @@ exports[`CreateWallet should create a wallet 2`] = `
                   </section>
                 </div>
                 <div
-                  class="flex justify-between mt-8"
+                  class="flex justify-end mt-8 space-x-3"
                 >
-                  <div />
-                  <div
-                    class="flex justify-end space-x-3"
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 eJvReC"
+                    data-testid="CreateWallet__finish-button"
+                    type="submit"
                   >
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 eJvReC"
-                      data-testid="CreateWallet__finish-button"
-                      type="submit"
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Go to Wallet
-                      </div>
-                    </button>
-                  </div>
+                      Go to Wallet
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -1391,9 +1375,6 @@ exports[`CreateWallet should create a wallet with encryption 1`] = `
                 <li
                   class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
                 />
-                <li
-                  class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
-                />
               </ul>
               <div
                 class="mt-8"
@@ -1436,7 +1417,7 @@ exports[`CreateWallet should create a wallet with encryption 1`] = `
                       </label>
                       <div>
                         <div
-                          aria-expanded="true"
+                          aria-expanded="false"
                           aria-haspopup="listbox"
                           aria-owns="NetworkStep__network-menu"
                           data-testid="SelectNetwork"
@@ -1687,36 +1668,31 @@ exports[`CreateWallet should create a wallet with encryption 1`] = `
                   </section>
                 </div>
                 <div
-                  class="flex justify-between mt-8"
+                  class="flex justify-end mt-8 space-x-3"
                 >
-                  <div />
-                  <div
-                    class="flex justify-end space-x-3"
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
+                    data-testid="CreateWallet__back-button"
+                    type="button"
                   >
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
-                      data-testid="CreateWallet__back-button"
-                      type="button"
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Back
-                      </div>
-                    </button>
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 fyuekd"
-                      data-testid="CreateWallet__continue-button"
-                      disabled=""
-                      type="button"
+                      Back
+                    </div>
+                  </button>
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 fyuekd"
+                    data-testid="CreateWallet__continue-button"
+                    disabled=""
+                    type="button"
+                  >
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Continue
-                      </div>
-                    </button>
-                  </div>
+                      Continue
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -2169,24 +2145,19 @@ exports[`CreateWallet should create a wallet with encryption 2`] = `
                   </section>
                 </div>
                 <div
-                  class="flex justify-between mt-8"
+                  class="flex justify-end mt-8 space-x-3"
                 >
-                  <div />
-                  <div
-                    class="flex justify-end space-x-3"
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 eJvReC"
+                    data-testid="CreateWallet__finish-button"
+                    type="submit"
                   >
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 eJvReC"
-                      data-testid="CreateWallet__finish-button"
-                      type="submit"
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Go to Wallet
-                      </div>
-                    </button>
-                  </div>
+                      Go to Wallet
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -2492,9 +2463,6 @@ exports[`CreateWallet should remove pending wallet if not submitted 1`] = `
                 <li
                   class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
                 />
-                <li
-                  class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
-                />
               </ul>
               <div
                 class="mt-8"
@@ -2537,7 +2505,7 @@ exports[`CreateWallet should remove pending wallet if not submitted 1`] = `
                       </label>
                       <div>
                         <div
-                          aria-expanded="true"
+                          aria-expanded="false"
                           aria-haspopup="listbox"
                           aria-owns="NetworkStep__network-menu"
                           data-testid="SelectNetwork"
@@ -2788,36 +2756,31 @@ exports[`CreateWallet should remove pending wallet if not submitted 1`] = `
                   </section>
                 </div>
                 <div
-                  class="flex justify-between mt-8"
+                  class="flex justify-end mt-8 space-x-3"
                 >
-                  <div />
-                  <div
-                    class="flex justify-end space-x-3"
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
+                    data-testid="CreateWallet__back-button"
+                    type="button"
                   >
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
-                      data-testid="CreateWallet__back-button"
-                      type="button"
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Back
-                      </div>
-                    </button>
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 fyuekd"
-                      data-testid="CreateWallet__continue-button"
-                      disabled=""
-                      type="button"
+                      Back
+                    </div>
+                  </button>
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 fyuekd"
+                    data-testid="CreateWallet__continue-button"
+                    disabled=""
+                    type="button"
+                  >
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Continue
-                      </div>
-                    </button>
-                  </div>
+                      Continue
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -3121,9 +3084,6 @@ exports[`CreateWallet should show an error message for duplicate name 1`] = `
                 <li
                   class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
                 />
-                <li
-                  class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
-                />
               </ul>
               <div
                 class="mt-8"
@@ -3166,7 +3126,7 @@ exports[`CreateWallet should show an error message for duplicate name 1`] = `
                       </label>
                       <div>
                         <div
-                          aria-expanded="true"
+                          aria-expanded="false"
                           aria-haspopup="listbox"
                           aria-owns="NetworkStep__network-menu"
                           data-testid="SelectNetwork"
@@ -3417,36 +3377,31 @@ exports[`CreateWallet should show an error message for duplicate name 1`] = `
                   </section>
                 </div>
                 <div
-                  class="flex justify-between mt-8"
+                  class="flex justify-end mt-8 space-x-3"
                 >
-                  <div />
-                  <div
-                    class="flex justify-end space-x-3"
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
+                    data-testid="CreateWallet__back-button"
+                    type="button"
                   >
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
-                      data-testid="CreateWallet__back-button"
-                      type="button"
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Back
-                      </div>
-                    </button>
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 fyuekd"
-                      data-testid="CreateWallet__continue-button"
-                      disabled=""
-                      type="button"
+                      Back
+                    </div>
+                  </button>
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 fyuekd"
+                    data-testid="CreateWallet__continue-button"
+                    disabled=""
+                    type="button"
+                  >
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Continue
-                      </div>
-                    </button>
-                  </div>
+                      Continue
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -3740,9 +3695,6 @@ exports[`CreateWallet should show an error message if wallet generation failed 1
               >
                 <li
                   class="StepIndicator__StepStyled-sc-1kbqtlh-0 kcRpjv"
-                />
-                <li
-                  class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
                 />
                 <li
                   class="StepIndicator__StepStyled-sc-1kbqtlh-0 cqvTyD"
@@ -4088,35 +4040,30 @@ exports[`CreateWallet should show an error message if wallet generation failed 1
                   </section>
                 </div>
                 <div
-                  class="flex justify-between mt-8"
+                  class="flex justify-end mt-8 space-x-3"
                 >
-                  <div />
-                  <div
-                    class="flex justify-end space-x-3"
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
+                    data-testid="CreateWallet__back-button"
+                    type="button"
                   >
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 cALXLL"
-                      data-testid="CreateWallet__back-button"
-                      type="button"
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Back
-                      </div>
-                    </button>
-                    <button
-                      class="OriginalButton__StyledButton-sc-o0fs2j-0 eJvReC"
-                      data-testid="CreateWallet__continue-button"
-                      type="button"
+                      Back
+                    </div>
+                  </button>
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 eJvReC"
+                    data-testid="CreateWallet__continue-button"
+                    type="button"
+                  >
+                    <div
+                      class="flex items-center space-x-2"
                     >
-                      <div
-                        class="flex items-center space-x-2"
-                      >
-                        Continue
-                      </div>
-                    </button>
-                  </div>
+                      Continue
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>

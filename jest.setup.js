@@ -2,9 +2,15 @@ import MockDate from "mockdate";
 import { bootEnvWithProfileFixtures } from "utils/test-helpers";
 import { env } from "utils/testing-library";
 
+// Reduce retries to 2 in all tests
+jest.mock("async-retry", () => {
+	const retry = jest.requireActual(`async-retry`);
+	return (fn, options) => retry(fn, { ...options, retries: 2 });
+});
+
 jest.mock("@ledgerhq/hw-transport-node-hid-singleton", () => {
-	const { createTransportReplayer } = require("@ledgerhq/hw-transport-mocker");
-	return createTransportReplayer();
+	const { TransportReplayer } = require("@ledgerhq/hw-transport-mocker/lib/openTransportReplayer");
+	return TransportReplayer;
 });
 
 jest.mock("electron", () => {

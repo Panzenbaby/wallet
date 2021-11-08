@@ -1,6 +1,7 @@
 import { Contracts } from "@payvo/profiles";
 import { PluginController, PluginManager } from "plugins/core";
 import { PluginAPI } from "plugins/types";
+import { act } from "react-dom/test-utils";
 import { env, waitFor } from "utils/testing-library";
 
 import { TimersPluginService } from "./TimersPluginService";
@@ -36,6 +37,10 @@ describe("TimersPluginService", () => {
 
 		ctrl = new PluginController(config, fixture);
 		ctrl.enable(profile, { autoRun: true });
+
+		act(() => {
+			jest.advanceTimersByTime(1000);
+		});
 
 		await waitFor(() => expect(test).toBe(5));
 

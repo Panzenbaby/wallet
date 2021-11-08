@@ -108,6 +108,7 @@ export const translations = {
 	EXPORT: "Export",
 	FAILED_FETCH: "Failed to fetch {{name}}. Reason: {{reason}}",
 	FAILED_UPDATE: "Failed to update {{name}}. Reason: {{reason}}",
+	FAILED_UPDATE_CHECK: "Checking for updates failed.",
 	FEE: "Fee",
 	FETCH: "Fetch",
 	FIAT: "Fiat",
@@ -144,6 +145,11 @@ export const translations = {
 			PRIVATE_KEY_NOT_MATCH_WALLET: "This private key does not correspond to your wallet",
 			SECRET_NOT_MATCH_WALLET: "This secret does not correspond to your wallet",
 			WIF_NOT_MATCH_WALLET: "This WIF does not correspond to your wallet",
+		},
+	},
+	INPUT_PUBLIC_KEY: {
+		VALIDATION: {
+			PUBLIC_KEY_ALREADY_EXISTS: "Public Key {{publicKey}} already exists",
 		},
 	},
 	INSTALL: "Install",
@@ -258,6 +264,7 @@ export const translations = {
 		PLACEHOLDER: "What would you like to search for?",
 	},
 	SECOND_MNEMONIC: "2nd Mnemonic",
+	SECOND_SECRET: "2nd Secret",
 	SECOND_SIGNATURE: "Second Signature",
 	SECRET: "Secret",
 	SECURITY: "Security",

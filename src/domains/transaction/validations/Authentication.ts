@@ -94,6 +94,26 @@ export const authentication = (t: any) => {
 				},
 			},
 		}),
+		secondSecret: (coin: Coins.Coin, secondPublicKey: string) => ({
+			required: t("COMMON.VALIDATION.FIELD_REQUIRED", {
+				field: t("COMMON.SECOND_SECRET"),
+			}),
+			validate: {
+				matchSenderPublicKey: async (secret: string) => {
+					try {
+						const { publicKey } = await coin.publicKey().fromSecret(secret);
+
+						if (publicKey === secondPublicKey) {
+							return true;
+						}
+
+						return t("COMMON.INPUT_PASSPHRASE.VALIDATION.SECRET_NOT_MATCH_WALLET");
+					} catch {
+						return t("COMMON.INPUT_PASSPHRASE.VALIDATION.SECRET_NOT_MATCH_WALLET");
+					}
+				},
+			},
+		}),
 		secret: (wallet: Contracts.IReadWriteWallet) => ({
 			required: t("COMMON.VALIDATION.FIELD_REQUIRED", {
 				field: t("COMMON.SECRET"),

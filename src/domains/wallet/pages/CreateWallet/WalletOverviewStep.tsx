@@ -4,6 +4,7 @@ import { Clipboard } from "app/components/Clipboard";
 import { Divider } from "app/components/Divider";
 import { Header } from "app/components/Header";
 import { Icon } from "app/components/Icon";
+import { Toggle } from "app/components/Toggle";
 import { toasts } from "app/services";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -13,7 +14,7 @@ import { saveFile } from "utils/electron-utils";
 import { MnemonicList } from "../../components/MnemonicList";
 
 export const WalletOverviewStep = () => {
-	const { getValues, unregister, watch } = useFormContext();
+	const { getValues, setValue, unregister, watch } = useFormContext();
 
 	// getValues does not get the value of `defaultValues` on first render
 	const [defaultMnemonic] = useState(() => watch("mnemonic"));
@@ -49,6 +50,10 @@ export const WalletOverviewStep = () => {
 		} catch (error) {
 			toasts.error(t("COMMON.SAVE_FILE.ERROR", { error: error.message }));
 		}
+	};
+
+	const handleToggleEncryption = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setValue("useEncryption", event.target.checked);
 	};
 
 	return (
@@ -93,6 +98,26 @@ export const WalletOverviewStep = () => {
 				</div>
 
 				<Divider dashed />
+
+				<div className="flex flex-col space-y-2 w-full">
+					<div className="flex justify-between items-center space-x-5">
+						<span className="font-bold text-theme-secondary-text">
+							{t("WALLETS.PAGE_CREATE_WALLET.PASSPHRASE_STEP.ENCRYPTION.TITLE")}
+						</span>
+
+						<span data-testid="CreateWallet__encryption">
+							<Toggle
+								data-testid="CreateWallet__encryption-toggle"
+								defaultChecked={getValues("useEncryption")}
+								onChange={handleToggleEncryption}
+							/>
+						</span>
+					</div>
+
+					<span className="text-sm text-theme-secondary-500 mr-12">
+						{t("WALLETS.PAGE_CREATE_WALLET.PASSPHRASE_STEP.ENCRYPTION.DESCRIPTION")}
+					</span>
+				</div>
 			</div>
 		</section>
 	);

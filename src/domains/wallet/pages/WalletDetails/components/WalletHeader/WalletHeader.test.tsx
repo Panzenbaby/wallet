@@ -1,4 +1,3 @@
-import { createTransportReplayer, RecordStore } from "@ledgerhq/hw-transport-mocker";
 import { Contracts } from "@payvo/profiles";
 import userEvent from "@testing-library/user-event";
 import { LedgerProvider } from "app/contexts/Ledger/Ledger";
@@ -166,7 +165,7 @@ describe("WalletHeader", () => {
 	});
 
 	it.each(["cancel", "close"])("should open & %s sign message modal", async (action) => {
-		const transport: typeof Transport = createTransportReplayer(RecordStore.fromString(""));
+		const transport = getDefaultLedgerTransport();
 
 		history.push(walletUrl);
 

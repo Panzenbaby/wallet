@@ -30,6 +30,26 @@ Feature: Import Wallet
         And completes the import wallet steps for mnemonic
         Then the wallet is imported to her profile
 
+    @importWallet-mnemonic-withEncryption
+    Scenario: Successfully Import Wallet via Mnemonic with encryption
+        Given Alice is on the import wallet page
+        When she chooses to encrypt the imported wallet
+        And enters a valid mnemonic to import
+        And enters the encryption passwords
+        And completes the import wallet steps for mnemonic
+        Then the wallet is imported to her profile
+
+    @importWallet-secret-withSecondSignatureAndEncryption
+    Scenario: Successfully Import Wallet via Secret with second signature and encryption
+        Given Alice is on the import wallet page
+        When she changes the import type to secret
+        And chooses to encrypt the imported wallet
+        And enters a valid secret to import
+        And enters the second secret
+        And enters the encryption passwords
+        And completes the import wallet steps for mnemonic
+        Then the wallet is imported to her profile
+
     @importWallet-address
     Scenario: Successfully Import Wallet via Address
         Given Alice is on the import wallet page
@@ -37,4 +57,3 @@ Feature: Import Wallet
         And enters a valid address to import
         And completes the import wallet steps for address
         Then the wallet is imported to her profile
-

@@ -1,24 +1,29 @@
-import Transport from "@ledgerhq/hw-transport";
-import { createTransportReplayer, RecordStore } from "@ledgerhq/hw-transport-mocker";
 import { Contracts } from "@payvo/profiles";
 import * as Sentry from "@sentry/react";
 import { LedgerProvider } from "app/contexts";
 import React from "react";
 import { Route } from "react-router-dom";
-import { env, getDefaultProfileId, getDefaultWalletId, render, waitFor } from "utils/testing-library";
+import {
+	env,
+	getDefaultLedgerTransport,
+	getDefaultProfileId,
+	getDefaultWalletId,
+	render,
+	waitFor,
+} from "utils/testing-library";
 
 import { SentryProvider } from "./SentryProvider";
 import { SentryRouterWrapper } from "./SentryRouterWrapper";
 
+const transport = getDefaultLedgerTransport();
+
 describe("Sentry Router Wrapper", () => {
 	let profile: Contracts.IProfile;
 	let wallet: Contracts.IReadWriteWallet;
-	let transport: typeof Transport;
 
 	beforeEach(() => {
 		profile = env.profiles().findById(getDefaultProfileId());
 		wallet = profile.wallets().findById(getDefaultWalletId());
-		transport = createTransportReplayer(RecordStore.fromString(""));
 		process.env.REACT_APP_SENTRY_DSN = "https://example.sentry-dsn.com";
 	});
 

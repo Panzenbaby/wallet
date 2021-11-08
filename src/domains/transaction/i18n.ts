@@ -266,6 +266,7 @@ export const translations = {
 		TITLE: "Transaction Review",
 	},
 	SECOND_MNEMONIC: "2nd Mnemonic",
+	SECOND_SECRET: "2nd Secret",
 	SENDER: "Sender",
 	SEND_ALL: "Send All",
 	SENT: "Sent",

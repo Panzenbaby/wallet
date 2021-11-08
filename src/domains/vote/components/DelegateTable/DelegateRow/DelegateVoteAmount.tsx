@@ -290,7 +290,14 @@ export const DelegateVoteAmount = ({
 						{ "right-15": !!errorMessage },
 						{ "cursor-default": isInputDisabled },
 					)}
-					onClick={() => !isInputDisabled && input.current?.focus()}
+					onClick={() => {
+						if (isInputDisabled) {
+							return;
+						}
+
+						input.current?.focus();
+						setIsFocused(true);
+					}}
 					data-testid="DelegateVoteAmount__ticker"
 				>
 					<span className={tickerColor()}>{selectedWallet.network().coin()}</span>

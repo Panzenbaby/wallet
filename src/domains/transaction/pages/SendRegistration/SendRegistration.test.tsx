@@ -713,6 +713,8 @@ describe("Registration", () => {
 	it("should show mnemonic error", async () => {
 		const { container, getByTestId, findByTestId } = await renderPage(secondWallet);
 
+		const actsWithMnemonicMock = jest.spyOn(secondWallet, "actsWithMnemonic").mockReturnValue(true);
+
 		const secondPublicKeyMock = jest
 			.spyOn(secondWallet, "secondPublicKey")
 			.mockReturnValue((await secondWallet.coin().publicKey().fromMnemonic(MNEMONICS[1])).publicKey);
@@ -753,6 +755,7 @@ describe("Registration", () => {
 		);
 		expect(container).toMatchSnapshot();
 
+		actsWithMnemonicMock.mockRestore();
 		secondPublicKeyMock.mockRestore();
 	});
 
@@ -830,6 +833,8 @@ describe("Registration", () => {
 	it("should show error step and go back", async () => {
 		const { asFragment, getByTestId, findByTestId } = await renderPage(secondWallet);
 
+		const actsWithMnemonicMock = jest.spyOn(secondWallet, "actsWithMnemonic").mockReturnValue(true);
+
 		const secondPublicKeyMock = jest
 			.spyOn(secondWallet, "secondPublicKey")
 			.mockReturnValue((await secondWallet.coin().publicKey().fromMnemonic(MNEMONICS[1])).publicKey);
@@ -882,6 +887,7 @@ describe("Registration", () => {
 
 		historyMock.mockRestore();
 		broadcastMock.mockRestore();
+		actsWithMnemonicMock.mockRestore();
 		secondPublicKeyMock.mockRestore();
 	});
 });

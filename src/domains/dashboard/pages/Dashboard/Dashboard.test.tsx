@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/require-await */
-import Transport, { Observer } from "@ledgerhq/hw-transport";
-import { createTransportReplayer, RecordStore } from "@ledgerhq/hw-transport-mocker";
+import { Observer } from "@ledgerhq/hw-transport";
 import { Contracts } from "@payvo/profiles";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -17,6 +16,7 @@ import {
 	act,
 	env,
 	fireEvent,
+	getDefaultLedgerTransport,
 	getDefaultProfileId,
 	render,
 	syncDelegates,
@@ -33,7 +33,7 @@ let profile: Contracts.IProfile;
 const fixtureProfileId = getDefaultProfileId();
 let dashboardURL: string;
 
-const transport: typeof Transport = createTransportReplayer(RecordStore.fromString(""));
+const transport = getDefaultLedgerTransport();
 
 describe("Dashboard", () => {
 	beforeAll(async () => {

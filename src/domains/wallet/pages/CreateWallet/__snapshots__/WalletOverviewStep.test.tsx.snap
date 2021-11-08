@@ -451,6 +451,44 @@ exports[`WalletOverviewStep Render step should render 1`] = `
         class="Divider-sc-17ehhxk-0 hZpmpp border-theme-secondary-300 dark:border-theme-secondary-800"
         type="horizontal"
       />
+      <div
+        class="flex flex-col space-y-2 w-full"
+      >
+        <div
+          class="flex justify-between items-center space-x-5"
+        >
+          <span
+            class="font-bold text-theme-secondary-text"
+          >
+            Use Wallet Encryption
+          </span>
+          <span
+            data-testid="CreateWallet__encryption"
+          >
+            <label
+              class="Toggle__Wrapper-sc-6s3wfu-0 kIsRpT"
+            >
+              <input
+                class="Toggle__Input-sc-6s3wfu-1 utRNX"
+                data-testid="CreateWallet__encryption-toggle"
+                type="checkbox"
+              />
+              <div
+                class="Toggle__Handle-sc-6s3wfu-2 cAxMdF"
+              >
+                <span
+                  class="Toggle__HandleInner-sc-6s3wfu-3 fCjUWZ"
+                />
+              </div>
+            </label>
+          </span>
+        </div>
+        <span
+          class="text-sm text-theme-secondary-500 mr-12"
+        >
+          This will allow you to set an encryption password during creation to use instead of your mnemonic.
+        </span>
+      </div>
     </div>
   </section>
 </DocumentFragment>

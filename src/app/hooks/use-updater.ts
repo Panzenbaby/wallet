@@ -3,6 +3,8 @@ import { ipcRenderer } from "electron";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { toasts } from "../services";
+
 export interface DownloadProgress {
 	total: number;
 	percent: number;
@@ -78,8 +80,8 @@ export const useUpdater = () => {
 						meta: { version: updateInfo.version },
 						name: t("COMMON.APP_NAME"),
 					});
-			} catch (error) {
-				console.error(`Checking for update failed: ${error.message}`);
+			} catch {
+				toasts.error(t("COMMON.FAILED_UPDATE_CHECK"));
 			}
 		},
 		[t],
