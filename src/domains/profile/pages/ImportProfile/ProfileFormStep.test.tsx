@@ -238,7 +238,7 @@ describe("Import Profile - Profile Form Step", () => {
 		fireEvent.input(getAllByTestId("Input")[0], { target: { value: "" } });
 
 		await waitFor(() => {
-			expect(getAllByTestId("Input")[0]).toHaveValue("");
+			expect(getAllByTestId("Input")[0]).not.toHaveValue();
 		});
 
 		act(() => getAllByTestId("InputPassword")[0].focus());

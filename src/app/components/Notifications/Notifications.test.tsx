@@ -44,7 +44,7 @@ describe("Notifications", () => {
 		const { container } = render(<Notifications profile={profile} />);
 
 		await waitFor(() => expect(screen.getAllByTestId("NotificationItem")).toHaveLength(2));
-		await waitFor(() => expect(screen.queryAllByTestId("TransactionRowMode").length).toBeGreaterThan(0));
+		await waitFor(() => expect(screen.queryAllByTestId("TransactionRowMode")).toHaveLength(3));
 
 		expect(container).toMatchSnapshot();
 	});
@@ -54,7 +54,7 @@ describe("Notifications", () => {
 
 		render(<Notifications profile={profile} onNotificationAction={onNotificationAction} />);
 		await waitFor(() => expect(screen.getAllByTestId("NotificationItem")).toHaveLength(2));
-		await waitFor(() => expect(screen.queryAllByTestId("TransactionRowMode").length).toBeGreaterThan(0));
+		await waitFor(() => expect(screen.queryAllByTestId("TransactionRowMode")).toHaveLength(3));
 
 		fireEvent.click(screen.getAllByTestId("NotificationItem__action")[1]);
 
@@ -67,7 +67,7 @@ describe("Notifications", () => {
 		const { container } = render(<Notifications profile={profile} onTransactionClick={onTransactionClick} />);
 
 		await waitFor(() => expect(screen.getAllByTestId("NotificationItem")).toHaveLength(2));
-		await waitFor(() => expect(screen.queryAllByTestId("TransactionRowMode").length).toBeGreaterThan(0));
+		await waitFor(() => expect(screen.queryAllByTestId("TransactionRowMode")).toHaveLength(3));
 
 		fireEvent.click(screen.getAllByTestId("TransactionRowMode")[0]);
 

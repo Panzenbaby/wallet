@@ -43,7 +43,7 @@ describe("WalletsGrid", () => {
 			},
 		);
 
-		await waitFor(() => expect(getAllByTestId("WalletCard__skeleton").length).toBeGreaterThan(2));
+		await waitFor(() => expect(getAllByTestId("WalletCard__skeleton")).toHaveLength(3));
 	});
 
 	it("should render wallets", async () => {

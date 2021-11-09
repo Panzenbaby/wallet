@@ -454,7 +454,7 @@ describe("Dropdown positioning", () => {
 
 		fireEvent.click(toggle);
 
-		expect(getBoundingClientRectSpy).toHaveBeenCalledTimes(0);
+		expect(getBoundingClientRectSpy).not.toHaveBeenCalled();
 
 		getBoundingClientRectSpy.mockRestore();
 		documentClientHeightSpy.mockRestore();

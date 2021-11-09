@@ -143,7 +143,7 @@ describe("Use Ledger Connection", () => {
 		const { getAllByTestId } = render(<Component />);
 
 		await waitFor(() => {
-			expect(getAllByTestId("Wallet").length).toBeGreaterThan(0);
+			expect(getAllByTestId("Wallet")).toHaveLength(2);
 		});
 
 		act(() => {
@@ -155,7 +155,7 @@ describe("Use Ledger Connection", () => {
 		fireEvent.click(screen.getByText("Import"));
 
 		await waitFor(() => {
-			expect(getAllByTestId("Wallet").length).toBeGreaterThan(0);
+			expect(getAllByTestId("Wallet")).toHaveLength(2);
 		});
 
 		const importedWallet = profile

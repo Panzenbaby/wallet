@@ -348,7 +348,8 @@ describe("Signed Transaction Table", () => {
 				pendingTransactions={pendingMultisignatureTransactions}
 			/>,
 		);
-		await waitFor(() => expect(screen.getAllByText("pencil.svg").length).toBeGreaterThan(0));
+
+		await screen.findByText("pencil.svg");
 
 		expect(asFragment()).toMatchSnapshot();
 

@@ -178,7 +178,7 @@ describe("News", () => {
 			},
 		});
 
-		await waitFor(() => expect(searchInput).toHaveValue(""));
+		await waitFor(() => expect(searchInput).not.toHaveValue());
 
 		fireEvent.click(screen.getByText(commonTranslations.SELECT_ALL));
 

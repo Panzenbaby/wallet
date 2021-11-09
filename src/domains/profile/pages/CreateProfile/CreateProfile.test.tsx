@@ -107,7 +107,7 @@ describe("CreateProfile", () => {
 		const selectDropdown = screen.getByTestId("SelectDropdown__input");
 
 		fireEvent.change(selectDropdown, { target: { value: "" } });
-		await waitFor(() => expect(selectDropdown).toHaveValue(""));
+		await waitFor(() => expect(selectDropdown).not.toHaveValue());
 
 		fireEvent.change(selectDropdown, { target: { value: "BTC" } });
 		await waitFor(() => expect(selectDropdown).toHaveValue("BTC"));
@@ -250,7 +250,7 @@ describe("CreateProfile", () => {
 		act(() => screen.getAllByTestId("Input")[0].focus());
 
 		fireEvent.input(screen.getAllByTestId("Input")[0], { target: { value: "" } });
-		await waitFor(() => expect(screen.getAllByTestId("Input")[0]).toHaveValue(""));
+		await waitFor(() => expect(screen.getAllByTestId("Input")[0]).not.toHaveValue());
 
 		fireEvent.blur(screen.getAllByTestId("Input")[0]);
 
@@ -273,7 +273,7 @@ describe("CreateProfile", () => {
 
 		fireEvent.input(screen.getAllByTestId("Input")[0], { target: { value: "" } });
 
-		await waitFor(() => expect(screen.getAllByTestId("Input")[0]).toHaveValue(""));
+		await waitFor(() => expect(screen.getAllByTestId("Input")[0]).not.toHaveValue());
 
 		act(() => screen.getAllByTestId("InputPassword")[1].focus());
 

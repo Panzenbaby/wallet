@@ -310,7 +310,7 @@ describe("SelectDropdown", () => {
 			fireEvent.change(selectDropdown, { target: { value: "Optt" } });
 			fireEvent.keyDown(selectDropdown, { code: 9, key: "Tab" });
 
-			expect(screen.getByTestId("select-list__input")).toHaveValue("");
+			expect(screen.getByTestId("select-list__input")).not.toHaveValue();
 		},
 	);
 
@@ -323,7 +323,7 @@ describe("SelectDropdown", () => {
 			fireEvent.change(selectDropdown, { target: { value: "Opt" } });
 			fireEvent.keyDown(selectDropdown, { code: 65, key: "A" });
 
-			expect(screen.getByTestId("select-list__input")).toHaveValue("");
+			expect(screen.getByTestId("select-list__input")).not.toHaveValue();
 		},
 	);
 
@@ -342,7 +342,7 @@ describe("SelectDropdown", () => {
 			fireEvent.keyDown(selectDropdown, { code: 65, key: "A" });
 			fireEvent.keyDown(selectDropdown, { code: 65, key: "B" });
 
-			expect(screen.getByTestId("select-list__input")).toHaveValue("");
+			expect(screen.getByTestId("select-list__input")).not.toHaveValue();
 		},
 	);
 
@@ -368,7 +368,7 @@ describe("SelectDropdown", () => {
 			fireEvent.change(selectDropdown, { target: { value: "Foobar" } });
 			fireEvent.blur(selectDropdown);
 
-			await waitFor(() => expect(selectDropdown).toHaveValue(""));
+			await waitFor(() => expect(selectDropdown).not.toHaveValue());
 		},
 	);
 
@@ -431,7 +431,7 @@ describe("SelectDropdown", () => {
 		fireEvent.click(screen.getByTestId("btn-reset"));
 
 		// check value reset and dropdown not open
-		expect(screen.getByTestId("select-list__input")).toHaveValue("");
+		expect(screen.getByTestId("select-list__input")).not.toHaveValue();
 		expect(screen.queryByText("Option 2")).not.toBeInTheDocument();
 	});
 
@@ -491,7 +491,7 @@ describe("SelectDropdown", () => {
 
 		fireEvent.change(selectDropdown, { target: { value: "" } });
 
-		expect(screen.getByTestId("select-list__input")).toHaveValue("");
+		expect(screen.getByTestId("select-list__input")).not.toHaveValue();
 		expect(screen.getByTestId("SelectDropdown__option--0")).toBeInTheDocument();
 		expect(screen.getByTestId("SelectDropdown__option--1")).toBeInTheDocument();
 		expect(screen.getByTestId("SelectDropdown__option--2")).toBeInTheDocument();

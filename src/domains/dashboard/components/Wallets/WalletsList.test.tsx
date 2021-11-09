@@ -97,7 +97,7 @@ describe("WalletsList", () => {
 	it("should render loading state", () => {
 		const { asFragment, getAllByTestId } = render(<WalletsList wallets={[]} isLoading={true} />);
 
-		expect(getAllByTestId("TableRow").length).toBeGreaterThan(0);
+		expect(getAllByTestId("TableRow")).toHaveLength(3);
 		expect(asFragment()).toMatchSnapshot();
 	});
 

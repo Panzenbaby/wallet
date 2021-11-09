@@ -78,7 +78,7 @@ describe("CreateWallet", () => {
 		expect(continueButton).toBeEnabled();
 
 		fireEvent.change(selectNetworkInput, { target: { value: "" } });
-		await waitFor(() => expect(selectNetworkInput).toHaveValue(""));
+		await waitFor(() => expect(selectNetworkInput).not.toHaveValue());
 
 		expect(continueButton).toBeDisabled();
 
@@ -194,7 +194,7 @@ describe("CreateWallet", () => {
 		expect(continueButton).toBeEnabled();
 
 		fireEvent.change(selectNetworkInput, { target: { value: "" } });
-		await waitFor(() => expect(selectNetworkInput).toHaveValue(""));
+		await waitFor(() => expect(selectNetworkInput).not.toHaveValue());
 
 		expect(continueButton).toBeDisabled();
 

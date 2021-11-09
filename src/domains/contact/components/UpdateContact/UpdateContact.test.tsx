@@ -187,6 +187,6 @@ describe("UpdateContact", () => {
 		const savedContact = profile.contacts().findById(contact.id());
 
 		expect(savedContact.name()).toEqual(newName);
-		expect(savedContact.addresses().findByAddress(newAddress.address).length).toBeGreaterThan(0);
+		expect(savedContact.addresses().findByAddress(newAddress.address)).toHaveLength(1);
 	});
 });

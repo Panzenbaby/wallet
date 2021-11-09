@@ -89,7 +89,7 @@ describe("AddRecipient", () => {
 			/>,
 		);
 
-		await waitFor(() => expect(getByTestId("SelectDropdown__input")).toHaveValue(""));
+		await waitFor(() => expect(getByTestId("SelectDropdown__input")).not.toHaveValue());
 
 		expect(container).toMatchSnapshot();
 	});
@@ -203,7 +203,7 @@ describe("AddRecipient", () => {
 
 		fireEvent.click(getByTestId("AddRecipient__send-all"));
 
-		await waitFor(() => expect(getByTestId("AddRecipient__amount")).toHaveValue(""));
+		await waitFor(() => expect(getByTestId("AddRecipient__amount")).not.toHaveValue());
 
 		expect(container).toMatchSnapshot();
 	});
@@ -376,7 +376,7 @@ describe("AddRecipient", () => {
 
 		render(<Component />, { routes: [`/profiles/${profile.id()}`] });
 
-		expect(screen.getByTestId("SelectDropdown__input")).toHaveValue("");
+		expect(screen.getByTestId("SelectDropdown__input")).not.toHaveValue();
 
 		userEvent.click(screen.getByText(translations.TRANSACTION.MULTIPLE));
 
@@ -390,7 +390,9 @@ describe("AddRecipient", () => {
 
 		expect(() => screen.getByTestId("modal__inner")).toThrow(/Unable to find an element by/);
 
-		await waitFor(() => expect(screen.getByTestId("SelectDropdown__input")).not.toHaveValue(""));
+		await waitFor(() =>
+			expect(screen.getByTestId("SelectDropdown__input")).toHaveValue("D8rr7B1d6TL6pf14LgMz4sKp1VBMs6YUYD"),
+		);
 
 		fireEvent.input(screen.getByTestId("AddRecipient__amount"), {
 			target: {

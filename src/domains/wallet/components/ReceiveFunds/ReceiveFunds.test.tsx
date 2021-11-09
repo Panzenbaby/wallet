@@ -74,7 +74,7 @@ describe("ReceiveFunds", () => {
 
 		fireEvent.click(getByTestId("ReceiveFunds__toggle"));
 
-		await waitFor(() => expect(getByTestId("ReceiveFundsForm__amount")).toHaveValue(""));
-		await waitFor(() => expect(getByTestId("ReceiveFundsForm__memo")).toHaveValue(""));
+		await waitFor(() => expect(getByTestId("ReceiveFundsForm__amount")).not.toHaveValue());
+		await waitFor(() => expect(getByTestId("ReceiveFundsForm__memo")).not.toHaveValue());
 	});
 });

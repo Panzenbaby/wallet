@@ -185,7 +185,7 @@ describe("SearchRecipient", () => {
 		// Reset search
 		fireEvent.click(screen.getByTestId("header-search-bar__reset"));
 
-		await waitFor(() => expect(searchInput).toHaveValue(""));
+		await waitFor(() => expect(searchInput).not.toHaveValue());
 		await waitFor(() => expect(screen.queryAllByTestId("TableRow")).toHaveLength(2));
 
 		jest.useRealTimers();

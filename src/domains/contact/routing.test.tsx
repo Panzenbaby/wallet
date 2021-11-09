@@ -2,17 +2,17 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import { RouterView } from "router";
-import { render } from "utils/testing-library";
+import { render, screen } from "utils/testing-library";
 
 describe("ContactRoutes", () => {
 	it("should render", () => {
-		const { getAllByText, asFragment } = render(
+		const { asFragment } = render(
 			<MemoryRouter>
 				<RouterView routes={[{ component: () => <h1>ContactRoutes</h1>, path: "/" }]} />
 			</MemoryRouter>,
 		);
 
-		expect(getAllByText("ContactRoutes").length).toBeGreaterThan(0);
+		expect(screen.getByText("ContactRoutes")).toBeInTheDocument();
 		expect(asFragment()).toMatchSnapshot();
 	});
 });

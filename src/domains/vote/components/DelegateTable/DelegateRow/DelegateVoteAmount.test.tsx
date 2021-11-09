@@ -432,7 +432,7 @@ describe("DelegateVoteAmount", () => {
 			rerender(<VoteAmount selectedUnvotes={[]} selectedVotes={selectedVotes} />);
 
 			await waitFor(() => {
-				expect(screen.getByTestId("InputCurrency")).toHaveValue("");
+				expect(screen.getByTestId("InputCurrency")).not.toHaveValue();
 			});
 
 			unmount();
@@ -458,7 +458,7 @@ describe("DelegateVoteAmount", () => {
 			rerender(<VoteAmount selectedUnvotes={selectedUnvotes} selectedVotes={[]} />);
 
 			await waitFor(() => {
-				expect(screen.getByTestId("InputCurrency")).toHaveValue("");
+				expect(screen.getByTestId("InputCurrency")).not.toHaveValue();
 			});
 		});
 	});
@@ -758,7 +758,7 @@ describe("DelegateVoteAmount", () => {
 
 			rerender(<VoteAmount isSelectedVote={false} />);
 
-			expect(screen.getByTestId("InputCurrency")).toHaveValue("");
+			expect(screen.getByTestId("InputCurrency")).not.toHaveValue();
 
 			await waitFor(() => {
 				expect(setAvailableBalance).toHaveBeenLastCalledWith(90);
@@ -807,7 +807,7 @@ describe("DelegateVoteAmount", () => {
 
 			rerender(<VoteAmount isSelectedUnvote />);
 
-			expect(screen.getByTestId("InputCurrency")).toHaveValue("");
+			expect(screen.getByTestId("InputCurrency")).not.toHaveValue();
 
 			await waitFor(() => {
 				expect(setAvailableBalance).toHaveBeenLastCalledWith(90);
@@ -823,7 +823,7 @@ describe("DelegateVoteAmount", () => {
 
 			rerender(<VoteAmount isSelectedUnvote />);
 
-			expect(screen.getByTestId("InputCurrency")).toHaveValue("");
+			expect(screen.getByTestId("InputCurrency")).not.toHaveValue();
 
 			await waitFor(() => {
 				expect(setAvailableBalance).toHaveBeenLastCalledWith(90);

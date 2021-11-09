@@ -672,7 +672,7 @@ describe("SendTransfer", () => {
 		expect(input).not.toHaveAttribute("aria-invalid");
 
 		fireEvent.change(input, { target: { value: "" } });
-		await waitFor(() => expect(input).toHaveValue(""));
+		await waitFor(() => expect(input).not.toHaveValue());
 
 		expect(input).toHaveAttribute("aria-invalid", "true");
 
@@ -1738,7 +1738,7 @@ describe("SendTransfer", () => {
 			within(getByTestId("InputFee")).getByText(transactionTranslations.INPUT_FEE_VIEW_TYPE.ADVANCED),
 		);
 		fireEvent.change(getByTestId("InputCurrency"), { target: { value: "" } });
-		await waitFor(() => expect(getByTestId("InputCurrency")).toHaveValue(""));
+		await waitFor(() => expect(getByTestId("InputCurrency")).not.toHaveValue());
 
 		await waitFor(() => {
 			expect(getByTestId("Input__error")).toBeVisible();

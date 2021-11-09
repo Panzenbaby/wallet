@@ -305,7 +305,7 @@ describe("Add Participant", () => {
 
 		expect(screen.queryAllByTestId("recipient-list__recipient-list-item")).toHaveLength(1);
 
-		expect(screen.getByTestId("SelectDropdown__input")).toHaveValue("");
+		expect(screen.getByTestId("SelectDropdown__input")).not.toHaveValue();
 
 		// add participant
 		fireEvent.input(screen.getByTestId("SelectDropdown__input"), {
@@ -318,7 +318,7 @@ describe("Add Participant", () => {
 
 		await waitFor(() => expect(screen.queryAllByTestId("recipient-list__recipient-list-item")).toHaveLength(2));
 
-		await waitFor(() => expect(screen.getByTestId("SelectDropdown__input")).toHaveValue(""));
+		await waitFor(() => expect(screen.getByTestId("SelectDropdown__input")).not.toHaveValue());
 
 		// add participant
 		fireEvent.input(screen.getByTestId("SelectDropdown__input"), {
@@ -331,7 +331,7 @@ describe("Add Participant", () => {
 
 		await waitFor(() => expect(screen.queryAllByTestId("recipient-list__recipient-list-item")).toHaveLength(3));
 
-		await waitFor(() => expect(screen.getByTestId("SelectDropdown__input")).toHaveValue(""));
+		await waitFor(() => expect(screen.getByTestId("SelectDropdown__input")).not.toHaveValue());
 	});
 
 	it("should remove participant", async () => {

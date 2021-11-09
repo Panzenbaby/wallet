@@ -305,7 +305,7 @@ describe.each([true, false])("SearchWallet uses fiat value = %s", (showConverted
 		// Reset search
 		fireEvent.click(getByTestId("header-search-bar__reset"));
 
-		await waitFor(() => expect(searchInput).toHaveValue(""));
+		await waitFor(() => expect(searchInput).not.toHaveValue());
 		await waitFor(() => expect(queryAllByTestId("TableRow")).toHaveLength(2));
 
 		jest.useRealTimers();
