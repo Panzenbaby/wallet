@@ -1,4 +1,4 @@
-import { Contracts, Profile } from "@payvo/profiles";
+import { Contracts, DTO, Profile } from "@payvo/profiles";
 import { ReadOnlyWallet } from "@payvo/profiles/distribution/read-only-wallet";
 import { Wallet } from "@payvo/profiles/distribution/wallet";
 import { Coins, Networks } from "@payvo/sdk";
@@ -41,6 +41,26 @@ export function assertNetwork(network?: Networks.Network): asserts network is Ne
 	if (!(network instanceof Networks.Network)) {
 		throw new AssertionError({
 			message: `Expected 'network' to be Networks.Network, but received ${network}`,
+		});
+	}
+}
+
+export function assertSignedTransaction(
+	transaction?: DTO.ExtendedSignedTransactionData,
+): asserts transaction is DTO.ExtendedSignedTransactionData {
+	if (!(transaction instanceof DTO.ExtendedSignedTransactionData)) {
+		throw new AssertionError({
+			message: `Expected 'transaction' to be DTO.ExtendedSignedTransactionData, but received ${transaction}`,
+		});
+	}
+}
+
+export function assertConfirmedTransaction(
+	transaction?: DTO.ExtendedConfirmedTransactionData,
+): asserts transaction is DTO.ExtendedConfirmedTransactionData {
+	if (!(transaction instanceof DTO.ExtendedConfirmedTransactionData)) {
+		throw new AssertionError({
+			message: `Expected 'transaction' to be DTO.ExtendedConfirmedTransactionData, but received ${transaction}`,
 		});
 	}
 }

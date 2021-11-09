@@ -15,13 +15,13 @@ describe("NetworkOptions", () => {
 	});
 
 	it("should render empty", () => {
-		const { container } = render(<NetworkOptions />);
+		const { container } = render(<NetworkOptions networks={[]} onClick={jest.fn()} />);
 
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should render available networks options", () => {
-		const { container } = render(<NetworkOptions networks={networkOptions} />);
+		const { container } = render(<NetworkOptions networks={networkOptions} onClick={jest.fn()} />);
 
 		expect(container).toMatchSnapshot();
 	});

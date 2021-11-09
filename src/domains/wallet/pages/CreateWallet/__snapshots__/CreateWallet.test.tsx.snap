@@ -7,7 +7,7 @@ exports[`CreateWallet should create a wallet 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -32,7 +32,7 @@ exports[`CreateWallet should create a wallet 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -106,7 +106,7 @@ exports[`CreateWallet should create a wallet 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -145,7 +145,7 @@ exports[`CreateWallet should create a wallet 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
@@ -176,7 +176,7 @@ exports[`CreateWallet should create a wallet 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
@@ -628,7 +628,7 @@ exports[`CreateWallet should create a wallet 2`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -653,7 +653,7 @@ exports[`CreateWallet should create a wallet 2`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -727,7 +727,7 @@ exports[`CreateWallet should create a wallet 2`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -766,11 +766,12 @@ exports[`CreateWallet should create a wallet 2`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
-                  class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
+                  class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
                   data-testid="navbar__buttons--send"
+                  disabled=""
                   type="button"
                 >
                   <div
@@ -796,11 +797,12 @@ exports[`CreateWallet should create a wallet 2`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
-                  class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
+                  class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
                   data-testid="navbar__buttons--receive"
+                  disabled=""
                   type="button"
                 >
                   <div
@@ -1090,7 +1092,7 @@ exports[`CreateWallet should create a wallet with encryption 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -1115,7 +1117,7 @@ exports[`CreateWallet should create a wallet with encryption 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -1189,7 +1191,7 @@ exports[`CreateWallet should create a wallet with encryption 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1228,7 +1230,7 @@ exports[`CreateWallet should create a wallet with encryption 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
@@ -1259,7 +1261,7 @@ exports[`CreateWallet should create a wallet with encryption 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
@@ -1711,7 +1713,7 @@ exports[`CreateWallet should create a wallet with encryption 2`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -1736,7 +1738,7 @@ exports[`CreateWallet should create a wallet with encryption 2`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -1810,7 +1812,7 @@ exports[`CreateWallet should create a wallet with encryption 2`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1849,11 +1851,12 @@ exports[`CreateWallet should create a wallet with encryption 2`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
-                  class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
+                  class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
                   data-testid="navbar__buttons--send"
+                  disabled=""
                   type="button"
                 >
                   <div
@@ -1879,11 +1882,12 @@ exports[`CreateWallet should create a wallet with encryption 2`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
-                  class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
+                  class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
                   data-testid="navbar__buttons--receive"
+                  disabled=""
                   type="button"
                 >
                   <div
@@ -2178,7 +2182,7 @@ exports[`CreateWallet should remove pending wallet if not submitted 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -2203,7 +2207,7 @@ exports[`CreateWallet should remove pending wallet if not submitted 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -2277,7 +2281,7 @@ exports[`CreateWallet should remove pending wallet if not submitted 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2316,7 +2320,7 @@ exports[`CreateWallet should remove pending wallet if not submitted 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
@@ -2347,7 +2351,7 @@ exports[`CreateWallet should remove pending wallet if not submitted 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
@@ -2801,7 +2805,7 @@ exports[`CreateWallet should show an error message for duplicate name 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -2826,7 +2830,7 @@ exports[`CreateWallet should show an error message for duplicate name 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -2900,7 +2904,7 @@ exports[`CreateWallet should show an error message for duplicate name 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2939,7 +2943,7 @@ exports[`CreateWallet should show an error message for duplicate name 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2969,7 +2973,7 @@ exports[`CreateWallet should show an error message for duplicate name 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3420,7 +3424,7 @@ exports[`CreateWallet should show an error message if wallet generation failed 1
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -3445,7 +3449,7 @@ exports[`CreateWallet should show an error message if wallet generation failed 1
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -3519,7 +3523,7 @@ exports[`CreateWallet should show an error message if wallet generation failed 1
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3558,7 +3562,7 @@ exports[`CreateWallet should show an error message if wallet generation failed 1
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
@@ -3589,7 +3593,7 @@ exports[`CreateWallet should show an error message if wallet generation failed 1
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"

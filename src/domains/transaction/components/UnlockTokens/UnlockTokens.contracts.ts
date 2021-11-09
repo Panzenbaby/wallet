@@ -1,6 +1,5 @@
 import { Contracts } from "@payvo/profiles";
 import { UnlockableBalance as SDKUnlockableBalance } from "@payvo/sdk/distribution/services"; // @TODO: refactor export path in sdk
-import { TableColumn } from "app/components/Table/TableColumn.models";
 
 const POLLING_INTERVAL = 1000 * 60; // 1 min
 
@@ -30,8 +29,6 @@ interface UnlockTokensFormState {
 	secret: string | undefined;
 }
 
-type UnlockableBalanceSkeleton = Record<string, never>;
-
 type UseUnlockableBalancesHook = (
 	wallet: Contracts.IReadWriteWallet,
 ) => {
@@ -40,18 +37,12 @@ type UseUnlockableBalancesHook = (
 	isFirstLoad: boolean;
 };
 
-type UseColumnsHook = (config: {
-	canSelectAll: boolean;
-	isAllSelected: boolean;
-	onToggleAll: () => void;
-}) => TableColumn[];
+export type { UnlockableBalance, UnlockTokensFormState, UseUnlockableBalancesHook };
 
-export type {
-	UnlockableBalance,
-	UnlockableBalanceSkeleton,
-	UnlockTokensFormState,
-	UseColumnsHook,
-	UseUnlockableBalancesHook,
-};
+export interface UnlockTokensModalProperties {
+	profile: Contracts.IProfile;
+	wallet: Contracts.IReadWriteWallet;
+	onClose: () => void;
+}
 
 export { POLLING_INTERVAL, Step };

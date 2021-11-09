@@ -69,7 +69,7 @@ export const SelectProfileImage = ({
 
 		const type = await fromBuffer(file.content);
 
-		if (!ALLOWED_EXTENSIONS.includes(type?.ext ?? "")) {
+		if (!type?.ext || !ALLOWED_EXTENSIONS.includes(type.ext)) {
 			toasts.error(t("COMMON.ERRORS.INVALID_IMAGE"));
 			return;
 		}

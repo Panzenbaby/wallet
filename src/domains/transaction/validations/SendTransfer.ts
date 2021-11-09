@@ -1,15 +1,9 @@
 import { Contracts } from "@payvo/profiles";
 import { Coins, Networks } from "@payvo/sdk";
-
-import { RecipientListItem } from "../components/RecipientList/RecipientList.contracts";
+import { RecipientItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
 
 export const sendTransfer = (t: any) => ({
-	amount: (
-		network: Networks.Network,
-		balance: number,
-		recipients: RecipientListItem[],
-		isSingleRecipient: boolean,
-	) => ({
+	amount: (network: Networks.Network, balance: number, recipients: RecipientItem[], isSingleRecipient: boolean) => ({
 		validate: {
 			valid: (amountValue: any) => {
 				const amount = amountValue || 0;
@@ -59,7 +53,7 @@ export const sendTransfer = (t: any) => ({
 	recipientAddress: (
 		profile: Contracts.IProfile,
 		network: Networks.Network,
-		recipients: RecipientListItem[],
+		recipients: RecipientItem[],
 		isSingleRecipient: boolean,
 	) => ({
 		validate: {
@@ -90,7 +84,7 @@ export const sendTransfer = (t: any) => ({
 	}),
 	recipients: () => ({
 		validate: {
-			valid: (recipients: RecipientListItem[]) => recipients.length > 0,
+			valid: (recipients: RecipientItem[]) => recipients.length > 0,
 		},
 	}),
 	senderAddress: () => ({

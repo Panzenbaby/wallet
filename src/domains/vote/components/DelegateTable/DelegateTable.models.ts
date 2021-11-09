@@ -1,4 +1,5 @@
 import { Contracts } from "@payvo/profiles";
+import { Networks } from "@payvo/sdk";
 import React from "react";
 
 export interface DelegateTableProperties {
@@ -18,4 +19,9 @@ export interface DelegateTableProperties {
 export interface VoteDelegateProperties {
 	delegateAddress: string;
 	amount: number;
+}
+
+export interface DelegateTableColumnsProperties {
+	network: Networks.Network;
+	isLoading?: boolean;
 }

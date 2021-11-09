@@ -102,7 +102,6 @@ describe("TransactionDetailModal", () => {
 						wallet: () => wallet,
 					}}
 				/>
-				,
 			</Route>,
 			{
 				history,
@@ -137,7 +136,6 @@ describe("TransactionDetailModal", () => {
 						wallet: () => wallet,
 					}}
 				/>
-				,
 			</Route>,
 			{
 				history,
@@ -163,7 +161,6 @@ describe("TransactionDetailModal", () => {
 						type: () => "ipfs",
 					}}
 				/>
-				,
 			</Route>,
 			{
 				history,
@@ -197,7 +194,6 @@ describe("TransactionDetailModal", () => {
 						type: () => "vote",
 					}}
 				/>
-				,
 			</Route>,
 			{
 				history,
@@ -231,7 +227,6 @@ describe("TransactionDetailModal", () => {
 						type: () => "unvote",
 					}}
 				/>
-				,
 			</Route>,
 			{
 				history,
@@ -255,7 +250,6 @@ describe("TransactionDetailModal", () => {
 						username: () => "ARK Wallet",
 					}}
 				/>
-				,
 			</Route>,
 			{
 				history,
@@ -282,7 +276,6 @@ describe("TransactionDetailModal", () => {
 						}),
 					}}
 				/>
-				,
 			</Route>,
 			{
 				history,
@@ -305,7 +298,6 @@ describe("TransactionDetailModal", () => {
 						type: () => "secondSignature",
 					}}
 				/>
-				,
 			</Route>,
 			{
 				history,
@@ -330,7 +322,6 @@ describe("TransactionDetailModal", () => {
 						type: () => "magistrate",
 					}}
 				/>
-				,
 			</Route>,
 			{
 				history,
@@ -378,7 +369,6 @@ describe("TransactionDetailModal", () => {
 							type: () => "unknown",
 						}}
 					/>
-					,
 				</Route>,
 				{
 					history,

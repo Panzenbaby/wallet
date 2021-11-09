@@ -149,7 +149,7 @@ describe("Dashboard", () => {
 			},
 		);
 
-		await waitFor(() => expect(getAllByRole("row").length).toBeGreaterThan(1));
+		await waitFor(() => expect(getAllByRole("row")).toHaveLength(5));
 
 		fireEvent.click(getByText(dashboardTranslations.WALLET_CONTROLS.IMPORT_LEDGER));
 

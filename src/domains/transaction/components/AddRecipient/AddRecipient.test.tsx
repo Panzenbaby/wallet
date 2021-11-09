@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { buildTranslations } from "app/i18n/helpers";
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { Route } from "react-router-dom";
 import { env, fireEvent, getDefaultProfileId, MNEMONICS, render, screen, waitFor, within } from "utils/testing-library";
 
 import { AddRecipient } from "./AddRecipient";
@@ -33,7 +34,14 @@ const renderWithFormProvider = (children: any, defaultValues?: any) => {
 		return <FormProvider {...form}>{children}</FormProvider>;
 	};
 
-	return render(<Wrapper />);
+	return render(
+		<Route path="/profiles/:profileId">
+			<Wrapper />
+		</Route>,
+		{
+			routes: [`/profiles/${profile.id()}`],
+		},
+	);
 };
 
 describe("AddRecipient", () => {
@@ -45,15 +53,7 @@ describe("AddRecipient", () => {
 
 	it("should render", async () => {
 		const { container } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" />,
-		);
-
-		expect(container).toMatchSnapshot();
-	});
-
-	it("should render without recipients", async () => {
-		const { container } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} recipients={undefined} />,
+			<AddRecipient profile={profile} wallet={wallet} recipients={[]} onChange={jest.fn()} />,
 		);
 
 		expect(container).toMatchSnapshot();
@@ -62,12 +62,11 @@ describe("AddRecipient", () => {
 	it("should render with single recipient data", async () => {
 		const values = {
 			amount: "1",
-			displayAmount: "1",
 			recipientAddress: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax",
 		};
 
 		const { getByTestId, container } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} />,
+			<AddRecipient profile={profile} wallet={wallet} recipients={[]} onChange={jest.fn()} />,
 			values,
 		);
 
@@ -81,17 +80,29 @@ describe("AddRecipient", () => {
 
 	it("should render with multiple recipients switch", async () => {
 		const { getByTestId, container } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" showMultiPaymentOption />,
+			<AddRecipient
+				onChange={jest.fn()}
+				profile={profile}
+				recipients={[]}
+				showMultiPaymentOption
+				wallet={wallet}
+			/>,
 		);
 
-		await waitFor(() => expect(getByTestId("SelectDropdown__input")).toHaveValue(""));
+		await waitFor(() => expect(getByTestId("SelectDropdown__input")).not.toHaveValue());
 
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should render without the single & multiple switch", async () => {
 		const { container } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" showMultiPaymentOption={false} />,
+			<AddRecipient
+				onChange={jest.fn()}
+				profile={profile}
+				recipients={[]}
+				showMultiPaymentOption={false}
+				wallet={wallet}
+			/>,
 		);
 
 		expect(container).toMatchSnapshot();
@@ -107,7 +118,7 @@ describe("AddRecipient", () => {
 		);
 
 		const { getByTestId } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" onChange={onChange} />,
+			<AddRecipient profile={profile} wallet={wallet} onChange={onChange} recipients={[]} />,
 		);
 
 		fireEvent.input(getByTestId("AddRecipient__amount"), {
@@ -142,7 +153,7 @@ describe("AddRecipient", () => {
 
 	it("should select recipient", async () => {
 		const { getByTestId, findByTestId } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" />,
+			<AddRecipient profile={profile} wallet={wallet} recipients={[]} onChange={jest.fn()} />,
 		);
 
 		expect(() => getByTestId("modal__inner")).toThrow(/Unable to find an element by/);
@@ -162,7 +173,7 @@ describe("AddRecipient", () => {
 
 	it("should set available amount", async () => {
 		const { getByTestId, container } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" />,
+			<AddRecipient profile={profile} wallet={wallet} recipients={[]} onChange={jest.fn()} />,
 		);
 
 		fireEvent.click(getByTestId("AddRecipient__send-all"));
@@ -187,19 +198,19 @@ describe("AddRecipient", () => {
 		emptyProfile.wallets().push(emptyWallet);
 
 		const { getByTestId, container } = renderWithFormProvider(
-			<AddRecipient profile={emptyProfile} wallet={emptyWallet} assetSymbol="ARK" />,
+			<AddRecipient profile={emptyProfile} wallet={emptyWallet} recipients={[]} onChange={jest.fn()} />,
 		);
 
 		fireEvent.click(getByTestId("AddRecipient__send-all"));
 
-		await waitFor(() => expect(getByTestId("AddRecipient__amount")).toHaveValue(""));
+		await waitFor(() => expect(getByTestId("AddRecipient__amount")).not.toHaveValue());
 
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should toggle between single and multiple recipients", async () => {
 		const { getByText, queryByText, findByText } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" />,
+			<AddRecipient profile={profile} wallet={wallet} recipients={[]} onChange={jest.fn()} />,
 		);
 
 		const singleButton = getByText(translations.TRANSACTION.SINGLE);
@@ -222,8 +233,7 @@ describe("AddRecipient", () => {
 		jest.useFakeTimers();
 
 		const values = {
-			amount: "1",
-			displayAmount: "1",
+			amount: 1,
 			recipientAddress: "bP6T9GQ3kqP6T9GQ3kqP6T9GQ3kqTTTP6T9GQ3kqT",
 		};
 
@@ -242,34 +252,39 @@ describe("AddRecipient", () => {
 			}, []);
 
 			return (
-				<FormProvider {...form}>
-					<AddRecipient
-						profile={profile}
-						wallet={wallet}
-						assetSymbol="ARK"
-						recipients={[
-							{
-								address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax",
-								amount: undefined,
-							},
-							{
-								address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax",
-								amount: 1,
-							},
-							{
-								address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ay",
-								amount: 1,
-							},
-						]}
-					/>
-				</FormProvider>
+				<Route path="/profiles/:profileId">
+					<FormProvider {...form}>
+						<AddRecipient
+							profile={profile}
+							wallet={wallet}
+							onChange={jest.fn()}
+							recipients={[
+								{
+									address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax",
+									amount: undefined,
+								},
+								{
+									address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax",
+									amount: 1,
+								},
+								{
+									address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ay",
+									amount: 1,
+								},
+							]}
+						/>
+					</FormProvider>
+				</Route>
 			);
 		};
-		render(<Component />);
+
+		render(<Component />, {
+			routes: [`/profiles/${profile.id()}`],
+		});
 
 		fireEvent.input(screen.getByTestId("AddRecipient__amount"), {
 			target: {
-				value: values.displayAmount,
+				value: values.amount,
 			},
 		});
 
@@ -281,8 +296,7 @@ describe("AddRecipient", () => {
 		});
 
 		await waitFor(() => {
-			expect(form.getValues("amount")).toEqual(values.amount);
-			expect(form.getValues("displayAmount")).toEqual(values.displayAmount);
+			expect(+form.getValues("amount")).toEqual(values.amount);
 			expect(screen.getByTestId("AddRecipient__add-button")).toBeInTheDocument();
 			expect(screen.getByTestId("AddRecipient__add-button")).toBeDisabled();
 		});
@@ -303,36 +317,38 @@ describe("AddRecipient", () => {
 
 	it("should disable recipient fields if network is not filled", async () => {
 		const values = {
-			displayAmount: "1",
-			network: null,
+			amount: 1,
+			network: undefined,
 		};
 
 		const { getByTestId } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" />,
+			<AddRecipient profile={profile} wallet={wallet} onChange={jest.fn()} recipients={[]} />,
 			values,
 		);
 
 		await waitFor(() => {
 			expect(getByTestId("SelectDropdown__input")).toBeDisabled();
-			expect(getByTestId("AddRecipient__amount")).toBeDisabled();
 		});
+
+		expect(getByTestId("AddRecipient__amount")).toBeDisabled();
 	});
 
 	it("should disable recipient fields if sender address is not filled", async () => {
 		const values = {
-			displayAmount: "1",
-			senderAddress: null,
+			amount: 1,
+			senderAddress: undefined,
 		};
 
 		const { getByTestId } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" />,
+			<AddRecipient profile={profile} wallet={wallet} onChange={jest.fn()} recipients={[]} />,
 			values,
 		);
 
 		await waitFor(() => {
 			expect(getByTestId("SelectDropdown__input")).toBeDisabled();
-			expect(getByTestId("AddRecipient__amount")).toBeDisabled();
 		});
+
+		expect(getByTestId("AddRecipient__amount")).toBeDisabled();
 	});
 
 	it("should show wallet name in recipients' list for multiple type", async () => {
@@ -350,15 +366,17 @@ describe("AddRecipient", () => {
 			}, []);
 
 			return (
-				<FormProvider {...form}>
-					<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" recipients={[]} />
-				</FormProvider>
+				<Route path="/profiles/:profileId">
+					<FormProvider {...form}>
+						<AddRecipient profile={profile} wallet={wallet} onChange={jest.fn()} recipients={[]} />
+					</FormProvider>
+				</Route>
 			);
 		};
 
-		render(<Component />);
+		render(<Component />, { routes: [`/profiles/${profile.id()}`] });
 
-		expect(screen.getByTestId("SelectDropdown__input")).toHaveValue("");
+		expect(screen.getByTestId("SelectDropdown__input")).not.toHaveValue();
 
 		userEvent.click(screen.getByText(translations.TRANSACTION.MULTIPLE));
 
@@ -372,7 +390,9 @@ describe("AddRecipient", () => {
 
 		expect(() => screen.getByTestId("modal__inner")).toThrow(/Unable to find an element by/);
 
-		await waitFor(() => expect(screen.getByTestId("SelectDropdown__input")).not.toHaveValue(""));
+		await waitFor(() =>
+			expect(screen.getByTestId("SelectDropdown__input")).toHaveValue("D8rr7B1d6TL6pf14LgMz4sKp1VBMs6YUYD"),
+		);
 
 		fireEvent.input(screen.getByTestId("AddRecipient__amount"), {
 			target: {
@@ -390,7 +410,7 @@ describe("AddRecipient", () => {
 
 	it("should show error for low balance", async () => {
 		const { getByTestId, findByTestId } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" />,
+			<AddRecipient profile={profile} wallet={wallet} onChange={jest.fn()} recipients={[]} />,
 		);
 
 		expect(() => getByTestId("modal__inner")).toThrow(/Unable to find an element by/);
@@ -418,7 +438,7 @@ describe("AddRecipient", () => {
 		const mockWalletBalance = jest.spyOn(wallet, "balance").mockReturnValue(0);
 
 		const { getByTestId, findByTestId } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" />,
+			<AddRecipient profile={profile} wallet={wallet} onChange={jest.fn()} recipients={[]} />,
 		);
 
 		expect(() => getByTestId("modal__inner")).toThrow(/Unable to find an element by/);
@@ -446,7 +466,7 @@ describe("AddRecipient", () => {
 
 	it("should show error for invalid address", async () => {
 		const { getByTestId, getAllByTestId, findByTestId } = renderWithFormProvider(
-			<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" />,
+			<AddRecipient profile={profile} wallet={wallet} onChange={jest.fn()} recipients={[]} />,
 		);
 
 		expect(() => getByTestId("modal__inner")).toThrow(/Unable to find an element by/);
@@ -474,8 +494,7 @@ describe("AddRecipient", () => {
 
 	it("should remove recipient in multiple tab", async () => {
 		const values = {
-			amount: "1",
-			displayAmount: "1",
+			amount: 1,
 			recipientAddress: "DFJ5Z51F1euNNdRUQJKQVdG4h495LZkc6T",
 		};
 
@@ -493,30 +512,35 @@ describe("AddRecipient", () => {
 			}, []);
 
 			return (
-				<FormProvider {...form}>
-					<AddRecipient
-						profile={profile}
-						wallet={wallet}
-						assetSymbol="ARK"
-						recipients={[
-							{
-								address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax",
-								amount: 1,
-							},
-							{
-								address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ay",
-								amount: 1,
-							},
-						]}
-					/>
-				</FormProvider>
+				<Route path="/profiles/:profileId">
+					<FormProvider {...form}>
+						<AddRecipient
+							profile={profile}
+							wallet={wallet}
+							onChange={jest.fn()}
+							recipients={[
+								{
+									address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ax",
+									amount: 1,
+								},
+								{
+									address: "D6Z26L69gdk9qYmTv5uzk3uGepigtHY4ay",
+									amount: 1,
+								},
+							]}
+						/>
+					</FormProvider>
+				</Route>
 			);
 		};
-		render(<Component />);
+
+		render(<Component />, {
+			routes: [`/profiles/${profile.id()}`],
+		});
 
 		fireEvent.input(screen.getByTestId("AddRecipient__amount"), {
 			target: {
-				value: values.displayAmount,
+				value: values.amount,
 			},
 		});
 
@@ -535,8 +559,7 @@ describe("AddRecipient", () => {
 
 	it("should not override default values in single tab", async () => {
 		const values = {
-			amount: "1",
-			displayAmount: "1",
+			amount: 1,
 			recipientAddress: "DFJ5Z51F1euNNdRUQJKQVdG4h495LZkc6T",
 		};
 
@@ -555,7 +578,7 @@ describe("AddRecipient", () => {
 
 			return (
 				<FormProvider {...form}>
-					<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" recipients={[]} />
+					<AddRecipient profile={profile} wallet={wallet} onChange={jest.fn()} recipients={[]} />
 				</FormProvider>
 			);
 		};
@@ -585,13 +608,17 @@ describe("AddRecipient", () => {
 			}, []);
 
 			return (
-				<FormProvider {...form}>
-					<AddRecipient profile={profile} wallet={wallet} assetSymbol="ARK" recipients={[]} />
-				</FormProvider>
+				<Route path="/profiles/:profileId">
+					<FormProvider {...form}>
+						<AddRecipient profile={profile} wallet={wallet} onChange={jest.fn()} recipients={[]} />
+					</FormProvider>
+				</Route>
 			);
 		};
 
-		render(<Component />);
+		render(<Component />, {
+			routes: [`/profiles/${profile.id()}`],
+		});
 
 		fireEvent.click(screen.getByText(translations.TRANSACTION.MULTIPLE));
 
@@ -629,7 +656,7 @@ describe("AddRecipient", () => {
 				]}
 				profile={profile}
 				wallet={wallet}
-				assetSymbol="ARK"
+				onChange={jest.fn()}
 			/>,
 		);
 

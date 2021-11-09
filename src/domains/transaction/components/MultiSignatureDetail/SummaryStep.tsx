@@ -91,7 +91,7 @@ export const SummaryStep = ({
 				/>
 			)}
 
-			{(type === "vote" || type === "unvote") && <TransactionVotes {...delegates} />}
+			{(type === "vote" || type === "unvote") && <TransactionVotes {...delegates} currency={wallet.currency()} />}
 
 			{type === "ipfs" && (
 				<TransactionDetail

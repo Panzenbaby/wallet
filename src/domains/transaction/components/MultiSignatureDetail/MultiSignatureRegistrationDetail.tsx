@@ -1,7 +1,7 @@
 import { Enums } from "@payvo/sdk";
 import { Modal } from "app/components/Modal";
 import { RecipientList } from "domains/transaction/components/RecipientList";
-import { RecipientListItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
+import { RecipientItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
 import {
 	TransactionDetail,
 	TransactionExplorerLink,
@@ -15,16 +15,20 @@ import { useTranslation } from "react-i18next";
 
 import { TransactionDetailProperties } from "../TransactionDetailModal/TransactionDetailModal.models";
 
-export const MultiSignatureRegistrationDetail = ({ isOpen, transaction, onClose }: TransactionDetailProperties) => {
+export const MultiSignatureRegistrationDetail: React.FC<TransactionDetailProperties> = ({
+	isOpen,
+	transaction,
+	onClose,
+}: TransactionDetailProperties) => {
 	const { t } = useTranslation();
 
 	const wallet = transaction.wallet();
-	const [participants, setParticipants] = useState<RecipientListItem[]>([]);
+	const [participants, setParticipants] = useState<RecipientItem[]>([]);
 	const [generatedAddress, setGeneratedAddress] = useState<string>();
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const addresses: RecipientListItem[] = [];
+			const addresses: RecipientItem[] = [];
 			for (const publicKey of transaction.publicKeys()) {
 				const address = (await wallet.coin().address().fromPublicKey(publicKey)).address;
 				addresses.push({ address });
@@ -61,7 +65,14 @@ export const MultiSignatureRegistrationDetail = ({ isOpen, transaction, onClose 
 			<TransactionStatus transaction={transaction} />
 
 			<TransactionDetail label={t("TRANSACTION.MULTISIGNATURE.PARTICIPANTS")} paddingPosition="top">
-				<RecipientList showAmount={false} variant="condensed" recipients={participants} isEditable={false} />
+				<RecipientList
+					isEditable={false}
+					recipients={participants}
+					showAmount={false}
+					showExchangeAmount={false}
+					ticker={wallet.currency()}
+					variant="condensed"
+				/>
 			</TransactionDetail>
 
 			<TransactionDetail label={t("TRANSACTION.MULTISIGNATURE.MIN_SIGNATURES")}>
@@ -71,10 +82,12 @@ export const MultiSignatureRegistrationDetail = ({ isOpen, transaction, onClose 
 			{generatedAddress && (
 				<TransactionDetail label={t("TRANSACTION.MULTISIGNATURE.GENERATED_ADDRESS")} paddingPosition="top">
 					<RecipientList
-						showAmount={false}
-						variant="condensed"
-						recipients={[{ address: generatedAddress }]}
 						isEditable={false}
+						recipients={[{ address: generatedAddress }]}
+						showAmount={false}
+						showExchangeAmount={false}
+						ticker={wallet.currency()}
+						variant="condensed"
 					/>
 				</TransactionDetail>
 			)}

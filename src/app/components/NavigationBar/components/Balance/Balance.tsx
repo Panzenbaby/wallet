@@ -3,6 +3,7 @@ import { Amount } from "app/components/Amount";
 import { useProfileBalance } from "app/hooks/use-profile-balance";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { assertProfile, assertString } from "utils/assertions";
 
 import { BalanceSkeleton } from "./BalanceSkeleton";
 
@@ -19,19 +20,21 @@ export const Balance: React.FC<BalanceProperties> = ({ profile, isLoading }: Bal
 	const { t } = useTranslation();
 	const { convertedBalance } = useProfileBalance({ isLoading, profile });
 
-	useEffect(() => setWidth((width) => reference?.current?.clientWidth || width), [convertedBalance]);
+	useEffect(() => setWidth((width) => reference.current?.clientWidth || width), [convertedBalance]);
 
 	if (isLoading) {
 		return <BalanceSkeleton width={width} />;
 	}
 
-	// @TODO: enable during maintenance work
-	// assertProfile(profile);
+	assertProfile(profile);
 
-	const ticker: string | undefined = profile?.settings().get<string>(Contracts.ProfileSetting.ExchangeCurrency) || "";
+	if (!profile.status().isRestored()) {
+		return <BalanceSkeleton width={width} />;
+	}
 
-	// @TODO: enable during maintenance work
-	// assertString(ticker);
+	const ticker = profile.settings().get<string>(Contracts.ProfileSetting.ExchangeCurrency);
+
+	assertString(ticker);
 
 	return (
 		<div className="text-right">

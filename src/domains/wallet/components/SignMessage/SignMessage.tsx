@@ -104,7 +104,7 @@ export const SignMessage = ({
 				wallet,
 				message,
 				mnemonic,
-				wallet?.signingKey().exists() ? wallet.signingKey().get(encryptionPassword) : undefined,
+				wallet.signingKey().exists() ? wallet.signingKey().get(encryptionPassword) : undefined,
 				secret,
 				{
 					abortSignal,

@@ -48,7 +48,7 @@ export const SendDelegateResignation = () => {
 
 	useEffect(() => {
 		register("fees");
-		register("fee", common.fee(activeWallet?.balance?.(), activeWallet?.network?.()));
+		register("fee", common.fee(activeWallet.balance(), activeWallet.network()));
 		register("inputFeeSettings");
 
 		register("suppressWarning");

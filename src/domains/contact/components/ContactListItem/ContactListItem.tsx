@@ -10,11 +10,11 @@ import { TableCell, TableRow } from "app/components/Table";
 import { useEnvironmentContext } from "app/contexts";
 import { useNetworkOptions } from "app/hooks";
 import { NetworkIcon } from "domains/network/components/NetworkIcon";
-import React, { useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { assertNetwork } from "utils/assertions";
 
-import { ContactListItemProperties, Option } from "./ContactListItem.models";
+import { ContactListItemOption, ContactListItemProperties } from "./ContactListItem.models";
 
 const defaultProps = {
 	options: [
@@ -23,13 +23,13 @@ const defaultProps = {
 	],
 };
 
-export const ContactListItem = ({
+export const ContactListItem: FC<ContactListItemProperties> = ({
 	item,
 	onAction,
 	onSend,
 	options = defaultProps.options,
 	useTestNetworks,
-}: ContactListItemProperties) => {
+}) => {
 	const { env } = useEnvironmentContext();
 	const { networkById } = useNetworkOptions();
 	const { t } = useTranslation();
@@ -129,7 +129,9 @@ export const ContactListItem = ({
 												</Button>
 											}
 											options={options}
-											onSelect={(action: Option) => onAction?.(action, address.address())}
+											onSelect={(action: ContactListItemOption) =>
+												onAction?.(action, address.address())
+											}
 										/>
 									) : (
 										<Button

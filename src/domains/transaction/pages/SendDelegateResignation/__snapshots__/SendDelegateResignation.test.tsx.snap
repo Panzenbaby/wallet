@@ -7,7 +7,7 @@ exports[`SendDelegateResignation Delegate Resignation should change fee 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -32,7 +32,7 @@ exports[`SendDelegateResignation Delegate Resignation should change fee 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -106,7 +106,7 @@ exports[`SendDelegateResignation Delegate Resignation should change fee 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -145,7 +145,7 @@ exports[`SendDelegateResignation Delegate Resignation should change fee 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -175,7 +175,7 @@ exports[`SendDelegateResignation Delegate Resignation should change fee 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -622,7 +622,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 1st step 1`]
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -647,7 +647,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 1st step 1`]
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -721,7 +721,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 1st step 1`]
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -760,7 +760,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 1st step 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -790,7 +790,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 1st step 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1244,7 +1244,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 2nd step 1`]
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -1269,7 +1269,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 2nd step 1`]
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -1343,7 +1343,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 2nd step 1`]
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1382,7 +1382,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 2nd step 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1412,7 +1412,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 2nd step 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1791,7 +1791,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 3rd step 1`]
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -1816,7 +1816,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 3rd step 1`]
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -1890,7 +1890,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 3rd step 1`]
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1929,7 +1929,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 3rd step 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1959,7 +1959,7 @@ exports[`SendDelegateResignation Delegate Resignation should render 3rd step 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2264,7 +2264,7 @@ exports[`SendDelegateResignation Delegate Resignation should show error step and
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -2289,7 +2289,7 @@ exports[`SendDelegateResignation Delegate Resignation should show error step and
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -2363,7 +2363,7 @@ exports[`SendDelegateResignation Delegate Resignation should show error step and
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2402,7 +2402,7 @@ exports[`SendDelegateResignation Delegate Resignation should show error step and
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2432,7 +2432,7 @@ exports[`SendDelegateResignation Delegate Resignation should show error step and
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2680,7 +2680,7 @@ exports[`SendDelegateResignation Delegate Resignation should show mnemonic authe
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -2705,7 +2705,7 @@ exports[`SendDelegateResignation Delegate Resignation should show mnemonic authe
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -2779,7 +2779,7 @@ exports[`SendDelegateResignation Delegate Resignation should show mnemonic authe
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2818,7 +2818,7 @@ exports[`SendDelegateResignation Delegate Resignation should show mnemonic authe
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2848,7 +2848,7 @@ exports[`SendDelegateResignation Delegate Resignation should show mnemonic authe
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3166,7 +3166,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -3191,7 +3191,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -3265,7 +3265,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3304,7 +3304,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3334,7 +3334,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3761,7 +3761,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -3786,7 +3786,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -3860,7 +3860,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3899,7 +3899,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3929,7 +3929,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -4356,7 +4356,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -4381,7 +4381,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -4455,7 +4455,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -4494,7 +4494,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -4524,7 +4524,7 @@ exports[`SendDelegateResignation Delegate Resignation should successfully sign a
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"

@@ -9,7 +9,7 @@ import { MultiSignatureDetail } from "domains/transaction/components/MultiSignat
 import { TransactionDetailModal } from "domains/transaction/components/TransactionDetailModal";
 import { Transactions } from "domains/transaction/components/Transactions";
 import { PendingTransactions } from "domains/transaction/components/TransactionTable/PendingTransactionsTable";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 
@@ -58,6 +58,11 @@ export const WalletDetails = () => {
 		history.push(`/profiles/${activeProfile.id()}/wallets/${activeWallet.id()}/votes`);
 	};
 
+	const onPendingTransactionRemove = useCallback(async () => {
+		await syncPending();
+		toasts.success(t("TRANSACTION.TRANSACTION_REMOVED"));
+	}, [syncPending, t]);
+
 	const useCompactTables = !activeProfile.appearance().get("useExpandedTables");
 
 	return (
@@ -105,10 +110,7 @@ export const WalletDetails = () => {
 								wallet={activeWallet}
 								onPendingTransactionClick={setTransactionModalItem}
 								onClick={setSignedTransactionModalItem}
-								onRemove={() => {
-									syncPending();
-									toasts.success(t("TRANSACTION.TRANSACTION_REMOVED"));
-								}}
+								onRemove={onPendingTransactionRemove}
 							/>
 						</div>
 					)}

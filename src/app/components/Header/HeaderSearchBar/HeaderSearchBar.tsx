@@ -3,29 +3,17 @@ import { Icon } from "app/components/Icon";
 import { Input } from "app/components/Input";
 import { clickOutsideHandler, useDebounce } from "app/hooks";
 import cn from "classnames";
-import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import tw, { styled } from "twin.macro";
 
-interface HeaderSearchBarProperties {
-	offsetClassName?: string;
-	placeholder?: string;
-	label?: string;
-	noToggleBorder?: boolean;
-	onSearch?: (query: string) => void;
-	onReset?: () => void;
-	extra?: React.ReactNode;
-	maxLength?: number;
-	debounceTimeout?: number;
-	defaultQuery?: string;
-	resetFields?: boolean;
-}
+import { HeaderSearchBarProperties } from "./HeaderSearchBar.contracts";
 
 const SearchBarInputWrapper = styled.div`
 	${tw`min-width[448px] dark:border dark:border-theme-secondary-800`}
 `;
 
-export const HeaderSearchBar = ({
+export const HeaderSearchBar: FC<HeaderSearchBarProperties> = ({
 	offsetClassName,
 	placeholder,
 	label = "Search",
@@ -37,7 +25,7 @@ export const HeaderSearchBar = ({
 	defaultQuery = "",
 	debounceTimeout = 500,
 	resetFields = false,
-}: HeaderSearchBarProperties) => {
+}) => {
 	const { t } = useTranslation();
 
 	const [searchbarVisible, setSearchbarVisible] = useState(false);

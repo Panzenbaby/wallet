@@ -45,7 +45,7 @@ describe("SelectNetwork", () => {
 
 		fireEvent.change(input, { target: { value: "" } });
 
-		expect(input).toHaveValue("");
+		expect(input).not.toHaveValue();
 
 		expect(screen.getAllByTestId("SelectNetwork__NetworkIcon--container")).toHaveLength(availableNetworksLength);
 	});
@@ -81,7 +81,7 @@ describe("SelectNetwork", () => {
 
 		fireEvent.change(input, { target: { value: "" } });
 
-		expect(input).toHaveValue("");
+		expect(input).not.toHaveValue();
 
 		expect(onInputChange).toHaveBeenCalledWith();
 	});
@@ -139,15 +139,15 @@ describe("SelectNetwork", () => {
 
 		fireEvent.change(input, { target: { value: "test" } });
 
-		expect(input).toHaveValue("");
+		expect(input).not.toHaveValue();
 
 		fireEvent.keyDown(input, { code: 65, key: "A" });
 
-		expect(input).toHaveValue("");
+		expect(input).not.toHaveValue();
 
 		fireEvent.keyDown(input, { code: 65, key: "B" });
 
-		expect(input).toHaveValue("");
+		expect(input).not.toHaveValue();
 
 		expect(within(screen.getByTestId("SelectNetworkInput__network")).queryByTestId("CoinIcon")).toBeNull();
 	});

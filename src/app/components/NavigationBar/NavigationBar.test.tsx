@@ -33,11 +33,17 @@ describe("NavigationBar", () => {
 		history.push(dashboardURL);
 	});
 
-	it("should render", () => {
+	it.each([true, false])("should render full variant when profile restored is %s", (isRestored) => {
+		const isRestoredMock = jest
+			.spyOn(mockedTestEnvironment.profiles().findById(getDefaultProfileId()).status(), "isRestored")
+			.mockReturnValue(isRestored);
+
 		const { container, asFragment } = render(<NavigationBar />);
 
 		expect(container).toBeInTheDocument();
 		expect(asFragment()).toMatchSnapshot();
+
+		isRestoredMock.mockRestore();
 	});
 
 	it("should render as logo-only variant", () => {
@@ -73,12 +79,6 @@ describe("NavigationBar", () => {
 
 		expect(container).toBeInTheDocument();
 		expect(asFragment()).toMatchSnapshot();
-	});
-
-	it("should render without profile", () => {
-		const { container } = render(<NavigationBar />);
-
-		expect(container).toBeInTheDocument();
 	});
 
 	it("should handle menu click", () => {
@@ -168,15 +168,12 @@ describe("NavigationBar", () => {
 		expect(() => getByTestId("modal__inner")).toThrow(/Unable to find an element by/);
 	});
 
-	it("should not render if no active profile", () => {
-		const { asFragment } = render(<NavigationBar />);
-
-		expect(asFragment()).toMatchSnapshot();
-	});
-
 	it("should disable send transfer button when no Live wallets in test network", () => {
 		const mockProfile = environmentHooks.useActiveProfile();
-		const useNetworksMock = jest.spyOn(mockProfile.settings(), "get").mockImplementation((key: string) => {
+		const profileSettingsMock = jest.spyOn(mockProfile.settings(), "get").mockImplementation((key: string) => {
+			if (key === Contracts.ProfileSetting.Name) {
+				return "John Doe";
+			}
 			if (key === Contracts.ProfileSetting.UseTestNetworks) {
 				return false;
 			}
@@ -192,6 +189,6 @@ describe("NavigationBar", () => {
 		expect(container).toBeInTheDocument();
 		expect(getByTestId("navbar__buttons--send")).toHaveAttribute("disabled");
 
-		useNetworksMock.mockRestore();
+		profileSettingsMock.mockRestore();
 	});
 });

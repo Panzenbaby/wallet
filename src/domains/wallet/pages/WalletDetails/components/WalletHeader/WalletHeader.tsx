@@ -24,6 +24,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import tw, { styled } from "twin.macro";
+import { assertString } from "utils/assertions";
 import { openExternal } from "utils/electron-utils";
 
 import { useWalletOptions } from "../../hooks/use-wallet-options";
@@ -148,6 +149,9 @@ export const WalletHeader = ({
 		}
 	}, [isSyncing, previousIsUpdatingTransactions, isUpdatingTransactions, onUpdate]);
 
+	const exchangeCurrency = profile.settings().get<string>(Contracts.ProfileSetting.ExchangeCurrency);
+	assertString(exchangeCurrency);
+
 	return (
 		<>
 			<header className="flex items-center" data-testid="WalletHeader">
@@ -222,7 +226,7 @@ export const WalletHeader = ({
 							{!wallet.network().isTest() && (
 								<Amount
 									value={wallet.convertedBalance()}
-									ticker={profile.settings().get<string>(Contracts.ProfileSetting.ExchangeCurrency)}
+									ticker={exchangeCurrency}
 									data-testid="WalletHeader__currency-balance"
 									className="ml-1"
 								/>

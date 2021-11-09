@@ -1,6 +1,6 @@
 import { Contracts } from "@payvo/profiles";
 import { act, renderHook } from "@testing-library/react-hooks";
-import { RecipientProperties } from "domains/transaction/components/SearchRecipient/SearchRecipient.models";
+import { RecipientProperties } from "domains/transaction/components/SearchRecipient/SearchRecipient.contracts";
 import React from "react";
 import { env, getDefaultProfileId } from "utils/testing-library";
 

@@ -9,7 +9,7 @@ interface TransactionVotesProperties {
 	isLoading?: boolean;
 	votes: Contracts.VoteRegistryItem[] | Contracts.IReadOnlyWallet[];
 	unvotes: Contracts.VoteRegistryItem[] | Contracts.IReadOnlyWallet[];
-	currency?: string;
+	currency: string;
 }
 
 const defaultProps = {

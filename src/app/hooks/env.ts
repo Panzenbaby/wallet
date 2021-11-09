@@ -1,21 +1,23 @@
+import { Contracts } from "@payvo/profiles";
 import { useEnvironmentContext } from "app/contexts/Environment";
 import { useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-export const useActiveProfile = () => {
+export const useActiveProfile = (): Contracts.IProfile => {
+	const history = useHistory();
+
 	const context = useEnvironmentContext();
 	const { profileId } = useParams<{ profileId: string }>();
 
 	return useMemo(() => {
 		if (!profileId) {
-			return undefined;
+			throw new Error(
+				`Parameter [profileId] must be available on the route where [useActiveProfile] is called. Current route is [${history.location.pathname}].`,
+			);
 		}
-		try {
-			return context.env.profiles().findById(profileId);
-		} catch {
-			return undefined;
-		}
-	}, [context, profileId])!;
+
+		return context.env.profiles().findById(profileId);
+	}, [context, profileId]); // eslint-disable-line react-hooks/exhaustive-deps
 };
 
 export const useActiveWallet = () => {

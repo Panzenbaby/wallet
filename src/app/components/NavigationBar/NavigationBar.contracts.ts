@@ -13,7 +13,16 @@ export interface NavigationBarProperties {
 }
 
 export interface UserInfoProperties {
-	avatarImage?: string;
+	avatarImage: string;
 	onUserAction: (option: DropdownOption) => void;
 	userInitials?: string;
+}
+
+export interface NavigationBarLogoOnlyProperties {
+	title?: string;
+}
+
+export interface NavigationBarFullProperties {
+	title?: string;
+	isBackDisabled?: boolean;
 }

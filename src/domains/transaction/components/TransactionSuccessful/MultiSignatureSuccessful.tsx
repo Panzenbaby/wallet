@@ -8,7 +8,7 @@ import { Image } from "app/components/Image";
 import { TruncateMiddleDynamic } from "app/components/TruncateMiddleDynamic";
 import { getMultiSignatureInfo } from "domains/transaction/components/MultiSignatureDetail/MultiSignatureDetail.helpers";
 import { RecipientList } from "domains/transaction/components/RecipientList";
-import { RecipientListItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
+import { RecipientItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
 import {
 	TransactionDetail,
 	TransactionNetwork,
@@ -23,20 +23,20 @@ import { assertString } from "utils/assertions";
 interface TransactionSuccessfulProperties {
 	children?: React.ReactNode;
 	transaction?: ExtendedSignedTransactionData;
-	senderWallet?: Contracts.IReadWriteWallet;
+	senderWallet: Contracts.IReadWriteWallet;
 }
 
 export const MultiSignatureSuccessful = ({ children, transaction, senderWallet }: TransactionSuccessfulProperties) => {
 	const { t } = useTranslation();
 	const [generatedAddress, setGeneratedAddress] = useState<string>();
-	const [participantAddresses, setParticipantAddresses] = useState<RecipientListItem[]>();
+	const [participantAddresses, setParticipantAddresses] = useState<RecipientItem[]>([]);
 
 	const [minParticipants, setMinParticipants] = useState<number>();
 	const [publicKeys, setPublicKeys] = useState<string[]>();
 
 	useEffect(() => {
 		const fetchData = async () => {
-			if (!transaction || !senderWallet) {
+			if (!transaction) {
 				return;
 			}
 
@@ -69,7 +69,7 @@ export const MultiSignatureSuccessful = ({ children, transaction, senderWallet }
 				// TODO: AddressService#fromMultiSignature is not implemented for Lisk.
 			}
 
-			const addresses: RecipientListItem[] = [];
+			const addresses: RecipientItem[] = [];
 			for (const publicKey of publicKeys) {
 				const address = await addressFromPublicKey(senderWallet, publicKey);
 				assertString(address);
@@ -146,10 +146,12 @@ export const MultiSignatureSuccessful = ({ children, transaction, senderWallet }
 
 						<TransactionDetail label={t("TRANSACTION.MULTISIGNATURE.PARTICIPANTS")} paddingPosition="top">
 							<RecipientList
-								showAmount={false}
-								variant="condensed"
-								recipients={participantAddresses}
 								isEditable={false}
+								recipients={participantAddresses}
+								showAmount={false}
+								showExchangeAmount={senderWallet.network().isLive()}
+								ticker={senderWallet.currency()}
+								variant="condensed"
 							/>
 						</TransactionDetail>
 

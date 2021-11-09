@@ -588,7 +588,8 @@ describe("PluginManager", () => {
 			},
 		);
 
-		await waitFor(() => expect(screen.getAllByText("ARK Delegate Calculator").length).toBeGreaterThan(0));
+		await screen.findByText("ARK Delegate Calculator");
+
 		await waitFor(() => expect(screen.getAllByTestId("Card")).toHaveLength(9));
 
 		fireEvent.click(
@@ -652,7 +653,7 @@ describe("PluginManager", () => {
 			},
 		);
 
-		await waitFor(() => expect(screen.getAllByText("ARK Delegate Calculator").length).toBeGreaterThan(0));
+		await screen.findByText("ARK Delegate Calculator");
 		await waitFor(() => expect(screen.getAllByTestId("Card")).toHaveLength(9));
 
 		fireEvent.click(screen.getByTestId("tabs__tab-button-my-plugins"));
@@ -690,7 +691,7 @@ describe("PluginManager", () => {
 			},
 		);
 
-		await waitFor(() => expect(screen.getAllByText("ARK Delegate Calculator").length).toBeGreaterThan(0));
+		await screen.findByText("ARK Delegate Calculator");
 		await waitFor(() => expect(screen.getAllByTestId("Card")).toHaveLength(9));
 
 		fireEvent.click(screen.getByTestId("tabs__tab-button-my-plugins"));
@@ -976,7 +977,7 @@ describe("PluginManager", () => {
 
 		await screen.findByTestId("PluginUpdatesConfirmation");
 
-		expect(screen.getAllByText("1.0.0").length).toBeGreaterThan(0);
+		expect(screen.getByText("1.0.0")).toBeInTheDocument();
 
 		fireEvent.click(screen.getByTestId("PluginUpdates__continue-button"));
 

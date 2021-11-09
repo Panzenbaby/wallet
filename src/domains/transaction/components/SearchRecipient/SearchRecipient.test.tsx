@@ -5,7 +5,7 @@ import { act, env, getDefaultProfileId, render, screen } from "utils/testing-lib
 
 import { translations } from "../../i18n";
 import { SearchRecipient } from "./SearchRecipient";
-import { RecipientProperties } from "./SearchRecipient.models";
+import { RecipientProperties } from "./SearchRecipient.contracts";
 
 let recipients: RecipientProperties[];
 
@@ -185,7 +185,7 @@ describe("SearchRecipient", () => {
 		// Reset search
 		fireEvent.click(screen.getByTestId("header-search-bar__reset"));
 
-		await waitFor(() => expect(searchInput).toHaveValue(""));
+		await waitFor(() => expect(searchInput).not.toHaveValue());
 		await waitFor(() => expect(screen.queryAllByTestId("TableRow")).toHaveLength(2));
 
 		jest.useRealTimers();

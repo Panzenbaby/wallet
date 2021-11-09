@@ -273,7 +273,7 @@ export const useProfileRestore = () => {
 		restorePlugins(profile);
 
 		// Profile restore finished but url changed in the meanwhile.
-		// Prevent from unecessary save of old profile.
+		// Prevent from unnecessary save of old profile.
 		const activeProfile = getProfileFromUrl(history?.location?.pathname);
 		if (activeProfile?.id() !== profile.id()) {
 			return;

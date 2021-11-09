@@ -7,7 +7,7 @@ exports[`PluginManager should cancel install plugin 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -33,7 +33,7 @@ exports[`PluginManager should cancel install plugin 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -108,7 +108,7 @@ exports[`PluginManager should cancel install plugin 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -147,7 +147,7 @@ exports[`PluginManager should cancel install plugin 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -177,7 +177,7 @@ exports[`PluginManager should cancel install plugin 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1014,7 +1014,7 @@ exports[`PluginManager should disable plugin on my-plugins 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -1040,7 +1040,7 @@ exports[`PluginManager should disable plugin on my-plugins 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -1115,7 +1115,7 @@ exports[`PluginManager should disable plugin on my-plugins 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1154,7 +1154,7 @@ exports[`PluginManager should disable plugin on my-plugins 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1184,7 +1184,7 @@ exports[`PluginManager should disable plugin on my-plugins 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1931,7 +1931,7 @@ exports[`PluginManager should enable plugin on my-plugins 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -1957,7 +1957,7 @@ exports[`PluginManager should enable plugin on my-plugins 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -2032,7 +2032,7 @@ exports[`PluginManager should enable plugin on my-plugins 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2071,7 +2071,7 @@ exports[`PluginManager should enable plugin on my-plugins 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2101,7 +2101,7 @@ exports[`PluginManager should enable plugin on my-plugins 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2848,7 +2848,7 @@ exports[`PluginManager should render when useExpandedTables = false 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -2874,7 +2874,7 @@ exports[`PluginManager should render when useExpandedTables = false 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -2949,7 +2949,7 @@ exports[`PluginManager should render when useExpandedTables = false 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2988,7 +2988,7 @@ exports[`PluginManager should render when useExpandedTables = false 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3018,7 +3018,7 @@ exports[`PluginManager should render when useExpandedTables = false 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -4033,7 +4033,7 @@ exports[`PluginManager should render when useExpandedTables = true 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -4059,7 +4059,7 @@ exports[`PluginManager should render when useExpandedTables = true 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -4134,7 +4134,7 @@ exports[`PluginManager should render when useExpandedTables = true 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -4173,7 +4173,7 @@ exports[`PluginManager should render when useExpandedTables = true 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -4203,7 +4203,7 @@ exports[`PluginManager should render when useExpandedTables = true 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -5218,7 +5218,7 @@ exports[`PluginManager should search for plugin 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -5244,7 +5244,7 @@ exports[`PluginManager should search for plugin 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -5319,7 +5319,7 @@ exports[`PluginManager should search for plugin 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -5358,7 +5358,7 @@ exports[`PluginManager should search for plugin 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -5388,7 +5388,7 @@ exports[`PluginManager should search for plugin 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -5838,7 +5838,7 @@ exports[`PluginManager should switch to category by clicking on view all link 1`
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -5864,7 +5864,7 @@ exports[`PluginManager should switch to category by clicking on view all link 1`
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -5939,7 +5939,7 @@ exports[`PluginManager should switch to category by clicking on view all link 1`
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -5978,7 +5978,7 @@ exports[`PluginManager should switch to category by clicking on view all link 1`
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -6008,7 +6008,7 @@ exports[`PluginManager should switch to category by clicking on view all link 1`
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -6869,7 +6869,7 @@ exports[`PluginManager should toggle between list and grid on a category tab 1`]
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -6895,7 +6895,7 @@ exports[`PluginManager should toggle between list and grid on a category tab 1`]
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -6970,7 +6970,7 @@ exports[`PluginManager should toggle between list and grid on a category tab 1`]
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -7009,7 +7009,7 @@ exports[`PluginManager should toggle between list and grid on a category tab 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -7039,7 +7039,7 @@ exports[`PluginManager should toggle between list and grid on a category tab 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -7631,7 +7631,7 @@ exports[`PluginManager should toggle between list and grid on all 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -7657,7 +7657,7 @@ exports[`PluginManager should toggle between list and grid on all 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -7732,7 +7732,7 @@ exports[`PluginManager should toggle between list and grid on all 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -7771,7 +7771,7 @@ exports[`PluginManager should toggle between list and grid on all 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -7801,7 +7801,7 @@ exports[`PluginManager should toggle between list and grid on all 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -8393,7 +8393,7 @@ exports[`PluginManager should toggle between list and grid on latest 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -8419,7 +8419,7 @@ exports[`PluginManager should toggle between list and grid on latest 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -8494,7 +8494,7 @@ exports[`PluginManager should toggle between list and grid on latest 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -8533,7 +8533,7 @@ exports[`PluginManager should toggle between list and grid on latest 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -8563,7 +8563,7 @@ exports[`PluginManager should toggle between list and grid on latest 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -9578,7 +9578,7 @@ exports[`PluginManager should update plugin on my-plugins 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -9604,7 +9604,7 @@ exports[`PluginManager should update plugin on my-plugins 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -9679,7 +9679,7 @@ exports[`PluginManager should update plugin on my-plugins 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -9718,7 +9718,7 @@ exports[`PluginManager should update plugin on my-plugins 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -9748,7 +9748,7 @@ exports[`PluginManager should update plugin on my-plugins 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"

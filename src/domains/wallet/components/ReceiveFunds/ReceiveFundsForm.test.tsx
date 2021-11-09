@@ -24,8 +24,8 @@ describe("ReceiveFundsForm", () => {
 	it("should render", async () => {
 		const { asFragment, getByTestId } = renderWithForm(<ReceiveFundsForm network={network} />);
 
-		await waitFor(() => expect(getByTestId("ReceiveFundsForm__amount")).toHaveValue(""));
-		await waitFor(() => expect(getByTestId("ReceiveFundsForm__memo")).toHaveValue(""));
+		await waitFor(() => expect(getByTestId("ReceiveFundsForm__amount")).not.toHaveValue());
+		await waitFor(() => expect(getByTestId("ReceiveFundsForm__memo")).not.toHaveValue());
 
 		expect(asFragment()).toMatchSnapshot();
 	});
@@ -33,7 +33,7 @@ describe("ReceiveFundsForm", () => {
 	it("should emit amount onChange event", async () => {
 		const { asFragment, getByTestId, form } = renderWithForm(<ReceiveFundsForm network={network} />);
 
-		await waitFor(() => expect(getByTestId("ReceiveFundsForm__amount")).toHaveValue(""));
+		await waitFor(() => expect(getByTestId("ReceiveFundsForm__amount")).not.toHaveValue());
 
 		fireEvent.input(getByTestId("ReceiveFundsForm__amount"), { target: { value: "10" } });
 
@@ -44,7 +44,7 @@ describe("ReceiveFundsForm", () => {
 
 	it("should emit memo onChange event", async () => {
 		const { asFragment, getByTestId, form } = renderWithForm(<ReceiveFundsForm network={network} />);
-		await waitFor(() => expect(getByTestId("ReceiveFundsForm__memo")).toHaveValue(""));
+		await waitFor(() => expect(getByTestId("ReceiveFundsForm__memo")).not.toHaveValue());
 
 		fireEvent.input(getByTestId("ReceiveFundsForm__memo"), { target: { value: "test" } });
 		await waitFor(() => expect(form()?.getValues("memo")).toBe("test"));

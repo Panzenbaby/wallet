@@ -1,12 +1,11 @@
 import { CURRENCIES } from "@payvo/intl";
 
 const DEFAULT_DECIMALS = 8;
-const DEFAULT_TICKER = "BTC";
 
 type CurrencyKey = keyof typeof CURRENCIES;
 
 interface AmountProperties {
-	ticker?: string;
+	ticker: string;
 	value: number;
 	showSign?: boolean;
 	showTicker?: boolean;
@@ -26,9 +25,16 @@ interface AmountLabelProperties {
 interface FormatParameters {
 	locale?: string;
 	value: number;
-	ticker?: string;
+	ticker: string;
 }
 
-export { DEFAULT_DECIMALS, DEFAULT_TICKER };
+interface Currency {
+	symbol: string;
+	decimals: number;
+}
 
-export type { AmountLabelProperties, AmountProperties, CurrencyKey, FormatParameters };
+type CurrenciesMap = Record<string, Currency | undefined>;
+
+export { DEFAULT_DECIMALS };
+
+export type { AmountLabelProperties, AmountProperties, CurrenciesMap, CurrencyKey, FormatParameters };

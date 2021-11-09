@@ -40,15 +40,15 @@ export const NetworkOption = ({ network, isSelected, onClick }: FilterOption) =>
 };
 
 export const NetworkOptions = ({
-	networks = [],
+	networks,
 	onClick,
 }: {
-	networks?: FilterOption[];
-	onClick?: (network: FilterOption, key: number) => void;
+	networks: FilterOption[];
+	onClick: (network: FilterOption, key: number) => void;
 }) => (
 	<ul data-testid="NetworkOptions" className="flex flex-wrap">
 		{networks.map((network: FilterOption, key: number) => (
-			<NetworkOption {...network} key={key} onClick={() => onClick?.(network, key)} />
+			<NetworkOption {...network} key={key} onClick={() => onClick(network, key)} />
 		))}
 	</ul>
 );

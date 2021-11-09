@@ -30,7 +30,14 @@ export const ReviewStep = ({ wallet }: { wallet: Contracts.IReadWriteWallet }) =
 			<TransactionSender address={wallet.address()} network={wallet.network()} />
 
 			<TransactionDetail label={t("TRANSACTION.MULTISIGNATURE.PARTICIPANTS")}>
-				<RecipientList showAmount={false} variant="condensed" recipients={participants} isEditable={false} />
+				<RecipientList
+					isEditable={false}
+					recipients={participants}
+					showAmount={false}
+					showExchangeAmount={wallet.network().isLive()}
+					ticker={wallet.currency()}
+					variant="condensed"
+				/>
 			</TransactionDetail>
 
 			<TransactionDetail label={t("TRANSACTION.MULTISIGNATURE.MIN_SIGNATURES")} className="-mt-4">

@@ -49,8 +49,8 @@ interface InputFeeProperties {
 	max: number;
 	step: number;
 	disabled?: boolean;
-	network?: Networks.Network;
-	profile?: Contracts.IProfile;
+	network: Networks.Network;
+	profile: Contracts.IProfile;
 	loading?: boolean;
 	viewType?: InputFeeViewType;
 	simpleValue?: InputFeeSimpleValue;

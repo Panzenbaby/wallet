@@ -8,24 +8,15 @@ import { WalletsControls } from "domains/dashboard/components/WalletsControls";
 import { DeleteWallet } from "domains/wallet/components/DeleteWallet";
 import { LedgerWaitingDevice } from "domains/wallet/components/Ledger/LedgerWaitingDevice";
 import { UpdateWalletName } from "domains/wallet/components/UpdateWalletName";
-import React, { useMemo, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { assertWallet } from "utils/assertions";
 
 import { useWalletDisplay, WalletsGrid, WalletsList } from ".";
+import { WalletsProperties } from "./Wallets.contracts";
 
-interface WalletsProperties {
-	title?: string;
-	onCreateWallet?: any;
-	onImportWallet?: any;
-	onImportLedgerWallet?: () => void;
-	listPagerLimit?: number;
-	walletsCount?: number;
-	isLoading?: boolean;
-}
-
-export const Wallets = ({
+export const Wallets: FC<WalletsProperties> = ({
 	title,
 	onCreateWallet,
 	onImportWallet,
@@ -33,7 +24,7 @@ export const Wallets = ({
 	walletsCount,
 	listPagerLimit = 10,
 	isLoading,
-}: WalletsProperties) => {
+}) => {
 	const [viewMore, setViewMore] = useState(false);
 	const [isWaitingLedger, setIsWaitingLedger] = useState(false);
 

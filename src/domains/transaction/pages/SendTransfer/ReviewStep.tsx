@@ -11,7 +11,11 @@ import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-export const ReviewStep = ({ wallet }: { wallet: Contracts.IReadWriteWallet }) => {
+interface ReviewStepProperties {
+	wallet: Contracts.IReadWriteWallet;
+}
+
+export const ReviewStep: React.FC<ReviewStepProperties> = ({ wallet }: ReviewStepProperties) => {
 	const { t } = useTranslation();
 
 	const { unregister, watch } = useFormContext();

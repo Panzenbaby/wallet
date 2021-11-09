@@ -1,484 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NavigationBar should not render if no active profile 1`] = `
-<DocumentFragment>
-  <nav
-    aria-labelledby="main menu"
-    class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
-  >
-    <div
-      class="flex relative h-21"
-    >
-      <button
-        class="BackButton__StyledBackButton-sc-18ta3r7-0 tELEj flex w-12"
-      >
-        <div
-          class="sc-bdnxRM AkeAK mx-auto"
-          height="10"
-          width="10"
-        >
-          <svg>
-            chevron-left-small.svg
-          </svg>
-        </div>
-      </button>
-      <div
-        class="flex flex-1 px-8"
-      >
-        <div
-          class="flex items-center my-auto"
-        >
-          <div
-            class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
-          >
-            <svg
-              height="28"
-            >
-              payvo-logo.svg
-            </svg>
-          </div>
-        </div>
-        <ul
-          class="flex mr-auto ml-4 space-x-8 h-21"
-          data-testid="navigationBar__menu"
-        >
-          <li
-            class="flex"
-          >
-            <a
-              class="flex relative items-center font-semibold transition-colors duration-200 focus:outline-none text-md text-theme-secondary-text ring-focus"
-              data-ring-focus-margin="-mx-2"
-              href="/profiles/b999d134-7a24-481e-a95d-bc47c543bfc9/dashboard"
-              title="Portfolio"
-            >
-              Portfolio
-            </a>
-          </li>
-          <li
-            class="flex"
-          >
-            <a
-              class="flex relative items-center font-semibold transition-colors duration-200 focus:outline-none text-md text-theme-secondary-text ring-focus"
-              data-ring-focus-margin="-mx-2"
-              href="/test"
-              title="test"
-            >
-              test
-            </a>
-          </li>
-        </ul>
-        <div
-          class="flex items-center my-auto space-x-4"
-          data-testid="navigationBar__notifications"
-        >
-          <div>
-            <div
-              class="relative"
-            >
-              <span
-                data-testid="dropdown__toggle"
-              >
-                <div
-                  class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
-                >
-                  <button
-                    class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
-                    data-testid="navbar__buttons--notifications"
-                    type="button"
-                  >
-                    <div
-                      class="flex items-center space-x-2"
-                    >
-                      <div
-                        class="sc-bdnxRM NjstW p-1"
-                        height="20"
-                        width="20"
-                      >
-                        <svg>
-                          bell.svg
-                        </svg>
-                      </div>
-                      <div
-                        class="flex absolute top-1 right-1 justify-center items-center p-1 rounded-full transition-all duration-100 ease-linear bg-theme-background dark:group-hover:bg-theme-secondary-800 group-hover:bg-theme-primary-100"
-                      >
-                        <div
-                          class="w-2 h-2 rounded-full bg-theme-danger-500"
-                        />
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </span>
-            </div>
-          </div>
-          <div
-            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
-          />
-          <div
-            class="flex items-center"
-          >
-            <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
-            >
-              <button
-                class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
-                data-testid="navbar__buttons--send"
-                type="button"
-              >
-                <div
-                  class="flex items-center space-x-2"
-                >
-                  <div
-                    class="sc-bdnxRM NjstW p-1"
-                    height="20"
-                    width="20"
-                  >
-                    <svg>
-                      double-arrow-right.svg
-                    </svg>
-                  </div>
-                </div>
-              </button>
-            </div>
-          </div>
-          <div
-            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
-          />
-          <div
-            class="flex items-center"
-          >
-            <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
-            >
-              <button
-                class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
-                data-testid="navbar__buttons--receive"
-                type="button"
-              >
-                <div
-                  class="flex items-center space-x-2"
-                >
-                  <div
-                    class="sc-bdnxRM NjstW p-1"
-                    height="20"
-                    width="20"
-                  >
-                    <svg>
-                      qr-code.svg
-                    </svg>
-                  </div>
-                </div>
-              </button>
-            </div>
-          </div>
-          <div
-            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
-          />
-        </div>
-        <div
-          class="flex items-center my-auto ml-8 space-x-4"
-          data-testid="navigationBar__userInfo"
-        >
-          <div
-            class="text-right"
-          >
-            <div
-              class="text-xs font-semibold text-theme-secondary-500"
-            >
-              Your Balance
-            </div>
-            <div
-              class="text-sm font-bold text-theme-secondary-text dark:text-theme-text"
-              data-testid="Balance__value"
-            >
-              <span
-                class="whitespace-nowrap"
-                data-testid="AmountCrypto"
-              >
-                0 BTC
-              </span>
-            </div>
-          </div>
-          <div
-            class="relative"
-          >
-            <span
-              data-testid="dropdown__toggle"
-            >
-              <div
-                class="relative justify-center items-center align-middle rounded-full cursor-pointer"
-                data-testid="navbar__useractions"
-              >
-                <div
-                  class="Avatar__AvatarWrapper-sc-18vw8a4-0 kkxZqy flex-shrink-0"
-                  data-testid="Avatar"
-                >
-                  <div
-                    class="w-full h-full inline-flex items-center justify-center overflow-hidden align-middle rounded-full"
-                  >
-                    <img
-                      alt="Profile Avatar"
-                      src="data:image/svg+xml;utf8,<svg version=\\"1.1\\" xmlns=\\"http://www.w3.org/2000/svg\\" class=\\"picasso\\" width=\\"100\\" height=\\"100\\" viewBox=\\"0 0 100 100\\"><style>.picasso circle{mix-blend-mode:soft-light;}</style><rect fill=\\"rgb(233, 30, 99)\\" width=\\"100\\" height=\\"100\\"/><circle r=\\"45\\" cx=\\"80\\" cy=\\"30\\" fill=\\"rgb(76, 175, 80)\\"/><circle r=\\"55\\" cx=\\"0\\" cy=\\"60\\" fill=\\"rgb(255, 152, 0)\\"/><circle r=\\"40\\" cx=\\"50\\" cy=\\"50\\" fill=\\"rgb(3, 169, 244)\\"/></svg>"
-                    />
-                    <span
-                      class="absolute text-sm font-semibold text-theme-background dark:text-theme-text"
-                    >
-                      JO
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-</DocumentFragment>
-`;
-
-exports[`NavigationBar should render 1`] = `
-<DocumentFragment>
-  <nav
-    aria-labelledby="main menu"
-    class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
-  >
-    <div
-      class="flex relative h-21"
-    >
-      <button
-        class="BackButton__StyledBackButton-sc-18ta3r7-0 tELEj flex w-12"
-      >
-        <div
-          class="sc-bdnxRM AkeAK mx-auto"
-          height="10"
-          width="10"
-        >
-          <svg>
-            chevron-left-small.svg
-          </svg>
-        </div>
-      </button>
-      <div
-        class="flex flex-1 px-8"
-      >
-        <div
-          class="flex items-center my-auto"
-        >
-          <div
-            class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
-          >
-            <svg
-              height="28"
-            >
-              payvo-logo.svg
-            </svg>
-          </div>
-        </div>
-        <ul
-          class="flex mr-auto ml-4 space-x-8 h-21"
-          data-testid="navigationBar__menu"
-        >
-          <li
-            class="flex"
-          >
-            <a
-              class="flex relative items-center font-semibold transition-colors duration-200 focus:outline-none text-md text-theme-secondary-text ring-focus"
-              data-ring-focus-margin="-mx-2"
-              href="/profiles/b999d134-7a24-481e-a95d-bc47c543bfc9/dashboard"
-              title="Portfolio"
-            >
-              Portfolio
-            </a>
-          </li>
-          <li
-            class="flex"
-          >
-            <a
-              class="flex relative items-center font-semibold transition-colors duration-200 focus:outline-none text-md text-theme-secondary-text ring-focus"
-              data-ring-focus-margin="-mx-2"
-              href="/test"
-              title="test"
-            >
-              test
-            </a>
-          </li>
-        </ul>
-        <div
-          class="flex items-center my-auto space-x-4"
-          data-testid="navigationBar__notifications"
-        >
-          <div>
-            <div
-              class="relative"
-            >
-              <span
-                data-testid="dropdown__toggle"
-              >
-                <div
-                  class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
-                >
-                  <button
-                    class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
-                    data-testid="navbar__buttons--notifications"
-                    type="button"
-                  >
-                    <div
-                      class="flex items-center space-x-2"
-                    >
-                      <div
-                        class="sc-bdnxRM NjstW p-1"
-                        height="20"
-                        width="20"
-                      >
-                        <svg>
-                          bell.svg
-                        </svg>
-                      </div>
-                      <div
-                        class="flex absolute top-1 right-1 justify-center items-center p-1 rounded-full transition-all duration-100 ease-linear bg-theme-background dark:group-hover:bg-theme-secondary-800 group-hover:bg-theme-primary-100"
-                      >
-                        <div
-                          class="w-2 h-2 rounded-full bg-theme-danger-500"
-                        />
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </span>
-            </div>
-          </div>
-          <div
-            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
-          />
-          <div
-            class="flex items-center"
-          >
-            <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
-            >
-              <button
-                class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
-                data-testid="navbar__buttons--send"
-                type="button"
-              >
-                <div
-                  class="flex items-center space-x-2"
-                >
-                  <div
-                    class="sc-bdnxRM NjstW p-1"
-                    height="20"
-                    width="20"
-                  >
-                    <svg>
-                      double-arrow-right.svg
-                    </svg>
-                  </div>
-                </div>
-              </button>
-            </div>
-          </div>
-          <div
-            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
-          />
-          <div
-            class="flex items-center"
-          >
-            <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
-            >
-              <button
-                class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
-                data-testid="navbar__buttons--receive"
-                type="button"
-              >
-                <div
-                  class="flex items-center space-x-2"
-                >
-                  <div
-                    class="sc-bdnxRM NjstW p-1"
-                    height="20"
-                    width="20"
-                  >
-                    <svg>
-                      qr-code.svg
-                    </svg>
-                  </div>
-                </div>
-              </button>
-            </div>
-          </div>
-          <div
-            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
-          />
-        </div>
-        <div
-          class="flex items-center my-auto ml-8 space-x-4"
-          data-testid="navigationBar__userInfo"
-        >
-          <div
-            class="text-right"
-          >
-            <div
-              class="text-xs font-semibold text-theme-secondary-500"
-            >
-              Your Balance
-            </div>
-            <div
-              class="text-sm font-bold text-theme-secondary-text dark:text-theme-text"
-              data-testid="Balance__value"
-            >
-              <span
-                class="whitespace-nowrap"
-                data-testid="AmountCrypto"
-              >
-                0 BTC
-              </span>
-            </div>
-          </div>
-          <div
-            class="relative"
-          >
-            <span
-              data-testid="dropdown__toggle"
-            >
-              <div
-                class="relative justify-center items-center align-middle rounded-full cursor-pointer"
-                data-testid="navbar__useractions"
-              >
-                <div
-                  class="Avatar__AvatarWrapper-sc-18vw8a4-0 kkxZqy flex-shrink-0"
-                  data-testid="Avatar"
-                >
-                  <div
-                    class="w-full h-full inline-flex items-center justify-center overflow-hidden align-middle rounded-full"
-                  >
-                    <img
-                      alt="Profile Avatar"
-                      src="data:image/svg+xml;utf8,<svg version=\\"1.1\\" xmlns=\\"http://www.w3.org/2000/svg\\" class=\\"picasso\\" width=\\"100\\" height=\\"100\\" viewBox=\\"0 0 100 100\\"><style>.picasso circle{mix-blend-mode:soft-light;}</style><rect fill=\\"rgb(233, 30, 99)\\" width=\\"100\\" height=\\"100\\"/><circle r=\\"45\\" cx=\\"80\\" cy=\\"30\\" fill=\\"rgb(76, 175, 80)\\"/><circle r=\\"55\\" cx=\\"0\\" cy=\\"60\\" fill=\\"rgb(255, 152, 0)\\"/><circle r=\\"40\\" cx=\\"50\\" cy=\\"50\\" fill=\\"rgb(3, 169, 244)\\"/></svg>"
-                    />
-                    <span
-                      class="absolute text-sm font-semibold text-theme-background dark:text-theme-text"
-                    >
-                      JO
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-</DocumentFragment>
-`;
-
 exports[`NavigationBar should render as logo-only variant 1`] = `
 <DocumentFragment>
   <nav
     aria-labelledby="main menu"
-    class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+    class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
   >
     <div
       class="flex relative h-21"
@@ -490,13 +16,493 @@ exports[`NavigationBar should render as logo-only variant 1`] = `
           class="flex items-center my-auto"
         >
           <div
-            class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+            class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
           >
             <svg
               height="28"
             >
               payvo-logo.svg
             </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`NavigationBar should render full variant when profile restored is false 1`] = `
+<DocumentFragment>
+  <nav
+    aria-labelledby="main menu"
+    class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
+  >
+    <div
+      class="flex relative h-21"
+    >
+      <button
+        class="BackButton__StyledBackButton-sc-18ta3r7-0 tELEj flex w-12"
+      >
+        <div
+          class="sc-bdnxRM AkeAK mx-auto"
+          height="10"
+          width="10"
+        >
+          <svg>
+            chevron-left-small.svg
+          </svg>
+        </div>
+      </button>
+      <div
+        class="flex flex-1 px-8"
+      >
+        <div
+          class="flex items-center my-auto"
+        >
+          <div
+            class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
+          >
+            <svg
+              height="28"
+            >
+              payvo-logo.svg
+            </svg>
+          </div>
+        </div>
+        <ul
+          class="flex mr-auto ml-4 space-x-8 h-21"
+          data-testid="navigationBar__menu"
+        >
+          <li
+            class="flex"
+          >
+            <a
+              class="flex relative items-center font-semibold transition-colors duration-200 focus:outline-none text-md text-theme-secondary-text ring-focus"
+              data-ring-focus-margin="-mx-2"
+              href="/profiles/b999d134-7a24-481e-a95d-bc47c543bfc9/dashboard"
+              title="Portfolio"
+            >
+              Portfolio
+            </a>
+          </li>
+          <li
+            class="flex"
+          >
+            <a
+              class="flex relative items-center font-semibold transition-colors duration-200 focus:outline-none text-md text-theme-secondary-text ring-focus"
+              data-ring-focus-margin="-mx-2"
+              href="/test"
+              title="test"
+            >
+              test
+            </a>
+          </li>
+        </ul>
+        <div
+          class="flex items-center my-auto space-x-4"
+          data-testid="navigationBar__notifications"
+        >
+          <div>
+            <div
+              class="relative"
+            >
+              <span
+                data-testid="dropdown__toggle"
+              >
+                <div
+                  class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
+                >
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
+                    data-testid="navbar__buttons--notifications"
+                    type="button"
+                  >
+                    <div
+                      class="flex items-center space-x-2"
+                    >
+                      <div
+                        class="sc-bdnxRM NjstW p-1"
+                        height="20"
+                        width="20"
+                      >
+                        <svg>
+                          bell.svg
+                        </svg>
+                      </div>
+                      <div
+                        class="flex absolute top-1 right-1 justify-center items-center p-1 rounded-full transition-all duration-100 ease-linear bg-theme-background dark:group-hover:bg-theme-secondary-800 group-hover:bg-theme-primary-100"
+                      >
+                        <div
+                          class="w-2 h-2 rounded-full bg-theme-danger-500"
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div
+            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
+          />
+          <div
+            class="flex items-center"
+          >
+            <div
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
+            >
+              <button
+                class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
+                data-testid="navbar__buttons--send"
+                disabled=""
+                type="button"
+              >
+                <div
+                  class="flex items-center space-x-2"
+                >
+                  <div
+                    class="sc-bdnxRM NjstW p-1"
+                    height="20"
+                    width="20"
+                  >
+                    <svg>
+                      double-arrow-right.svg
+                    </svg>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
+          />
+          <div
+            class="flex items-center"
+          >
+            <div
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
+            >
+              <button
+                class="OriginalButton__StyledButton-sc-o0fs2j-0 dMZjng"
+                data-testid="navbar__buttons--receive"
+                disabled=""
+                type="button"
+              >
+                <div
+                  class="flex items-center space-x-2"
+                >
+                  <div
+                    class="sc-bdnxRM NjstW p-1"
+                    height="20"
+                    width="20"
+                  >
+                    <svg>
+                      qr-code.svg
+                    </svg>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
+          />
+        </div>
+        <div
+          class="flex items-center my-auto ml-8 space-x-4"
+          data-testid="navigationBar__userInfo"
+        >
+          <div
+            class="text-right"
+          >
+            <div
+              class="text-xs font-semibold text-theme-secondary-500"
+            >
+              Your Balance
+            </div>
+            <div
+              class="flex justify-end mt-1"
+            >
+              <span>
+                <span
+                  class="flex items-center leading-none"
+                >
+                  <span
+                    class="react-loading-skeleton css-1eg0sfo-skeletonStyles-Skeleton"
+                    style="width: 60px; height: 16px;"
+                  >
+                    ‌
+                  </span>
+                  ‌
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            class="relative"
+          >
+            <span
+              data-testid="dropdown__toggle"
+            >
+              <div
+                class="relative justify-center items-center align-middle rounded-full cursor-pointer"
+                data-testid="navbar__useractions"
+              >
+                <div
+                  class="Avatar__AvatarWrapper-sc-18vw8a4-0 kkxZqy flex-shrink-0"
+                  data-testid="Avatar"
+                >
+                  <div
+                    class="w-full h-full inline-flex items-center justify-center overflow-hidden align-middle rounded-full"
+                  >
+                    <img
+                      alt="Profile Avatar"
+                      src="data:image/svg+xml;utf8,<svg version=\\"1.1\\" xmlns=\\"http://www.w3.org/2000/svg\\" class=\\"picasso\\" width=\\"100\\" height=\\"100\\" viewBox=\\"0 0 100 100\\"><style>.picasso circle{mix-blend-mode:soft-light;}</style><rect fill=\\"rgb(233, 30, 99)\\" width=\\"100\\" height=\\"100\\"/><circle r=\\"45\\" cx=\\"80\\" cy=\\"30\\" fill=\\"rgb(76, 175, 80)\\"/><circle r=\\"55\\" cx=\\"0\\" cy=\\"60\\" fill=\\"rgb(255, 152, 0)\\"/><circle r=\\"40\\" cx=\\"50\\" cy=\\"50\\" fill=\\"rgb(3, 169, 244)\\"/></svg>"
+                    />
+                    <span
+                      class="absolute text-sm font-semibold text-theme-background dark:text-theme-text"
+                    />
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`NavigationBar should render full variant when profile restored is true 1`] = `
+<DocumentFragment>
+  <nav
+    aria-labelledby="main menu"
+    class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
+  >
+    <div
+      class="flex relative h-21"
+    >
+      <button
+        class="BackButton__StyledBackButton-sc-18ta3r7-0 tELEj flex w-12"
+      >
+        <div
+          class="sc-bdnxRM AkeAK mx-auto"
+          height="10"
+          width="10"
+        >
+          <svg>
+            chevron-left-small.svg
+          </svg>
+        </div>
+      </button>
+      <div
+        class="flex flex-1 px-8"
+      >
+        <div
+          class="flex items-center my-auto"
+        >
+          <div
+            class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
+          >
+            <svg
+              height="28"
+            >
+              payvo-logo.svg
+            </svg>
+          </div>
+        </div>
+        <ul
+          class="flex mr-auto ml-4 space-x-8 h-21"
+          data-testid="navigationBar__menu"
+        >
+          <li
+            class="flex"
+          >
+            <a
+              class="flex relative items-center font-semibold transition-colors duration-200 focus:outline-none text-md text-theme-secondary-text ring-focus"
+              data-ring-focus-margin="-mx-2"
+              href="/profiles/b999d134-7a24-481e-a95d-bc47c543bfc9/dashboard"
+              title="Portfolio"
+            >
+              Portfolio
+            </a>
+          </li>
+          <li
+            class="flex"
+          >
+            <a
+              class="flex relative items-center font-semibold transition-colors duration-200 focus:outline-none text-md text-theme-secondary-text ring-focus"
+              data-ring-focus-margin="-mx-2"
+              href="/test"
+              title="test"
+            >
+              test
+            </a>
+          </li>
+        </ul>
+        <div
+          class="flex items-center my-auto space-x-4"
+          data-testid="navigationBar__notifications"
+        >
+          <div>
+            <div
+              class="relative"
+            >
+              <span
+                data-testid="dropdown__toggle"
+              >
+                <div
+                  class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
+                >
+                  <button
+                    class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
+                    data-testid="navbar__buttons--notifications"
+                    type="button"
+                  >
+                    <div
+                      class="flex items-center space-x-2"
+                    >
+                      <div
+                        class="sc-bdnxRM NjstW p-1"
+                        height="20"
+                        width="20"
+                      >
+                        <svg>
+                          bell.svg
+                        </svg>
+                      </div>
+                      <div
+                        class="flex absolute top-1 right-1 justify-center items-center p-1 rounded-full transition-all duration-100 ease-linear bg-theme-background dark:group-hover:bg-theme-secondary-800 group-hover:bg-theme-primary-100"
+                      >
+                        <div
+                          class="w-2 h-2 rounded-full bg-theme-danger-500"
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div
+            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
+          />
+          <div
+            class="flex items-center"
+          >
+            <div
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
+            >
+              <button
+                class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
+                data-testid="navbar__buttons--send"
+                type="button"
+              >
+                <div
+                  class="flex items-center space-x-2"
+                >
+                  <div
+                    class="sc-bdnxRM NjstW p-1"
+                    height="20"
+                    width="20"
+                  >
+                    <svg>
+                      double-arrow-right.svg
+                    </svg>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
+          />
+          <div
+            class="flex items-center"
+          >
+            <div
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
+            >
+              <button
+                class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
+                data-testid="navbar__buttons--receive"
+                type="button"
+              >
+                <div
+                  class="flex items-center space-x-2"
+                >
+                  <div
+                    class="sc-bdnxRM NjstW p-1"
+                    height="20"
+                    width="20"
+                  >
+                    <svg>
+                      qr-code.svg
+                    </svg>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="h-8 border-r border-theme-secondary-300 dark:border-theme-secondary-800"
+          />
+        </div>
+        <div
+          class="flex items-center my-auto ml-8 space-x-4"
+          data-testid="navigationBar__userInfo"
+        >
+          <div
+            class="text-right"
+          >
+            <div
+              class="text-xs font-semibold text-theme-secondary-500"
+            >
+              Your Balance
+            </div>
+            <div
+              class="text-sm font-bold text-theme-secondary-text dark:text-theme-text"
+              data-testid="Balance__value"
+            >
+              <span
+                class="whitespace-nowrap"
+                data-testid="AmountCrypto"
+              >
+                0 BTC
+              </span>
+            </div>
+          </div>
+          <div
+            class="relative"
+          >
+            <span
+              data-testid="dropdown__toggle"
+            >
+              <div
+                class="relative justify-center items-center align-middle rounded-full cursor-pointer"
+                data-testid="navbar__useractions"
+              >
+                <div
+                  class="Avatar__AvatarWrapper-sc-18vw8a4-0 kkxZqy flex-shrink-0"
+                  data-testid="Avatar"
+                >
+                  <div
+                    class="w-full h-full inline-flex items-center justify-center overflow-hidden align-middle rounded-full"
+                  >
+                    <img
+                      alt="Profile Avatar"
+                      src="data:image/svg+xml;utf8,<svg version=\\"1.1\\" xmlns=\\"http://www.w3.org/2000/svg\\" class=\\"picasso\\" width=\\"100\\" height=\\"100\\" viewBox=\\"0 0 100 100\\"><style>.picasso circle{mix-blend-mode:soft-light;}</style><rect fill=\\"rgb(233, 30, 99)\\" width=\\"100\\" height=\\"100\\"/><circle r=\\"45\\" cx=\\"80\\" cy=\\"30\\" fill=\\"rgb(76, 175, 80)\\"/><circle r=\\"55\\" cx=\\"0\\" cy=\\"60\\" fill=\\"rgb(255, 152, 0)\\"/><circle r=\\"40\\" cx=\\"50\\" cy=\\"50\\" fill=\\"rgb(3, 169, 244)\\"/></svg>"
+                    />
+                    <span
+                      class="absolute text-sm font-semibold text-theme-background dark:text-theme-text"
+                    >
+                      JO
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </span>
           </div>
         </div>
       </div>
@@ -509,7 +515,7 @@ exports[`NavigationBar should render with custom menu 1`] = `
 <DocumentFragment>
   <nav
     aria-labelledby="main menu"
-    class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+    class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
   >
     <div
       class="flex relative h-21"
@@ -534,7 +540,7 @@ exports[`NavigationBar should render with custom menu 1`] = `
           class="flex items-center my-auto"
         >
           <div
-            class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+            class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
           >
             <svg
               height="28"
@@ -584,7 +590,7 @@ exports[`NavigationBar should render with custom menu 1`] = `
                 data-testid="dropdown__toggle"
               >
                 <div
-                  class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                  class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                 >
                   <button
                     class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -623,7 +629,7 @@ exports[`NavigationBar should render with custom menu 1`] = `
             class="flex items-center"
           >
             <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
             >
               <button
                 class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -653,7 +659,7 @@ exports[`NavigationBar should render with custom menu 1`] = `
             class="flex items-center"
           >
             <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
             >
               <button
                 class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -746,7 +752,7 @@ exports[`NavigationBar should render with shadow if there is a scroll 1`] = `
 <DocumentFragment>
   <nav
     aria-labelledby="main menu"
-    class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kmaEsI"
+    class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 kTllja"
   >
     <div
       class="flex relative h-21"
@@ -771,7 +777,7 @@ exports[`NavigationBar should render with shadow if there is a scroll 1`] = `
           class="flex items-center my-auto"
         >
           <div
-            class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+            class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
           >
             <svg
               height="28"
@@ -821,7 +827,7 @@ exports[`NavigationBar should render with shadow if there is a scroll 1`] = `
                 data-testid="dropdown__toggle"
               >
                 <div
-                  class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                  class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                 >
                   <button
                     class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -860,7 +866,7 @@ exports[`NavigationBar should render with shadow if there is a scroll 1`] = `
             class="flex items-center"
           >
             <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
             >
               <button
                 class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -890,7 +896,7 @@ exports[`NavigationBar should render with shadow if there is a scroll 1`] = `
             class="flex items-center"
           >
             <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
             >
               <button
                 class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -983,7 +989,7 @@ exports[`NavigationBar should render with title 1`] = `
 <DocumentFragment>
   <nav
     aria-labelledby="main menu"
-    class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+    class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
   >
     <div
       class="flex relative h-21"
@@ -1008,7 +1014,7 @@ exports[`NavigationBar should render with title 1`] = `
           class="flex items-center my-auto"
         >
           <div
-            class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+            class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
           >
             <svg
               height="28"
@@ -1063,7 +1069,7 @@ exports[`NavigationBar should render with title 1`] = `
                 data-testid="dropdown__toggle"
               >
                 <div
-                  class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                  class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                 >
                   <button
                     class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1102,7 +1108,7 @@ exports[`NavigationBar should render with title 1`] = `
             class="flex items-center"
           >
             <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
             >
               <button
                 class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1132,7 +1138,7 @@ exports[`NavigationBar should render with title 1`] = `
             class="flex items-center"
           >
             <div
-              class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+              class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
             >
               <button
                 class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"

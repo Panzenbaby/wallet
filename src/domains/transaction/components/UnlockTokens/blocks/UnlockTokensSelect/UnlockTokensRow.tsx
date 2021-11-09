@@ -2,21 +2,13 @@ import { AmountCrypto } from "app/components/Amount";
 import { Checkbox } from "app/components/Checkbox";
 import { Icon } from "app/components/Icon";
 import { TableCell, TableRow } from "app/components/Table";
-import React from "react";
+import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { UnlockableBalance, UnlockableBalanceSkeleton } from "../../UnlockTokens.contracts";
 import { UnlockTokensRowSkeleton } from "./UnlockTokensRowSkeleton";
+import { UnlockTokensRowProperties } from "./UnlockTokensSelect.contracts";
 
-interface Properties {
-	loading: boolean;
-	item: UnlockableBalance | UnlockableBalanceSkeleton;
-	ticker: string;
-	checked: boolean;
-	onToggle: () => void;
-}
-
-export const UnlockTokensRow: React.FC<Properties> = ({ loading, item, ticker, onToggle, checked }: Properties) => {
+export const UnlockTokensRow: FC<UnlockTokensRowProperties> = ({ loading, item, ticker, onToggle, checked }) => {
 	const { t } = useTranslation();
 
 	if (loading) {

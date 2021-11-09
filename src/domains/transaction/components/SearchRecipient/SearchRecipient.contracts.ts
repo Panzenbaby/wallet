@@ -7,7 +7,7 @@ export interface RecipientProperties {
 	type: string;
 }
 
-export interface RecipientListItemProperties {
+export interface SearchRecipientListItemProperties {
 	index: number;
 	recipient: RecipientProperties;
 	onAction: (address: string) => void;

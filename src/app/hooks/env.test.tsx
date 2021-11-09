@@ -1,4 +1,5 @@
 import { Contracts } from "@payvo/profiles";
+import { createMemoryHistory } from "history";
 import React from "react";
 import { Route } from "react-router-dom";
 import { env, getDefaultProfileId, render } from "utils/testing-library";
@@ -17,7 +18,7 @@ describe("useActiveProfile", () => {
 	const TestProfile: React.FC = () => {
 		const profile = useActiveProfile();
 
-		return <h1>{profile?.name() ?? "No profile found"}</h1>;
+		return <h1>{profile.name()}</h1>;
 	};
 
 	const TestWallet: React.FC = () => {
@@ -39,17 +40,37 @@ describe("useActiveProfile", () => {
 		expect(getByText(profile.name())).toBeInTheDocument();
 	});
 
-	it("should return undefined when findById throws error", () => {
-		const { getByText } = render(
-			<Route path="/profiles/:profileId">
-				<TestProfile />
-			</Route>,
-			{
-				routes: [`/profiles/any_undefined_profile`],
-			},
+	it("should throw error when profile is not found", () => {
+		const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+
+		expect(() => {
+			render(
+				<Route path="/profiles/:profileId">
+					<TestProfile />
+				</Route>,
+				{
+					routes: [`/profiles/any_undefined_profile`],
+				},
+			);
+		}).toThrow("No profile found for [any_undefined_profile]");
+
+		consoleErrorSpy.mockRestore();
+	});
+
+	it("should throw error when useActiveProfile is called on a route where profile is not available", () => {
+		const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+		const history = createMemoryHistory({ initialEntries: ["/route-without-profile"] });
+
+		expect(() => {
+			render(<TestProfile />, {
+				history,
+				routes: ["/route-without-profile"],
+			});
+		}).toThrow(
+			"Parameter [profileId] must be available on the route where [useActiveProfile] is called. Current route is [/route-without-profile].",
 		);
 
-		expect(getByText("No profile found")).toBeTruthy();
+		consoleErrorSpy.mockRestore();
 	});
 
 	it("should return wallet", () => {

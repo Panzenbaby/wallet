@@ -33,21 +33,21 @@ describe("VoteList", () => {
 	});
 
 	it("should render", () => {
-		const { container, asFragment } = render(<VoteList votes={votes} />);
+		const { container, asFragment } = render(<VoteList currency="BTC" votes={votes} />);
 
 		expect(container).toBeInTheDocument();
 		expect(asFragment()).toMatchSnapshot();
 	});
 
 	it("should render vote amount", () => {
-		const { container, asFragment } = render(<VoteList votes={votesWithAmount} />);
+		const { container, asFragment } = render(<VoteList currency="BTC" votes={votesWithAmount} />);
 
 		expect(container).toBeInTheDocument();
 		expect(asFragment()).toMatchSnapshot();
 	});
 
 	it("should render with empty list", () => {
-		const { container, asFragment } = render(<VoteList votes={[]} />);
+		const { container, asFragment } = render(<VoteList currency="BTC" votes={[]} />);
 
 		expect(container).toBeInTheDocument();
 		expect(asFragment()).toMatchSnapshot();

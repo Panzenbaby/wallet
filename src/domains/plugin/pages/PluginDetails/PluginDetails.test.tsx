@@ -55,7 +55,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Packages"));
 
-		await waitFor(() => expect(screen.getAllByText("ARK Delegate Calculator").length).toBeGreaterThan(0));
+		await screen.findByText("ARK Delegate Calculator");
 
 		await waitFor(() => expect(screen.getByTestId("PluginSpecs__size")).toHaveTextContent("123 kB"));
 
@@ -90,7 +90,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Packages"));
 
-		await waitFor(() => expect(screen.getAllByText("Test Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Test Plugin");
 
 		expect(container).toMatchSnapshot();
 
@@ -128,7 +128,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Package"));
 
-		await waitFor(() => expect(screen.getAllByText("Remote Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Remote Plugin");
 
 		expect(container).toMatchSnapshot();
 	});
@@ -163,7 +163,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Packages"));
 
-		await waitFor(() => expect(screen.getAllByText("Test Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Test Plugin");
 
 		expect(container).toMatchSnapshot();
 
@@ -208,7 +208,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Packages"));
 
-		await waitFor(() => expect(screen.getAllByText("Test Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Test Plugin");
 
 		fireEvent.click(screen.getByTestId("PluginHeader__button--launch"));
 
@@ -248,7 +248,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Packages"));
 
-		await waitFor(() => expect(screen.getAllByText("Test Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Test Plugin");
 
 		fireEvent.click(within(screen.getByTestId("plugin-details__header")).getByTestId("dropdown__toggle"));
 		fireEvent.click(screen.getByText(commonTranslations.ENABLE));
@@ -292,7 +292,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Packages"));
 
-		await waitFor(() => expect(screen.getAllByText("Test Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Test Plugin");
 
 		fireEvent.click(within(screen.getByTestId("plugin-details__header")).getByTestId("dropdown__toggle"));
 		fireEvent.click(screen.getByText(commonTranslations.ENABLE));
@@ -333,7 +333,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Packages"));
 
-		await waitFor(() => expect(screen.getAllByText("Test Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Test Plugin");
 
 		fireEvent.click(within(screen.getByTestId("plugin-details__header")).getByTestId("dropdown__toggle"));
 		fireEvent.click(screen.getByText(commonTranslations.DISABLE));
@@ -370,7 +370,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Packages"));
 
-		await waitFor(() => expect(screen.getAllByText("Test Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Test Plugin");
 
 		fireEvent.click(within(screen.getByTestId("plugin-details__header")).getByTestId("dropdown__toggle"));
 		fireEvent.click(screen.getByText(commonTranslations.DELETE));
@@ -414,7 +414,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch Packages"));
 
-		await waitFor(() => expect(screen.getAllByText("Test Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Test Plugin");
 
 		fireEvent.click(within(screen.getByTestId("plugin-details__header")).getByTestId("dropdown__toggle"));
 		fireEvent.click(screen.getByText(commonTranslations.DELETE));
@@ -467,7 +467,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch"));
 
-		await waitFor(() => expect(screen.getAllByText("Remote Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Remote Plugin");
 
 		fireEvent.click(screen.getByTestId("PluginHeader__button--install"));
 
@@ -528,7 +528,7 @@ describe("PluginDetails", () => {
 
 		fireEvent.click(screen.getByText("Fetch"));
 
-		await waitFor(() => expect(screen.getAllByText("Remote Plugin").length).toBeGreaterThan(0));
+		await screen.findByText("Remote Plugin");
 
 		fireEvent.click(screen.getByTestId("PluginHeader__button--install"));
 

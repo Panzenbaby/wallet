@@ -505,10 +505,10 @@ describe("ExchangeForm", () => {
 		// remove from currency
 		fireEvent.change(screen.getAllByTestId("SelectDropdown__input")[0], { target: { value: "" } });
 		await waitFor(() => {
-			expect(screen.getAllByTestId("SelectDropdown__input")[0]).toHaveValue("");
+			expect(screen.getAllByTestId("SelectDropdown__input")[0]).not.toHaveValue();
 		});
 
-		expect(payinInput).toHaveValue("");
+		expect(payinInput).not.toHaveValue();
 
 		await selectCurrencies({
 			from: { name: "Bitcoin", ticker: "BTC" },
@@ -549,14 +549,14 @@ describe("ExchangeForm", () => {
 		fireEvent.change(screen.getAllByTestId("SelectDropdown__input")[0], { target: { value: "" } });
 
 		await waitFor(() => {
-			expect(payinInput).toHaveValue("");
+			expect(payinInput).not.toHaveValue();
 		});
 
 		// remove to currency
 		fireEvent.change(screen.getAllByTestId("SelectDropdown__input")[1], { target: { value: "" } });
 
 		await waitFor(() => {
-			expect(payoutInput).toHaveValue("");
+			expect(payoutInput).not.toHaveValue();
 		});
 	});
 
@@ -596,7 +596,7 @@ describe("ExchangeForm", () => {
 		fireEvent.change(payinInput, { target: { value: "" } });
 
 		await waitFor(() => {
-			expect(payoutInput).toHaveValue("");
+			expect(payoutInput).not.toHaveValue();
 		});
 	});
 
@@ -636,7 +636,7 @@ describe("ExchangeForm", () => {
 		fireEvent.change(payoutInput, { target: { value: "" } });
 
 		await waitFor(() => {
-			expect(payinInput).toHaveValue("");
+			expect(payinInput).not.toHaveValue();
 		});
 	});
 
@@ -661,7 +661,7 @@ describe("ExchangeForm", () => {
 		// remove from currency
 		fireEvent.change(screen.getAllByTestId("SelectDropdown__input")[0], { target: { value: "" } });
 		await waitFor(() => {
-			expect(screen.getAllByTestId("SelectDropdown__input")[0]).toHaveValue("");
+			expect(screen.getAllByTestId("SelectDropdown__input")[0]).not.toHaveValue();
 		});
 
 		const payinInput = screen.getAllByTestId("InputCurrency")[0];
@@ -675,7 +675,7 @@ describe("ExchangeForm", () => {
 		});
 
 		await waitFor(() => {
-			expect(payinInput).toHaveValue("");
+			expect(payinInput).not.toHaveValue();
 		});
 	});
 
@@ -700,7 +700,7 @@ describe("ExchangeForm", () => {
 		// remove to currency
 		fireEvent.change(screen.getAllByTestId("SelectDropdown__input")[1], { target: { value: "" } });
 		await waitFor(() => {
-			expect(screen.getAllByTestId("SelectDropdown__input")[1]).toHaveValue("");
+			expect(screen.getAllByTestId("SelectDropdown__input")[1]).not.toHaveValue();
 		});
 
 		const payinInput = screen.getAllByTestId("InputCurrency")[0];
@@ -714,7 +714,7 @@ describe("ExchangeForm", () => {
 		});
 
 		await waitFor(() => {
-			expect(payoutInput).toHaveValue("");
+			expect(payoutInput).not.toHaveValue();
 		});
 	});
 

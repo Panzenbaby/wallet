@@ -38,11 +38,11 @@ export const useProfileAddresses = (
 		const contactAddresses: AddressProperties[] = [];
 
 		const isNetworkSelected = (addressNetwork: string) => {
-			if (!network?.id()) {
+			if (!network) {
 				return true;
 			}
 
-			return addressNetwork === network?.id();
+			return addressNetwork === network.id();
 		};
 
 		for (const wallet of profileWallets) {

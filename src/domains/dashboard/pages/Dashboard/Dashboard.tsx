@@ -8,11 +8,11 @@ import { useLatestTransactions } from "domains/dashboard/hooks/use-latest-transa
 import { WelcomeModal } from "domains/profile/components/WelcomeModal";
 import { TransactionDetailModal } from "domains/transaction/components/TransactionDetailModal";
 import { TransactionTable } from "domains/transaction/components/TransactionTable";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 
-export const Dashboard = () => {
+export const Dashboard: FC = () => {
 	const history = useHistory();
 	const { t } = useTranslation();
 	const activeProfile = useActiveProfile();

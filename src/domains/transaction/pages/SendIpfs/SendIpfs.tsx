@@ -17,6 +17,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import { assertWallet } from "utils/assertions";
 
 import { FormStep, ReviewStep, SummaryStep } from ".";
 import { IpfsLedgerReview } from "./LedgerReview";
@@ -59,7 +60,7 @@ export const SendIpfs = () => {
 		register("senderAddress", sendIpfs.senderAddress());
 		register("hash", sendIpfs.hash());
 		register("fees");
-		register("fee", common.fee(activeWallet?.balance?.(), activeWallet?.network?.()));
+		register("fee", common.fee(activeWallet.balance(), activeWallet.network()));
 		register("inputFeeSettings");
 
 		setValue("senderAddress", activeWallet.address(), { shouldDirty: true, shouldValidate: true });
@@ -173,14 +174,15 @@ export const SendIpfs = () => {
 
 		const { network, senderAddress } = getValues();
 		const senderWallet = activeProfile.wallets().findByAddressWithNetwork(senderAddress, network.id());
+		assertWallet(senderWallet);
 
 		// Skip authorization step
-		if (newIndex === Step.AuthenticationStep && senderWallet?.isMultiSignature()) {
+		if (newIndex === Step.AuthenticationStep && senderWallet.isMultiSignature()) {
 			await handleSubmit(submitForm)();
 			return;
 		}
 
-		if (newIndex === Step.AuthenticationStep && senderWallet?.isLedger()) {
+		if (newIndex === Step.AuthenticationStep && senderWallet.isLedger()) {
 			handleSubmit(submitForm)();
 		}
 

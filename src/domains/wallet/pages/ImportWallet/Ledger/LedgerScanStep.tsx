@@ -15,9 +15,12 @@ import { useLedgerContext } from "app/contexts";
 import { LedgerData, useLedgerScanner } from "app/contexts/Ledger";
 import { useRandomNumber } from "app/hooks";
 import { SelectNetwork } from "domains/network/components/SelectNetwork";
-import React, { useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Column } from "react-table";
+
+import { LedgerTableProperties } from "./LedgerTabs.contracts";
 
 const AmountWrapper = ({ isLoading, children }: { isLoading: boolean; children?: React.ReactNode }) => {
 	const amountWidth = useRandomNumber(100, 130);
@@ -34,7 +37,7 @@ const AmountWrapper = ({ isLoading, children }: { isLoading: boolean; children?:
 	return <div>{children}</div>;
 };
 
-export const LedgerTable = ({
+export const LedgerTable: FC<LedgerTableProperties> = ({
 	network,
 	wallets,
 	selectedWallets,
@@ -42,92 +45,100 @@ export const LedgerTable = ({
 	toggleSelect,
 	toggleSelectAll,
 	isScanning,
-}: {
-	network: Networks.Network;
-} & ReturnType<typeof useLedgerScanner>) => {
+}) => {
 	const { t } = useTranslation();
 	const isAllSelected = !isScanning && wallets.length > 0 && selectedWallets.length === wallets.length;
 
-	const columns = [
-		{
-			Header: t("COMMON.ADDRESS"),
-			accessor: "address",
-		},
-		{
-			Header: t("COMMON.BALANCE"),
-			accessor: "balance",
-			className: "no-border justify-end",
-		},
-		{
-			Header: (
-				<Tippy content={isAllSelected ? t("COMMON.UNSELECT_ALL") : t("COMMON.SELECT_ALL")}>
-					<Checkbox
-						disabled={isScanning}
-						data-testid="LedgerScanStep__select-all"
-						onChange={() => toggleSelectAll()}
-						checked={isAllSelected}
-					/>
-				</Tippy>
-			),
-			className: "justify-center",
-			id: "select",
-			minimumWidth: true,
-		},
-	];
+	const columns = useMemo<Column<LedgerData>[]>(
+		() => [
+			{
+				Header: t("COMMON.ADDRESS"),
+				accessor: "address",
+			},
+			{
+				Header: t("COMMON.BALANCE"),
+				accessor: "balance",
+				className: "no-border justify-end",
+			},
+			{
+				Header: (
+					<Tippy content={isAllSelected ? t("COMMON.UNSELECT_ALL") : t("COMMON.SELECT_ALL")}>
+						<Checkbox
+							disabled={isScanning}
+							data-testid="LedgerScanStep__select-all"
+							onChange={() => toggleSelectAll()}
+							checked={isAllSelected}
+						/>
+					</Tippy>
+				),
+				className: "justify-center",
+				id: "select",
+				minimumWidth: true,
+			},
+		],
+		[t, isAllSelected, isScanning, toggleSelectAll],
+	);
 
 	const { isBusy } = useLedgerContext();
 
 	const showSkeleton = isScanning || (isBusy && /* istanbul ignore next */ wallets.length === 0);
 
-	const skeletonRows = Array.from({ length: 5 }).fill({});
-	const data = showSkeleton ? skeletonRows : wallets;
+	const data = useMemo(() => {
+		const skeletonRows = Array.from<LedgerData>({ length: 5 }).fill({} as LedgerData);
+		return showSkeleton ? skeletonRows : wallets;
+	}, [wallets, showSkeleton]);
 
-	return (
-		<Table columns={columns} data={data}>
-			{(wallet: LedgerData) => {
-				if (showSkeleton) {
-					return (
-						<TableRow>
-							<TableCell variant="start" className="w-2/5" innerClassName="space-x-4">
-								<Circle className="border-transparent" size="lg">
-									<Skeleton circle height={44} width={44} />
-								</Circle>
-								<Skeleton height={16} width={120} />
-							</TableCell>
-
-							<TableCell innerClassName="justify-end">
-								<AmountWrapper isLoading={true} />
-							</TableCell>
-
-							<TableCell variant="end">
-								<Skeleton height={16} width={16} />
-							</TableCell>
-						</TableRow>
-					);
-				}
-
+	const renderTableRow = useCallback(
+		(wallet: LedgerData) => {
+			if (showSkeleton) {
 				return (
-					<TableRow isSelected={isSelected(wallet.path)}>
+					<TableRow>
 						<TableCell variant="start" className="w-2/5" innerClassName="space-x-4">
-							<Avatar address={wallet.address} size="lg" noShadow />
-							<div className="flex flex-1 w-32">
-								<Address address={wallet.address} />
-							</div>
-							<span className="hidden">{wallet.path}</span>
+							<Circle className="border-transparent" size="lg">
+								<Skeleton circle height={44} width={44} />
+							</Circle>
+							<Skeleton height={16} width={120} />
 						</TableCell>
 
-						<TableCell innerClassName="justify-end font-semibold">
-							<AmountWrapper isLoading={false}>
-								<Amount value={wallet.balance!} ticker={network.ticker()} />
-							</AmountWrapper>
+						<TableCell innerClassName="justify-end">
+							<AmountWrapper isLoading={true} />
 						</TableCell>
 
-						<TableCell variant="end" innerClassName="justify-center">
-							<Checkbox checked={isSelected(wallet.path)} onChange={() => toggleSelect(wallet.path)} />
+						<TableCell variant="end">
+							<Skeleton height={16} width={16} />
 						</TableCell>
 					</TableRow>
 				);
-			}}
+			}
+
+			return (
+				<TableRow isSelected={isSelected(wallet.path)}>
+					<TableCell variant="start" className="w-2/5" innerClassName="space-x-4">
+						<Avatar address={wallet.address} size="lg" noShadow />
+						<div className="flex flex-1 w-32">
+							<Address address={wallet.address} />
+						</div>
+						<span className="hidden">{wallet.path}</span>
+					</TableCell>
+
+					<TableCell innerClassName="justify-end font-semibold">
+						<AmountWrapper isLoading={false}>
+							<Amount value={wallet.balance!} ticker={network.ticker()} />
+						</AmountWrapper>
+					</TableCell>
+
+					<TableCell variant="end" innerClassName="justify-center">
+						<Checkbox checked={isSelected(wallet.path)} onChange={() => toggleSelect(wallet.path)} />
+					</TableCell>
+				</TableRow>
+			);
+		},
+		[toggleSelect, showSkeleton, isSelected, network],
+	);
+
+	return (
+		<Table columns={columns} data={data}>
+			{renderTableRow}
 		</Table>
 	);
 };

@@ -277,7 +277,7 @@ describe("InputFee", () => {
 
 			render(<InputFee {...defaultProps} />);
 
-			expect(screen.getByTestId("InputCurrency")).toHaveValue("");
+			expect(screen.getByTestId("InputCurrency")).not.toHaveValue();
 			expect(screen.getByTestId("InputFeeAdvanced__up")).not.toBeDisabled();
 			expect(screen.getByTestId("InputFeeAdvanced__down")).not.toBeDisabled();
 
@@ -293,7 +293,7 @@ describe("InputFee", () => {
 
 			render(<InputFee {...defaultProps} />);
 
-			expect(screen.getByTestId("InputCurrency")).toHaveValue("");
+			expect(screen.getByTestId("InputCurrency")).not.toHaveValue();
 			expect(screen.getByTestId("InputFeeAdvanced__up")).not.toBeDisabled();
 			expect(screen.getByTestId("InputFeeAdvanced__down")).not.toBeDisabled();
 

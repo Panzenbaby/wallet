@@ -1,4 +1,5 @@
 import React from "react";
+import { Column } from "react-table";
 import { fireEvent, render, within } from "utils/testing-library";
 
 import { Table } from "./Table";
@@ -11,7 +12,7 @@ const data = [
 	},
 ];
 
-const columns = [
+const columns: Column<typeof data[number]>[] = [
 	{
 		Header: "Header 1",
 		accessor: "col1",

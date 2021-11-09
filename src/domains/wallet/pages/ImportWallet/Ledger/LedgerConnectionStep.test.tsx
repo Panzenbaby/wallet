@@ -126,8 +126,6 @@ describe("LedgerConnectionStep", () => {
 		const { mockTransportListen, observer } = ledgerObserverSpy();
 		const transportListenMock = mockTransportListen(transport);
 
-		render(<Component />);
-
 		const { container } = render(
 			<Route path="/profiles/:profileId">
 				<Component />
@@ -139,9 +137,6 @@ describe("LedgerConnectionStep", () => {
 			observer.error(new Error(t("WALLETS.MODAL_LEDGER_WALLET.GENERIC_CONNECTION_ERROR")));
 		});
 
-		await screen.findByText("Open the ARK app on your device ...");
-
-		await waitFor(() => expect(onFailed).toHaveBeenCalled());
 		await screen.findByText(t("WALLETS.MODAL_LEDGER_WALLET.GENERIC_CONNECTION_ERROR"));
 
 		expect(container).toMatchSnapshot();
