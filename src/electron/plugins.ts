@@ -5,6 +5,7 @@ import { ensureDirSync } from "fs-extra";
 import os from "os";
 import path from "path";
 import trash from "trash";
+
 import { injectHandler } from "../plugins/loader/fs/loader-fs-handler";
 
 export const setupPlugins = () => {
