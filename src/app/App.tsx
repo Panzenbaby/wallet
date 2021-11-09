@@ -1,4 +1,9 @@
 // import { TRX } from "@payvo/sdk-trx";
+// import { XLM } from "@payvo/sdk-xlm";
+// import { XRP } from "@payvo/sdk-xrp";
+// import { ZIL } from "@payvo/sdk-zil";
+import "focus-visible";
+
 import LedgerTransportNodeHID from "@ledgerhq/hw-transport-node-hid-singleton";
 // import { LUNA } from "@payvo/sdk-luna";
 // import { NANO } from "@payvo/sdk-nano";
@@ -16,10 +21,6 @@ import { LSK } from "@payvo/sdk-lsk";
 import { Offline } from "domains/error/pages";
 import { ExchangeProvider } from "domains/exchange/contexts/Exchange";
 import { Splash } from "domains/splash/pages";
-// import { XLM } from "@payvo/sdk-xlm";
-// import { XRP } from "@payvo/sdk-xrp";
-// import { ZIL } from "@payvo/sdk-zil";
-import "focus-visible";
 import React, { useLayoutEffect, useState } from "react";
 import { useErrorHandler } from "react-error-boundary";
 import { I18nextProvider, useTranslation } from "react-i18next";
