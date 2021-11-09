@@ -17,8 +17,12 @@ export class FileSystemPluginService implements PluginService {
 		};
 	}
 
-	private async askUserToSaveFile(content: string) {
-		const { filePath } = await electron.remote.dialog.showSaveDialog({});
+	private async askUserToSaveFile(content: string, suggestedFileName?: string) {
+		const { canceled, filePath } = await electron.remote.dialog.showSaveDialog({defaultPath: suggestedFileName});
+
+		if (canceled) {
+			throw new Error('Canceled by user');
+		}
 
 		/* istanbul ignore next */
 		if (!filePath) {

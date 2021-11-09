@@ -57,7 +57,7 @@ describe("FileSystemPluginService", () => {
 
 		const saveSpy = jest
 			.spyOn(electron.remote.dialog, "showSaveDialog")
-			.mockResolvedValue({ filePath: "filePath" });
+			.mockResolvedValue({ canceled: false, filePath: "filePath" });
 
 		const fixture = (api: PluginAPI) => {
 			api.filesystem().askUserToSaveFile(content);
