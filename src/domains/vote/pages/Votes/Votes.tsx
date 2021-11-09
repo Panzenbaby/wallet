@@ -11,12 +11,12 @@ import { useDelegates } from "domains/vote/hooks/use-delegates";
 import { useVoteActions } from "domains/vote/hooks/use-vote-actions";
 import { useVoteFilters } from "domains/vote/hooks/use-vote-filters";
 import { useVoteQueryParameters } from "domains/vote/hooks/use-vote-query-parameters";
-import React, { useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { Trans } from "react-i18next";
 import { useHistory, useParams } from "react-router-dom";
 import { assertWallet } from "utils/assertions";
 
-export const Votes = () => {
+export const Votes: FC = () => {
 	const history = useHistory();
 	const { walletId: hasWalletId } = useParams<{ walletId: string }>();
 	const { env } = useEnvironmentContext();
@@ -103,19 +103,22 @@ export const Votes = () => {
 		syncProfileWallets(true);
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-	const handleSelectAddress = (address: string, network: string) => {
-		const wallet = activeProfile.wallets().findByAddressWithNetwork(address, network);
+	const handleSelectAddress = useCallback(
+		async (address: string, network: string) => {
+			const wallet = activeProfile.wallets().findByAddressWithNetwork(address, network);
 
-		assertWallet(wallet);
+			assertWallet(wallet);
 
-		setSearchQuery("");
-		setSelectedAddress(address);
-		setSelectedNetwork(network);
-		setSelectedWallet(wallet);
-		setMaxVotes(wallet?.network().maximumVotesPerWallet());
+			setSearchQuery("");
+			setSelectedAddress(address);
+			setSelectedNetwork(network);
+			setSelectedWallet(wallet);
+			setMaxVotes(wallet?.network().maximumVotesPerWallet());
 
-		fetchDelegates(wallet);
-	};
+			await fetchDelegates(wallet);
+		},
+		[activeProfile, fetchDelegates, setMaxVotes, setSearchQuery, setSelectedAddress, setSelectedNetwork],
+	);
 
 	const hasSelectedAddress = !!selectedAddress;
 

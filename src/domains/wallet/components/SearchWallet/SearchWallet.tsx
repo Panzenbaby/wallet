@@ -10,8 +10,9 @@ import { Table, TableCell, TableRow } from "app/components/Table";
 import { useWalletAlias } from "app/hooks";
 import { useSearchWallet } from "app/hooks/use-search-wallet";
 import { NetworkIcon } from "domains/network/components/NetworkIcon";
-import React, { useMemo } from "react";
+import React, { FC, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { Column } from "react-table";
 
 import { SearchWalletListItemProperties, SearchWalletProperties } from "./SearchWallet.models";
 
@@ -92,7 +93,7 @@ const SearchWalletListItem = ({
 	);
 };
 
-export const SearchWallet = ({
+export const SearchWallet: FC<SearchWalletProperties> = ({
 	isOpen,
 	title,
 	description,
@@ -106,20 +107,20 @@ export const SearchWallet = ({
 	onSelectWallet,
 	profile,
 	selectedAddress,
-}: SearchWalletProperties) => {
+}) => {
 	const { setSearchKeyword, filteredList: filteredWallets, isEmptyResults } = useSearchWallet({ profile, wallets });
 
 	const { t } = useTranslation();
 
-	const columns = useMemo(() => {
-		const commonColumns = [
+	const columns = useMemo<Column<Contracts.IReadWriteWallet>[]>(() => {
+		const commonColumns: Column<Contracts.IReadWriteWallet>[] = [
 			{
 				Header: t("COMMON.WALLET_ADDRESS"),
-				accessor: (wallet: Contracts.IReadWriteWallet) => wallet.alias(),
+				accessor: (wallet) => wallet.alias(),
 			},
 			{
 				Header: t("COMMON.BALANCE"),
-				accessor: (wallet: Contracts.IReadWriteWallet) => wallet.balance?.().toFixed(0),
+				accessor: (wallet) => wallet.balance?.().toFixed(0),
 				className: "justify-end",
 			},
 		];
@@ -147,7 +148,7 @@ export const SearchWallet = ({
 					className: "justify-end",
 					disableSortBy: true,
 				},
-			];
+			] as Column<Contracts.IReadWriteWallet>[];
 		}
 
 		return [
@@ -167,29 +168,34 @@ export const SearchWallet = ({
 				className: "justify-end",
 				disableSortBy: true,
 			},
-		];
+		] as Column<Contracts.IReadWriteWallet>[];
 	}, [searchPlaceholder, setSearchKeyword, showConvertedValue, t]);
+
+	const renderTableRow = useCallback(
+		(wallet: Contracts.IReadWriteWallet, index: number) => (
+			<SearchWalletListItem
+				index={index}
+				wallet={wallet}
+				profile={profile}
+				disabled={disableAction?.(wallet)}
+				exchangeCurrency={
+					wallet.exchangeCurrency() ||
+					(profile.settings().get(Contracts.ProfileSetting.ExchangeCurrency) as string)
+				}
+				showConvertedValue={showConvertedValue}
+				showNetwork={showNetwork}
+				onAction={onSelectWallet}
+				selectedAddress={selectedAddress}
+			/>
+		),
+		[profile, disableAction, showConvertedValue, showNetwork, onSelectWallet, selectedAddress],
+	);
 
 	return (
 		<Modal title={title} description={description} isOpen={isOpen} size={size} onClose={onClose}>
 			<div className="mt-8">
-				<Table columns={columns} data={filteredWallets}>
-					{(wallet: Contracts.IReadWriteWallet, index: number) => (
-						<SearchWalletListItem
-							index={index}
-							wallet={wallet}
-							profile={profile}
-							disabled={disableAction?.(wallet)}
-							exchangeCurrency={
-								wallet.exchangeCurrency() ||
-								(profile?.settings().get(Contracts.ProfileSetting.ExchangeCurrency) as string)
-							}
-							showConvertedValue={showConvertedValue}
-							showNetwork={showNetwork}
-							onAction={onSelectWallet}
-							selectedAddress={selectedAddress}
-						/>
-					)}
+				<Table columns={columns} data={filteredWallets as Contracts.IReadWriteWallet[]}>
+					{renderTableRow}
 				</Table>
 
 				{isEmptyResults && (

@@ -1,60 +1,113 @@
 /* eslint-disable @typescript-eslint/require-await */
+import { Contracts } from "@payvo/profiles";
+import { RecipientItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
 import React from "react";
-import { fireEvent, render, screen } from "utils/testing-library";
+import { Route } from "react-router-dom";
+import { env, fireEvent, getDefaultProfileId, render, screen } from "utils/testing-library";
 
-import { RecipientList } from ".";
+import { RecipientList } from "./RecipientList";
 
-const recipients = [
+const recipients: RecipientItem[] = [
 	{
 		address: "FJKDSALJFKASLJFKSDAJD333FKFKDSAJFKSAJFKLASJKDFJ",
 		alias: "Recipient 1",
 		amount: 100,
-		assetSymbol: "ARK",
 	},
 	{
 		address: "AhFJKDSALJFKASLJFKSDEAJ333FKFKDSAJFKSAJFKLASJKDFJ",
 		alias: "Recipient 2",
 		amount: 100,
-		assetSymbol: "ARK",
-		isMultisig: true,
 	},
 	{
 		address: "FAhFJKDSALJFKASLJFKSFDAJ333FKFKDSAJFKSAJFKLASJKDFJ",
 		alias: "Recipient 3",
 		amount: 100,
-		assetSymbol: "ARK",
 	},
 	{
 		address: "FAhFJKDSALJFKASLJFKSFDAJ333FKFKDSAJFKSAJFKLASJKDFJ",
 		amount: 100,
-		assetSymbol: "ARK",
 	},
 ];
 
 describe("RecipientList", () => {
+	let profile: Contracts.IProfile;
+
+	beforeEach(() => {
+		profile = env.profiles().findById(getDefaultProfileId());
+	});
+
 	it("should render editable", () => {
-		const { container } = render(<RecipientList recipients={recipients} isEditable={true} assetSymbol="ARK" />);
+		const { container } = render(
+			<Route path="/profiles/:profileId">
+				<RecipientList
+					isEditable={true}
+					recipients={recipients}
+					showAmount={false}
+					showExchangeAmount={false}
+					ticker="ARK"
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
+		);
 
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should render condensed variant", () => {
 		const { container } = render(
-			<RecipientList recipients={recipients} isEditable={true} assetSymbol="ARK" variant="condensed" />,
+			<Route path="/profiles/:profileId">
+				<RecipientList
+					isEditable={true}
+					recipients={recipients}
+					showAmount={false}
+					showExchangeAmount={false}
+					ticker="ARK"
+					variant="condensed"
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
 		);
 
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should render non-editable", () => {
-		const { container } = render(<RecipientList recipients={recipients} isEditable={false} assetSymbol="ARK" />);
+		const { container } = render(
+			<Route path="/profiles/:profileId">
+				<RecipientList
+					isEditable={false}
+					recipients={recipients}
+					showAmount={false}
+					showExchangeAmount={false}
+					ticker="ARK"
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
+		);
 
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should render without amount column", () => {
 		const { container } = render(
-			<RecipientList recipients={recipients} isEditable={true} assetSymbol="ARK" showAmount={false} />,
+			<Route path="/profiles/:profileId">
+				<RecipientList
+					isEditable={false}
+					recipients={recipients}
+					showAmount={true}
+					showExchangeAmount={false}
+					ticker="ARK"
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
 		);
 
 		expect(container).toMatchSnapshot();
@@ -62,12 +115,19 @@ describe("RecipientList", () => {
 
 	it("should conditionally disable remove button", () => {
 		const { container } = render(
-			<RecipientList
-				recipients={recipients}
-				disableButton={(address: string) => address === recipients[0].address}
-				isEditable={true}
-				assetSymbol="ARK"
-			/>,
+			<Route path="/profiles/:profileId">
+				<RecipientList
+					disableButton={(address: string) => address === recipients[0].address}
+					isEditable={true}
+					recipients={recipients}
+					showAmount={false}
+					showExchangeAmount={false}
+					ticker="ARK"
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
 		);
 
 		const removeButtons = screen.getAllByTestId("recipient-list__remove-recipient");
@@ -87,7 +147,19 @@ describe("RecipientList", () => {
 		const onRemove = jest.fn();
 
 		const { getAllByTestId } = render(
-			<RecipientList onRemove={onRemove} recipients={recipients} isEditable={true} assetSymbol="ARK" />,
+			<Route path="/profiles/:profileId">
+				<RecipientList
+					onRemove={onRemove}
+					recipients={recipients}
+					isEditable={true}
+					ticker="ARK"
+					showAmount={false}
+					showExchangeAmount={false}
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
 		);
 
 		const removeButton = getAllByTestId("recipient-list__remove-recipient");
@@ -103,7 +175,18 @@ describe("RecipientList", () => {
 		const onRemove = jest.fn();
 
 		const { getAllByTestId } = render(
-			<RecipientList recipients={recipients} isEditable={true} assetSymbol="ARK" />,
+			<Route path="/profiles/:profileId">
+				<RecipientList
+					recipients={recipients}
+					isEditable={true}
+					ticker="ARK"
+					showAmount={false}
+					showExchangeAmount={false}
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
 		);
 
 		const removeButton = getAllByTestId("recipient-list__remove-recipient");
@@ -116,19 +199,36 @@ describe("RecipientList", () => {
 	});
 
 	it("should render exchange amount", async () => {
-		const recipients = [
+		const exchangeMock = jest.spyOn(env.exchangeRates(), "exchange").mockReturnValue(5);
+		const exchangeCurrencyMock = jest.spyOn(profile.settings(), "get").mockReturnValue("USD");
+
+		const recipients: RecipientItem[] = [
 			{
 				address: "FJKDSALJFKASLJFKSDAJD333FKFKDSAJFKSAJFKLASJKDFJ",
 				alias: "Recipient 1",
 				amount: 100,
-				assetSymbol: "ARK",
-				exchangeAmount: 1,
-				exchangeTicker: "USD",
 			},
 		];
 
-		render(<RecipientList recipients={recipients} showAmount={true} isEditable={true} assetSymbol="ARK" />);
+		render(
+			<Route path="/profiles/:profileId">
+				<RecipientList
+					recipients={recipients}
+					showAmount={true}
+					isEditable={true}
+					ticker="ARK"
+					showExchangeAmount={true}
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+				withProviders: true,
+			},
+		);
 
-		expect(screen.getByText("$1.00")).toBeInTheDocument();
+		expect(screen.getByText("$5.00")).toBeInTheDocument();
+
+		exchangeMock.mockRestore();
+		exchangeCurrencyMock.mockRestore();
 	});
 });

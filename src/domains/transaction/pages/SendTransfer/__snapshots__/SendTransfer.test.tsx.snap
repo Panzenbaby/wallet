@@ -7,7 +7,7 @@ exports[`SendTransfer should display unconfirmed transactions modal when submitt
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -32,7 +32,7 @@ exports[`SendTransfer should display unconfirmed transactions modal when submitt
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -106,7 +106,7 @@ exports[`SendTransfer should display unconfirmed transactions modal when submitt
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -145,7 +145,7 @@ exports[`SendTransfer should display unconfirmed transactions modal when submitt
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -175,7 +175,7 @@ exports[`SendTransfer should display unconfirmed transactions modal when submitt
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -939,7 +939,7 @@ exports[`SendTransfer should error if wrong mnemonic 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -964,7 +964,7 @@ exports[`SendTransfer should error if wrong mnemonic 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -1038,7 +1038,7 @@ exports[`SendTransfer should error if wrong mnemonic 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1077,7 +1077,7 @@ exports[`SendTransfer should error if wrong mnemonic 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1107,7 +1107,7 @@ exports[`SendTransfer should error if wrong mnemonic 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2014,7 +2014,7 @@ exports[`SendTransfer should render form and use location state 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -2039,7 +2039,7 @@ exports[`SendTransfer should render form and use location state 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -2113,7 +2113,7 @@ exports[`SendTransfer should render form and use location state 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2152,7 +2152,7 @@ exports[`SendTransfer should render form and use location state 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2182,7 +2182,7 @@ exports[`SendTransfer should render form and use location state 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3010,7 +3010,7 @@ exports[`SendTransfer should render form and use location state without memo 1`]
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -3035,7 +3035,7 @@ exports[`SendTransfer should render form and use location state without memo 1`]
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -3109,7 +3109,7 @@ exports[`SendTransfer should render form and use location state without memo 1`]
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3148,7 +3148,7 @@ exports[`SendTransfer should render form and use location state without memo 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -3178,7 +3178,7 @@ exports[`SendTransfer should render form and use location state without memo 1`]
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -6047,7 +6047,7 @@ exports[`SendTransfer should render network selection without selected wallet 1`
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -6072,7 +6072,7 @@ exports[`SendTransfer should render network selection without selected wallet 1`
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -6146,7 +6146,7 @@ exports[`SendTransfer should render network selection without selected wallet 1`
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -6185,7 +6185,7 @@ exports[`SendTransfer should render network selection without selected wallet 1`
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -6215,7 +6215,7 @@ exports[`SendTransfer should render network selection without selected wallet 1`
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -8428,7 +8428,7 @@ exports[`SendTransfer should select a cryptoasset and select sender without wall
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -8453,7 +8453,7 @@ exports[`SendTransfer should select a cryptoasset and select sender without wall
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -8527,7 +8527,7 @@ exports[`SendTransfer should select a cryptoasset and select sender without wall
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -8566,7 +8566,7 @@ exports[`SendTransfer should select a cryptoasset and select sender without wall
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -8596,7 +8596,7 @@ exports[`SendTransfer should select a cryptoasset and select sender without wall
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -9422,7 +9422,7 @@ exports[`SendTransfer should select cryptoasset 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -9447,7 +9447,7 @@ exports[`SendTransfer should select cryptoasset 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -9521,7 +9521,7 @@ exports[`SendTransfer should select cryptoasset 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -9560,7 +9560,7 @@ exports[`SendTransfer should select cryptoasset 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -9590,7 +9590,7 @@ exports[`SendTransfer should select cryptoasset 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -9896,7 +9896,7 @@ exports[`SendTransfer should send a single transfer and handle undefined expirat
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -9921,7 +9921,7 @@ exports[`SendTransfer should send a single transfer and handle undefined expirat
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -9995,7 +9995,7 @@ exports[`SendTransfer should send a single transfer and handle undefined expirat
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -10034,7 +10034,7 @@ exports[`SendTransfer should send a single transfer and handle undefined expirat
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -10064,7 +10064,7 @@ exports[`SendTransfer should send a single transfer and handle undefined expirat
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -10564,7 +10564,7 @@ exports[`SendTransfer should send a single transfer and show unconfirmed transac
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -10589,7 +10589,7 @@ exports[`SendTransfer should send a single transfer and show unconfirmed transac
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -10663,7 +10663,7 @@ exports[`SendTransfer should send a single transfer and show unconfirmed transac
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -10702,7 +10702,7 @@ exports[`SendTransfer should send a single transfer and show unconfirmed transac
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -10732,7 +10732,7 @@ exports[`SendTransfer should send a single transfer and show unconfirmed transac
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -11570,7 +11570,7 @@ exports[`SendTransfer should send a single transfer using wallet with encryption
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -11595,7 +11595,7 @@ exports[`SendTransfer should send a single transfer using wallet with encryption
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -11669,7 +11669,7 @@ exports[`SendTransfer should send a single transfer using wallet with encryption
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -11708,7 +11708,7 @@ exports[`SendTransfer should send a single transfer using wallet with encryption
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -11738,7 +11738,7 @@ exports[`SendTransfer should send a single transfer using wallet with encryption
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -12238,7 +12238,7 @@ exports[`SendTransfer should send a single transfer with a high fee by confirmin
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -12263,7 +12263,7 @@ exports[`SendTransfer should send a single transfer with a high fee by confirmin
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -12337,7 +12337,7 @@ exports[`SendTransfer should send a single transfer with a high fee by confirmin
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -12376,7 +12376,7 @@ exports[`SendTransfer should send a single transfer with a high fee by confirmin
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -12406,7 +12406,7 @@ exports[`SendTransfer should send a single transfer with a high fee by confirmin
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -12906,7 +12906,7 @@ exports[`SendTransfer should send a single transfer with a low fee by confirming
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -12931,7 +12931,7 @@ exports[`SendTransfer should send a single transfer with a low fee by confirming
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -13005,7 +13005,7 @@ exports[`SendTransfer should send a single transfer with a low fee by confirming
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -13044,7 +13044,7 @@ exports[`SendTransfer should send a single transfer with a low fee by confirming
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -13074,7 +13074,7 @@ exports[`SendTransfer should send a single transfer with a low fee by confirming
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -13574,7 +13574,7 @@ exports[`SendTransfer should send a single transfer with keyboard 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -13599,7 +13599,7 @@ exports[`SendTransfer should send a single transfer with keyboard 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -13673,7 +13673,7 @@ exports[`SendTransfer should send a single transfer with keyboard 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -13712,7 +13712,7 @@ exports[`SendTransfer should send a single transfer with keyboard 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -13742,7 +13742,7 @@ exports[`SendTransfer should send a single transfer with keyboard 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -14242,7 +14242,7 @@ exports[`SendTransfer should send a single transfer without keyboard 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -14267,7 +14267,7 @@ exports[`SendTransfer should send a single transfer without keyboard 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -14341,7 +14341,7 @@ exports[`SendTransfer should send a single transfer without keyboard 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -14380,7 +14380,7 @@ exports[`SendTransfer should send a single transfer without keyboard 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -14410,7 +14410,7 @@ exports[`SendTransfer should send a single transfer without keyboard 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -14910,7 +14910,7 @@ exports[`SendTransfer should show error step and go back 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 nFzZM"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 gKHJQe"
     >
       <div
         class="flex relative h-21"
@@ -14935,7 +14935,7 @@ exports[`SendTransfer should show error step and go back 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -15009,7 +15009,7 @@ exports[`SendTransfer should show error step and go back 1`] = `
                   data-testid="dropdown__toggle"
                 >
                   <div
-                    class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+                    class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
                   >
                     <button
                       class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -15048,7 +15048,7 @@ exports[`SendTransfer should show error step and go back 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -15078,7 +15078,7 @@ exports[`SendTransfer should show error step and go back 1`] = `
               class="flex items-center"
             >
               <div
-                class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd"
+                class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs"
               >
                 <button
                   class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"

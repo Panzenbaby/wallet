@@ -84,8 +84,8 @@ export const useLedgerScanner = (coin: string, network: string) => {
 		setIdle();
 	}, [setIdle]);
 
-	const toggleSelect = (path: string) => dispatch({ path, type: "toggleSelect" });
-	const toggleSelectAll = () => dispatch({ type: "toggleSelectAll" });
+	const toggleSelect = useCallback((path: string) => dispatch({ path, type: "toggleSelect" }), [dispatch]);
+	const toggleSelectAll = useCallback(() => dispatch({ type: "toggleSelectAll" }), [dispatch]);
 
 	return {
 		abortScanner,

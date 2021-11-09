@@ -7,7 +7,7 @@ exports[`Welcome should change route to create profile 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -19,7 +19,7 @@ exports[`Welcome should change route to create profile 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -227,7 +227,7 @@ exports[`Welcome should navigate to profile dashboard 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -239,7 +239,7 @@ exports[`Welcome should navigate to profile dashboard 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -515,7 +515,7 @@ exports[`Welcome should navigate to profile dashboard with correct password 1`] 
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -527,7 +527,7 @@ exports[`Welcome should navigate to profile dashboard with correct password 1`] 
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -803,7 +803,7 @@ exports[`Welcome should navigate to profile settings from profile card menu 1`] 
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -815,7 +815,7 @@ exports[`Welcome should navigate to profile settings from profile card menu 1`] 
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -1091,7 +1091,7 @@ exports[`Welcome should navigate to profile settings with correct password 1`] =
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -1103,7 +1103,7 @@ exports[`Welcome should navigate to profile settings with correct password 1`] =
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -1379,7 +1379,7 @@ exports[`Welcome should render with profiles 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -1391,7 +1391,7 @@ exports[`Welcome should render with profiles 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -1667,7 +1667,7 @@ exports[`Welcome should render without profiles 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -1679,7 +1679,7 @@ exports[`Welcome should render without profiles 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"

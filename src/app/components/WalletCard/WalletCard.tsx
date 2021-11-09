@@ -143,7 +143,7 @@ export const WalletCard = ({
 					)}
 
 					<TruncateMiddleDynamic
-						value={wallet?.address()}
+						value={wallet.address()}
 						className="mt-1 text-xs font-semibold whitespace-nowrap text-theme-secondary-text no-ligatures"
 					/>
 				</div>

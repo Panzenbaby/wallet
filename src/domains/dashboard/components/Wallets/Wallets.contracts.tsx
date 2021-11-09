@@ -1,9 +1,19 @@
 import { Contracts } from "@payvo/profiles";
 import { DropdownOption } from "app/components/Dropdown";
 
+export interface WalletsProperties {
+	title?: string;
+	onCreateWallet?: () => void;
+	onImportWallet?: () => void;
+	onImportLedgerWallet?: () => void;
+	listPagerLimit?: number;
+	walletsCount?: number;
+	isLoading?: boolean;
+}
+
 export interface GridWallet {
 	isBlank?: boolean;
-	wallet?: Contracts.IReadWriteWallet;
+	wallet: Contracts.IReadWriteWallet;
 }
 
 export interface WalletGridProperties {
@@ -12,7 +22,7 @@ export interface WalletGridProperties {
 	isLoading?: boolean;
 	sliderOptions?: Record<string, any>;
 	wallets: GridWallet[];
-	onWalletAction?: any;
+	onWalletAction?: (action: string, wallet: Contracts.IReadWriteWallet) => void;
 }
 
 export interface WalletListProperties {
@@ -21,7 +31,7 @@ export interface WalletListProperties {
 	isLoading?: boolean;
 	isVisible?: boolean;
 	onRowClick?: (walletId: string) => void;
-	onViewMore?: any;
+	onViewMore?: () => void;
 	wallets: GridWallet[];
 	walletsDisplayType?: string;
 	isCompact?: boolean;

@@ -1,13 +1,13 @@
 import { DTO } from "@payvo/profiles";
 import { Table } from "app/components/Table";
-import React, { useState } from "react";
+import { usePendingTransactionTableColumns } from "domains/transaction/components/TransactionTable/TransactionTable.helpers";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ConfirmRemovePendingTransaction } from "../../ConfirmRemovePendingTransaction";
 import { PendingTransferRow } from "../TransactionRow/PendingTransferRow";
 import { SignedTransactionRow } from "../TransactionRow/SignedTransactionRow";
 import { PendingTransaction, Properties } from "./PendingTransactionsTable.contracts";
-import { usePendingTransactionTableColumns } from "./PendingTransactionsTable.helpers";
 
 export const PendingTransactions = ({
 	wallet,
@@ -22,6 +22,33 @@ export const PendingTransactions = ({
 
 	const columns = usePendingTransactionTableColumns();
 
+	const renderTableRow = useCallback(
+		(transaction: PendingTransaction) => {
+			if (transaction.isPendingTransfer) {
+				return (
+					<PendingTransferRow
+						isCompact={isCompact}
+						wallet={wallet}
+						transaction={transaction.transaction as DTO.ExtendedConfirmedTransactionData}
+						onRowClick={onPendingTransactionClick}
+					/>
+				);
+			}
+
+			return (
+				<SignedTransactionRow
+					isCompact={isCompact}
+					transaction={transaction.transaction as DTO.ExtendedSignedTransactionData}
+					wallet={wallet}
+					onSign={onClick}
+					onRowClick={onClick}
+					onRemovePendingTransaction={setPendingRemovalTransaction}
+				/>
+			);
+		},
+		[isCompact, wallet, onClick, setPendingRemovalTransaction, onPendingTransactionClick],
+	);
+
 	const handleRemove = async (transaction: DTO.ExtendedSignedTransactionData) => {
 		await wallet.coin().multiSignature().forgetById(transaction?.id());
 		setPendingRemovalTransaction(undefined);
@@ -33,29 +60,7 @@ export const PendingTransactions = ({
 			<h2 className="mb-6 text-2xl font-bold">{t("WALLETS.PAGE_WALLET_DETAILS.PENDING_TRANSACTIONS")}</h2>
 
 			<Table columns={columns} data={pendingTransactions}>
-				{(transaction: PendingTransaction) => {
-					if (transaction.isPendingTransfer) {
-						return (
-							<PendingTransferRow
-								isCompact={isCompact}
-								wallet={wallet}
-								transaction={transaction.transaction as DTO.ExtendedConfirmedTransactionData}
-								onRowClick={onPendingTransactionClick}
-							/>
-						);
-					}
-
-					return (
-						<SignedTransactionRow
-							isCompact={isCompact}
-							transaction={transaction.transaction as DTO.ExtendedSignedTransactionData}
-							wallet={wallet}
-							onSign={onClick}
-							onRowClick={onClick}
-							onRemovePendingTransaction={setPendingRemovalTransaction}
-						/>
-					);
-				}}
+				{renderTableRow}
 			</Table>
 
 			<ConfirmRemovePendingTransaction

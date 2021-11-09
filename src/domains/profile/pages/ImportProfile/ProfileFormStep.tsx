@@ -23,9 +23,9 @@ interface CreateProfileFormProperties {
 	profile: Contracts.IProfile;
 	password?: string;
 	env: Environment;
-	shouldValidate?: boolean;
-	onSubmit?: (profile: Contracts.IProfile) => void;
-	onBack?: () => void;
+	shouldValidate: boolean;
+	onSubmit: (profile: Contracts.IProfile) => void;
+	onBack: () => void;
 }
 
 const CreateProfileForm = ({
@@ -34,7 +34,7 @@ const CreateProfileForm = ({
 	password,
 	onSubmit,
 	onBack,
-	shouldValidate = false,
+	shouldValidate,
 }: CreateProfileFormProperties) => {
 	const { t } = useTranslation();
 
@@ -43,9 +43,9 @@ const CreateProfileForm = ({
 	const form = useForm<any>({
 		defaultValues: {
 			confirmPassword: password,
-			currency: profile?.settings().get(Contracts.ProfileSetting.ExchangeCurrency) || "USD",
-			isDarkMode: profile?.settings().get(Contracts.ProfileSetting.Theme) === "dark",
-			name: profile?.name() || "",
+			currency: profile.settings().get(Contracts.ProfileSetting.ExchangeCurrency),
+			isDarkMode: profile.settings().get(Contracts.ProfileSetting.Theme) === "dark",
+			name: profile.name(),
 			password,
 		},
 		mode: "onChange",
@@ -60,14 +60,14 @@ const CreateProfileForm = ({
 		"password",
 	]);
 
-	const [avatarImage, setAvatarImage] = useState(profile?.avatar());
+	const [avatarImage, setAvatarImage] = useState(profile.avatar());
 
 	const { theme, setTheme } = useTheme();
 	const { createProfile, password: passwordValidation } = useValidation();
 
 	const formattedName = name?.trim();
 
-	const isSvg = useMemo(() => avatarImage?.endsWith("</svg>"), [avatarImage]);
+	const isSvg = useMemo(() => avatarImage.endsWith("</svg>"), [avatarImage]);
 
 	useEffect(() => {
 		if (shouldValidate) {
@@ -107,12 +107,10 @@ const CreateProfileForm = ({
 	];
 
 	const handleSubmit = async ({ name, password: enteredPassword, currency, isDarkMode }: any) => {
-		if (profile && !profile.name()) {
+		if (!profile.name()) {
 			profile.settings().set(Contracts.ProfileSetting.Name, name.trim());
 			env.profiles().persist(profile);
 		}
-
-		profile = profile || env.profiles().create(name.trim());
 
 		env.profiles().push(profile);
 		await env.profiles().restore(profile, password);
@@ -126,10 +124,10 @@ const CreateProfileForm = ({
 			profile.auth().setPassword(enteredPassword || password);
 		}
 
-		onSubmit?.(profile);
+		onSubmit(profile);
 	};
 
-	const showPasswordFields = !profile?.usesPassword();
+	const showPasswordFields = !profile.usesPassword();
 
 	return (
 		<div>
@@ -144,7 +142,7 @@ const CreateProfileForm = ({
 										ref={register(createProfile.name())}
 										onBlur={() => {
 											/* istanbul ignore else */
-											if (!avatarImage?.length || isSvg) {
+											if (avatarImage.length === 0 || isSvg) {
 												setAvatarImage(Helpers.Avatar.make(formattedName));
 											}
 										}}
@@ -213,7 +211,7 @@ const CreateProfileForm = ({
 					<Button
 						variant="secondary"
 						onClick={() => {
-							onBack?.();
+							onBack();
 							// to prevent changing theme by component
 							setTimeout(() => setTheme("system"), 0);
 						}}

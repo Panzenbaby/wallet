@@ -1,11 +1,18 @@
-import { BigNumber } from "@payvo/helpers";
+import { Contracts } from "@payvo/profiles";
 import React from "react";
-import { render } from "utils/testing-library";
+import { Route } from "react-router-dom";
+import { env, getDefaultProfileId, render } from "utils/testing-library";
 
 import { translations as transactionTranslations } from "../../../i18n";
 import { TransactionRecipients } from "./TransactionRecipients";
 
+let profile: Contracts.IProfile;
+
 describe("TransactionRecipients", () => {
+	beforeEach(() => {
+		profile = env.profiles().findById(getDefaultProfileId());
+	});
+
 	it("should render a single recipient", () => {
 		const address = "test-address";
 
@@ -34,14 +41,18 @@ describe("TransactionRecipients", () => {
 		const address = "test-address";
 
 		const { container } = render(
-			<TransactionRecipients
-				normalizeAmount={false}
-				currency="DARK"
-				recipients={[
-					{ address, amount: BigNumber.ONE },
-					{ address, amount: BigNumber.ONE },
-				]}
-			/>,
+			<Route path="/profiles/:profileId">
+				<TransactionRecipients
+					currency="DARK"
+					recipients={[
+						{ address, amount: 1 },
+						{ address, amount: 1 },
+					]}
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
 		);
 
 		expect(container).toHaveTextContent("1 DARK");

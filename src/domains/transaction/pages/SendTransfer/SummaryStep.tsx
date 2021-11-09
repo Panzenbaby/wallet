@@ -1,6 +1,6 @@
 import { Contracts, DTO } from "@payvo/profiles";
 import { useWalletAlias } from "app/hooks";
-import { RecipientListItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
+import { RecipientItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
 import {
 	TransactionAmount,
 	TransactionFee,
@@ -18,7 +18,7 @@ interface SummaryStepProperties {
 export const SummaryStep = ({ profile, senderWallet, transaction }: SummaryStepProperties): JSX.Element => {
 	const { getWalletAlias } = useWalletAlias();
 
-	const recipients: RecipientListItem[] = transaction.recipients().map((recipient) => {
+	const recipients: RecipientItem[] = transaction.recipients().map((recipient) => {
 		const { alias, isDelegate } = getWalletAlias({
 			address: recipient.address,
 			network: senderWallet.network(),

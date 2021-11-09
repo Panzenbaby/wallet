@@ -5,24 +5,21 @@ import { Header } from "app/components/Header";
 import { HeaderSearchBar } from "app/components/Header/HeaderSearchBar";
 import { Page, Section } from "app/components/Layout";
 import { Table } from "app/components/Table";
-import { TableColumn } from "app/components/Table/TableColumn.models";
 import { useEnvironmentContext } from "app/contexts";
 import { useActiveProfile, useNetworkOptions } from "app/hooks";
 import { CreateContact, DeleteContact, UpdateContact } from "domains/contact/components";
 import { ContactListItem } from "domains/contact/components/ContactListItem";
 import querystring from "querystring";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import { Column } from "react-table";
 import { assertNetwork } from "utils/assertions";
 
-interface ContactsHeaderExtraProperties {
-	showSearchBar: boolean;
-	onSearch?: any;
-	onAddContact?: any;
-}
+import { ContactListItemOption } from "../../components/ContactListItem/ContactListItem.models";
+import { ContactsHeaderExtraProperties } from "./Contacts.contracts";
 
-const ContactsHeaderExtra = ({ showSearchBar, onSearch, onAddContact }: ContactsHeaderExtraProperties) => {
+const ContactsHeaderExtra: VFC<ContactsHeaderExtraProperties> = ({ showSearchBar, onSearch, onAddContact }) => {
 	const { t } = useTranslation();
 
 	return (
@@ -41,7 +38,7 @@ const ContactsHeaderExtra = ({ showSearchBar, onSearch, onAddContact }: Contacts
 	);
 };
 
-export const Contacts = () => {
+export const Contacts: FC = () => {
 	const { state } = useEnvironmentContext();
 
 	const history = useHistory();
@@ -49,7 +46,7 @@ export const Contacts = () => {
 	const activeProfile = useActiveProfile();
 	const { networkById } = useNetworkOptions();
 
-	const [query, setQuery] = useState<string>("");
+	const [query, setQuery] = useState("");
 
 	const useTestNetworks = activeProfile.settings().get<boolean>(Contracts.ProfileSetting.UseTestNetworks) || false;
 
@@ -119,51 +116,75 @@ export const Contacts = () => {
 		}
 	}, [contactAction]);
 
-	const contactOptions = [
-		{ label: t("COMMON.EDIT"), value: "edit" },
-		{ label: t("COMMON.DELETE"), value: "delete" },
-	];
+	const listColumns = useMemo<Column<Contracts.IContact>[]>(
+		() => [
+			{
+				Header: t("COMMON.NAME"),
+				accessor: "name",
+			},
+			{
+				Header: t("COMMON.CRYPTOASSET"),
+				className: "justify-center",
+				minimumWidth: true,
+			},
+			{
+				Header: t("COMMON.ADDRESS"),
+			},
+			{
+				Header: t("COMMON.COPY"),
+				minimumWidth: true,
+			},
+			{
+				Header: "Actions",
+				className: "hidden no-border",
+				minimumWidth: true,
+			},
+		],
+		[t],
+	);
 
-	const listColumns: TableColumn[] = [
-		{
-			Header: t("COMMON.NAME"),
-			accessor: "name",
+	const handleContactAction = useCallback(
+		(action: ContactListItemOption, contact: Contracts.IContact) => {
+			setContactAction(String(action.value));
+			setSelectedContact(contact);
 		},
-		{
-			Header: t("COMMON.CRYPTOASSET"),
-			className: "justify-center",
-			minimumWidth: true,
-		},
-		{
-			Header: t("COMMON.ADDRESS"),
-		},
-		{
-			Header: t("COMMON.COPY"),
-			minimumWidth: true,
-		},
-		{
-			Header: "Actions",
-			className: "hidden no-border",
-			minimumWidth: true,
-		},
-	];
+		[setContactAction, setSelectedContact],
+	);
 
-	const handleContactAction = (action: string, contact: Contracts.IContact) => {
-		setContactAction(action);
-		setSelectedContact(contact);
-	};
+	const handleSend = useCallback(
+		(address: Contracts.IContactAddress) => {
+			const schema = { coin: address.coin(), network: address.network(), recipient: address.address() };
+			const queryParameters = querystring.encode(schema);
+			const url = `/profiles/${activeProfile.id()}/send-transfer?${queryParameters}`;
 
-	const handleSend = (address: Contracts.IContactAddress) => {
-		const schema = { coin: address.coin(), network: address.network(), recipient: address.address() };
-		const queryParameters = querystring.encode(schema);
-		const url = `/profiles/${activeProfile.id()}/send-transfer?${queryParameters}`;
-
-		history.push(url);
-	};
+			history.push(url);
+		},
+		[history, activeProfile],
+	);
 
 	const resetContactAction = () => {
 		setContactAction(null);
 	};
+
+	const renderTableRow = useCallback(
+		(contact: Contracts.IContact) => {
+			const contactOptions = [
+				{ label: t("COMMON.EDIT"), value: "edit" },
+				{ label: t("COMMON.DELETE"), value: "delete" },
+			];
+
+			return (
+				<ContactListItem
+					item={contact}
+					options={contactOptions}
+					onSend={handleSend}
+					onAction={(action) => handleContactAction(action, contact)}
+					useTestNetworks={useTestNetworks}
+				/>
+			);
+		},
+		[t, handleSend, useTestNetworks, handleContactAction],
+	);
 
 	return (
 		<>
@@ -190,17 +211,7 @@ export const Contacts = () => {
 							{filteredContacts.length > 0 ? (
 								<div className="w-full" data-testid="ContactList">
 									<Table columns={listColumns} data={filteredContacts}>
-										{(contact: Contracts.IContact) => (
-											<ContactListItem
-												item={contact}
-												options={contactOptions}
-												onSend={handleSend}
-												onAction={(action: { value: any }) =>
-													handleContactAction(action.value, contact)
-												}
-												useTestNetworks={useTestNetworks}
-											/>
-										)}
+										{renderTableRow}
 									</Table>
 								</div>
 							) : (

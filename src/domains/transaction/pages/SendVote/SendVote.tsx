@@ -18,7 +18,7 @@ import { appendParameters } from "domains/vote/utils/url-parameters";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { assertWallet } from "utils/assertions";
+import { assertProfile, assertWallet } from "utils/assertions";
 
 import { FormStep, ReviewStep, SummaryStep } from ".";
 import { VoteLedgerReview } from "./LedgerReview";
@@ -35,6 +35,8 @@ export const SendVote = () => {
 	const { env, persist } = useEnvironmentContext();
 	const history = useHistory();
 	const activeProfile = useActiveProfile();
+	assertProfile(activeProfile);
+
 	const activeWallet = useActiveWallet();
 
 	const networks = useMemo(() => env.availableNetworks(), [env]);
@@ -63,7 +65,7 @@ export const SendVote = () => {
 		register("network", sendVote.network());
 		register("senderAddress", sendVote.senderAddress());
 		register("fees");
-		register("fee", common.fee(activeWallet?.balance(), activeWallet?.network(), fees));
+		register("fee", common.fee(activeWallet.balance(), activeWallet.network(), fees));
 		register("inputFeeSettings");
 
 		setValue("senderAddress", activeWallet.address(), { shouldDirty: true, shouldValidate: true });
@@ -154,16 +156,15 @@ export const SendVote = () => {
 
 		const { network, senderAddress } = getValues();
 		const senderWallet = activeProfile.wallets().findByAddressWithNetwork(senderAddress, network.id());
-
 		assertWallet(senderWallet);
 
 		// Skip authorization step
-		if (newIndex === Step.AuthenticationStep && senderWallet?.isMultiSignature()) {
+		if (newIndex === Step.AuthenticationStep && senderWallet.isMultiSignature()) {
 			void handleSubmit(submitForm)();
 			return;
 		}
 
-		if (newIndex === Step.AuthenticationStep && senderWallet?.isLedger()) {
+		if (newIndex === Step.AuthenticationStep && senderWallet.isLedger()) {
 			void handleSubmit(submitForm)();
 		}
 
@@ -242,7 +243,7 @@ export const SendVote = () => {
 			assertWallet(senderWallet);
 
 			if (unvotes.length > 0 && votes.length > 0) {
-				if (senderWallet?.network().votingMethod() === "simple") {
+				if (senderWallet.network().votingMethod() === "simple") {
 					const { uuid, transaction } = await transactionBuilder.build(
 						"vote",
 						{
@@ -277,7 +278,7 @@ export const SendVote = () => {
 					await confirmSendVote("combined");
 				}
 
-				if (senderWallet?.network().votingMethod() === "split") {
+				if (senderWallet.network().votingMethod() === "split") {
 					const unvoteResult = await transactionBuilder.build(
 						"vote",
 						{

@@ -1,20 +1,14 @@
 import { sortByDesc } from "@arkecosystem/utils";
 import { Checkbox } from "app/components/Checkbox";
-import { TableColumn } from "app/components/Table/TableColumn.models";
 import { Tooltip } from "app/components/Tooltip";
 import { useScheduler } from "app/hooks/use-scheduler";
 import { toasts } from "app/services";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Column } from "react-table";
 
 import { UnlockTokensFetchError } from "./blocks/UnlockTokensFetchError";
-import {
-	POLLING_INTERVAL,
-	UnlockableBalance,
-	UnlockableBalanceSkeleton,
-	UseColumnsHook,
-	UseUnlockableBalancesHook,
-} from "./UnlockTokens.contracts";
+import { POLLING_INTERVAL, UnlockableBalance, UseUnlockableBalancesHook } from "./UnlockTokens.contracts";
 
 const useUnlockableBalances: UseUnlockableBalancesHook = (wallet) => {
 	const loadCount = useRef(0);
@@ -70,37 +64,42 @@ const useUnlockableBalances: UseUnlockableBalancesHook = (wallet) => {
 	};
 };
 
-const useColumns: UseColumnsHook = ({ canSelectAll, isAllSelected, onToggleAll }) => {
+const useUnlockTokensSelectTableColumns = (
+	isSelectDisabled: boolean,
+	isAllSelected: boolean,
+	onToggleAll: () => void,
+) => {
 	const { t } = useTranslation();
 
-	const columnAmount: TableColumn = {
-		Header: t("COMMON.AMOUNT"),
-		accessor: (unlockableBalance: UnlockableBalance | UnlockableBalanceSkeleton) =>
-			unlockableBalance.amount?.toNumber(),
-		id: "amount",
-	};
-
-	const columnTime: TableColumn = {
-		Header: t("COMMON.TIME"),
-		accessor: (unlockableBalance: UnlockableBalance | UnlockableBalanceSkeleton) =>
-			unlockableBalance.timestamp?.toUNIX(),
-		id: "time",
-	};
-
-	const columnStatus: TableColumn = {
-		Header: (
-			<>
-				<span className="mr-3">{t("COMMON.STATUS")}</span>
-				<Tooltip content={isAllSelected ? t("COMMON.UNSELECT_ALL") : t("COMMON.SELECT_ALL")}>
-					<Checkbox disabled={!canSelectAll} checked={isAllSelected} onChange={onToggleAll} />
-				</Tooltip>
-			</>
-		),
-		className: "justify-end float-right",
-		id: "status",
-	};
-
-	return [columnAmount, columnTime, columnStatus];
+	return useMemo<Column<UnlockableBalance>[]>(
+		() => [
+			{
+				Header: t("COMMON.AMOUNT"),
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+				accessor: (unlockableBalance) => unlockableBalance.amount?.toNumber(),
+				id: "amount",
+			},
+			{
+				Header: t("COMMON.TIME"),
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+				accessor: (unlockableBalance) => unlockableBalance.timestamp?.toUNIX(),
+				id: "time",
+			},
+			{
+				Header: (
+					<>
+						<span className="mr-3">{t("COMMON.STATUS")}</span>
+						<Tooltip content={isAllSelected ? t("COMMON.UNSELECT_ALL") : t("COMMON.SELECT_ALL")}>
+							<Checkbox disabled={isSelectDisabled} checked={isAllSelected} onChange={onToggleAll} />
+						</Tooltip>
+					</>
+				),
+				className: "justify-end float-right",
+				id: "status",
+			},
+		],
+		[t, isSelectDisabled, isAllSelected, onToggleAll],
+	);
 };
 
-export { useColumns, useUnlockableBalances };
+export { useUnlockableBalances, useUnlockTokensSelectTableColumns };

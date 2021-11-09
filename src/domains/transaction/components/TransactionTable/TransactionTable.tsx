@@ -1,66 +1,59 @@
-import { Contracts, DTO } from "@payvo/profiles";
+import { DTO } from "@payvo/profiles";
 import { Table } from "app/components/Table";
-import { useColumns } from "domains/transaction/components/TransactionTable/TransactionTable.helpers";
-import React, { memo, useMemo } from "react";
+import { useTransactionTableColumns } from "domains/transaction/components/TransactionTable/TransactionTable.helpers";
+import React, { FC, useCallback, useMemo } from "react";
+import { TableState } from "react-table";
 
 import { TransactionRow } from "./TransactionRow/TransactionRow";
+import { TransactionTableProperties } from "./TransactionTable.contracts";
 
-type Skeleton = Record<string, unknown>;
-
-interface Properties {
-	transactions: DTO.ExtendedConfirmedTransactionData[];
-	exchangeCurrency?: string;
-	hideHeader?: boolean;
-	onRowClick?: (row: DTO.ExtendedConfirmedTransactionData) => void;
-	isLoading?: boolean;
-	skeletonRowsLimit?: number;
-	profile: Contracts.IProfile;
-}
-
-export const TransactionTable = memo(
-	({
-		transactions,
-		exchangeCurrency,
-		hideHeader = false,
-		isLoading = false,
-		skeletonRowsLimit = 8,
-		onRowClick,
-		profile,
-	}: Properties) => {
-		const columns = useColumns({ exchangeCurrency });
-
-		const initialState = {
+export const TransactionTable: FC<TransactionTableProperties> = ({
+	transactions,
+	exchangeCurrency,
+	hideHeader = false,
+	isLoading = false,
+	skeletonRowsLimit = 8,
+	onRowClick,
+	profile,
+}) => {
+	const columns = useTransactionTableColumns(exchangeCurrency);
+	const initialState = useMemo<Partial<TableState<DTO.ExtendedConfirmedTransactionData>>>(
+		() => ({
 			sortBy: [
 				{
 					desc: true,
 					id: "date",
 				},
 			],
-		};
+		}),
+		[],
+	);
 
-		const showSkeleton = useMemo(() => isLoading && transactions.length === 0, [transactions, isLoading]);
+	const showSkeleton = isLoading && transactions.length === 0;
 
-		const data = useMemo(() => {
-			const skeletonRows = new Array(skeletonRowsLimit).fill({});
-			return showSkeleton ? skeletonRows : transactions;
-		}, [showSkeleton, transactions, skeletonRowsLimit]);
+	const data = useMemo<DTO.ExtendedConfirmedTransactionData[]>(() => {
+		const skeletonRows = new Array(skeletonRowsLimit).fill({} as DTO.ExtendedConfirmedTransactionData);
+		return showSkeleton ? skeletonRows : transactions;
+	}, [showSkeleton, transactions, skeletonRowsLimit]);
 
-		return (
-			<div data-testid="TransactionTable" className="relative">
-				<Table hideHeader={hideHeader} columns={columns} data={data} initialState={initialState}>
-					{(row: DTO.ExtendedConfirmedTransactionData | Skeleton) => (
-						<TransactionRow
-							isLoading={showSkeleton}
-							onClick={() => onRowClick?.(row as DTO.ExtendedConfirmedTransactionData)}
-							transaction={row as DTO.ExtendedConfirmedTransactionData}
-							exchangeCurrency={exchangeCurrency}
-							profile={profile}
-						/>
-					)}
-				</Table>
-			</div>
-		);
-	},
-);
+	const renderTableRow = useCallback(
+		(row: DTO.ExtendedConfirmedTransactionData) => (
+			<TransactionRow
+				isLoading={showSkeleton}
+				onClick={() => onRowClick?.(row)}
+				transaction={row}
+				exchangeCurrency={exchangeCurrency}
+				profile={profile}
+			/>
+		),
+		[showSkeleton, onRowClick, exchangeCurrency, profile],
+	);
 
-TransactionTable.displayName = "TransactionTable";
+	return (
+		<div data-testid="TransactionTable" className="relative">
+			<Table hideHeader={hideHeader} columns={columns} data={data} initialState={initialState}>
+				{renderTableRow}
+			</Table>
+		</div>
+	);
+};

@@ -7,7 +7,7 @@ exports[`Splash should  render  dark theme 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -19,7 +19,7 @@ exports[`Splash should  render  dark theme 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -149,7 +149,7 @@ exports[`Splash should  render  light theme 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -161,7 +161,7 @@ exports[`Splash should  render  light theme 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"
@@ -291,7 +291,7 @@ exports[`Splash should render without year 1`] = `
   >
     <nav
       aria-labelledby="main menu"
-      class="NavigationBar__NavWrapper-sc-1nkmx4c-0 kwMnUP"
+      class="NavigationBarblocks__NavWrapper-sc-nciu2a-0 cAPddZ"
     >
       <div
         class="flex relative h-21"
@@ -303,7 +303,7 @@ exports[`Splash should render without year 1`] = `
             class="flex items-center my-auto"
           >
             <div
-              class="NavigationBar__LogoContainer-sc-1nkmx4c-1 bfIa-di"
+              class="flex items-center justify-center my-auto mr-4 pl-0.5 text-white rounded-xl w-11 h-11 bg-theme-success-600"
             >
               <svg
                 height="28"

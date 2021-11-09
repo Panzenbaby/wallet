@@ -55,7 +55,7 @@ export const VoteDetail = ({ isOpen, transaction, onClose }: TransactionDetailPr
 
 			<TransactionSender address={transaction.sender()} network={transaction.wallet().network()} border={false} />
 
-			<TransactionVotes isLoading={isLoadingDelegates} {...delegates} />
+			<TransactionVotes isLoading={isLoadingDelegates} {...delegates} currency={wallet.currency()} />
 
 			<TransactionFee currency={wallet.currency()} value={transaction.fee()} />
 

@@ -1,4 +1,4 @@
-import { Contracts, DTO } from "@payvo/profiles";
+import { DTO } from "@payvo/profiles";
 import { Services } from "@payvo/sdk";
 import { Form } from "app/components/Form";
 import { Modal } from "app/components/Modal";
@@ -10,16 +10,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { UnlockTokensAuthentication, UnlockTokensReview, UnlockTokensSelect, UnlockTokensSummary } from "./blocks";
-import { Step, UnlockTokensFormState } from "./UnlockTokens.contracts";
+import { Step, UnlockTokensFormState, UnlockTokensModalProperties } from "./UnlockTokens.contracts";
 import { useUnlockableBalances } from "./UnlockTokens.helpers";
 
-interface Properties {
-	profile: Contracts.IProfile;
-	wallet: Contracts.IReadWriteWallet;
-	onClose: () => void;
-}
-
-export const UnlockTokensModal: React.FC<Properties> = ({ profile, wallet, onClose }: Properties) => {
+export const UnlockTokensModal: React.VFC<UnlockTokensModalProperties> = ({ profile, wallet, onClose }) => {
 	const [step, setStep] = useState<Step>(Step.SelectStep);
 
 	const [transaction, setTransaction] = useState<DTO.ExtendedSignedTransactionData | undefined>(undefined);

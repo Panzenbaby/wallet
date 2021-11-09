@@ -5,6 +5,7 @@ import { translations as transactionTranslations } from "domains/transaction/i18
 import nock from "nock";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Route } from "react-router-dom";
 import walletFixture from "tests/fixtures/coins/ark/devnet/wallets/D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyib.json";
 import coldWalletFixture from "tests/fixtures/coins/ark/devnet/wallets/DC8ghUdhS8w8d11K8cFQ37YsLBFhL3Dq2P.json";
 import { env, fireEvent, getDefaultProfileId, render, screen, waitFor } from "utils/testing-library";
@@ -34,7 +35,15 @@ describe("Add Participant", () => {
 			.get("/api/wallets")
 			.query({ address: "D61mfSggzbvQgTUe6JhYKH2doHaqJ3Dyiba" })
 			.reply(404);
-		const { asFragment } = render(<AddParticipant profile={profile} wallet={wallet} />);
+
+		const { asFragment } = render(
+			<Route path="/profiles/:profileId">
+				<AddParticipant profile={profile} wallet={wallet} />
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
+		);
 
 		fireEvent.input(screen.getByTestId("SelectDropdown__input"), {
 			target: {
@@ -68,7 +77,14 @@ describe("Add Participant", () => {
 				meta: { count: 1, pageCount: 1, totalCount: 1 },
 			});
 
-		const { asFragment } = render(<AddParticipant profile={profile} wallet={wallet} />);
+		const { asFragment } = render(
+			<Route path="/profiles/:profileId">
+				<AddParticipant profile={profile} wallet={wallet} />
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
+		);
 
 		fireEvent.input(screen.getByTestId("SelectDropdown__input"), {
 			target: {
@@ -95,17 +111,21 @@ describe("Add Participant", () => {
 
 	it("should fail with a duplicate address", async () => {
 		const { asFragment } = render(
-			<AddParticipant
-				profile={profile}
-				wallet={wallet}
-				defaultParticipants={[
-					{
-						address: wallet.address(),
-						balance: wallet.balance().toString(),
-						publicKey: wallet.publicKey()!,
-					},
-				]}
-			/>,
+			<Route path="/profiles/:profileId">
+				<AddParticipant
+					profile={profile}
+					wallet={wallet}
+					defaultParticipants={[
+						{
+							address: wallet.address(),
+							publicKey: wallet.publicKey()!,
+						},
+					]}
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
 		);
 
 		fireEvent.input(screen.getByTestId("SelectDropdown__input"), {
@@ -140,7 +160,14 @@ describe("Add Participant", () => {
 				meta: { count: 0, pageCount: 1, totalCount: 0 },
 			});
 
-		const { asFragment } = render(<AddParticipant profile={profile} wallet={wallet} />);
+		const { asFragment } = render(
+			<Route path="/profiles/:profileId">
+				<AddParticipant profile={profile} wallet={wallet} />
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
+		);
 
 		fireEvent.input(screen.getByTestId("SelectDropdown__input"), {
 			target: {
@@ -167,7 +194,14 @@ describe("Add Participant", () => {
 
 	it("should work with an imported wallet", async () => {
 		const onChange = jest.fn();
-		const { asFragment } = render(<AddParticipant profile={profile} wallet={wallet} onChange={onChange} />);
+		const { asFragment } = render(
+			<Route path="/profiles/:profileId">
+				<AddParticipant profile={profile} wallet={wallet} onChange={onChange} />
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
+		);
 
 		fireEvent.input(screen.getByTestId("SelectDropdown__input"), {
 			target: {
@@ -203,7 +237,14 @@ describe("Add Participant", () => {
 				meta: { count: 1, pageCount: 1, totalCount: 1 },
 			});
 
-		render(<AddParticipant profile={profile} wallet={wallet} />);
+		render(
+			<Route path="/profiles/:profileId">
+				<AddParticipant profile={profile} wallet={wallet} />
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
+		);
 
 		fireEvent.input(screen.getByTestId("SelectDropdown__input"), {
 			target: {
@@ -224,16 +265,21 @@ describe("Add Participant", () => {
 
 	it("should render custom participants", () => {
 		const { asFragment } = render(
-			<AddParticipant
-				profile={profile}
-				wallet={wallet}
-				defaultParticipants={[
-					{
-						address: wallet2.address(),
-						publicKey: wallet2.publicKey()!,
-					},
-				]}
-			/>,
+			<Route path="/profiles/:profileId">
+				<AddParticipant
+					profile={profile}
+					wallet={wallet}
+					defaultParticipants={[
+						{
+							address: wallet2.address(),
+							publicKey: wallet2.publicKey()!,
+						},
+					]}
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
 		);
 
 		expect(asFragment()).toMatchSnapshot();
@@ -248,7 +294,14 @@ describe("Add Participant", () => {
 				meta: { count: 1, pageCount: 1, totalCount: 1 },
 			});
 
-		render(<AddParticipant profile={profile} wallet={wallet} />);
+		render(
+			<Route path="/profiles/:profileId">
+				<AddParticipant profile={profile} wallet={wallet} />
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
+		);
 
 		expect(screen.queryAllByTestId("recipient-list__recipient-list-item")).toHaveLength(1);
 
@@ -283,22 +336,28 @@ describe("Add Participant", () => {
 
 	it("should remove participant", async () => {
 		const onChange = jest.fn();
+
 		render(
-			<AddParticipant
-				profile={profile}
-				wallet={wallet}
-				onChange={onChange}
-				defaultParticipants={[
-					{
-						address: wallet.address(),
-						publicKey: wallet.publicKey()!,
-					},
-					{
-						address: wallet2.address(),
-						publicKey: wallet2.publicKey()!,
-					},
-				]}
-			/>,
+			<Route path="/profiles/:profileId">
+				<AddParticipant
+					profile={profile}
+					wallet={wallet}
+					onChange={onChange}
+					defaultParticipants={[
+						{
+							address: wallet.address(),
+							publicKey: wallet.publicKey()!,
+						},
+						{
+							address: wallet2.address(),
+							publicKey: wallet2.publicKey()!,
+						},
+					]}
+				/>
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
 		);
 
 		await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(2));
@@ -316,7 +375,14 @@ describe("Add Participant", () => {
 	});
 
 	it("should not remove own address", async () => {
-		render(<AddParticipant profile={profile} wallet={wallet} />);
+		render(
+			<Route path="/profiles/:profileId">
+				<AddParticipant profile={profile} wallet={wallet} />
+			</Route>,
+			{
+				routes: [`/profiles/${profile.id()}`],
+			},
+		);
 
 		await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(1));
 

@@ -1,7 +1,7 @@
 import { Contracts, DTO } from "@payvo/profiles";
 import { Button } from "app/components/Button";
 import { Icon } from "app/components/Icon";
-import { NavigationButtonWrapper } from "app/components/NavigationBar";
+import { NavigationButtonWrapper } from "app/components/NavigationBar/NavigationBar.blocks";
 import { Notifications, useNotifications } from "app/components/Notifications";
 import { TransactionDetailModal } from "domains/transaction/components/TransactionDetailModal";
 import { WalletUpdate } from "domains/wallet/components/WalletUpdate";

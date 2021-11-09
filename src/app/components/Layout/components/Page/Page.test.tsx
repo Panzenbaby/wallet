@@ -18,21 +18,18 @@ describe("Page", () => {
 		history.push(dashboardURL);
 	});
 
-	it("should render", () => {
-		const sidebar = true;
-
+	it.each([true, false])("should render with sidebar = %s", (sidebar) => {
 		const { container, asFragment } = render(
-			<Page title="Test" sidebar={sidebar}>
-				{}
-			</Page>,
+			<Route path="/profiles/:profileId/dashboard">
+				<Page title="Test" sidebar={sidebar}>
+					{}
+				</Page>
+			</Route>,
+			{
+				history,
+				routes: [dashboardURL],
+			},
 		);
-
-		expect(container).toBeInTheDocument();
-		expect(asFragment()).toMatchSnapshot();
-	});
-
-	it("should render without sidebar", () => {
-		const { container, asFragment } = render(<Page title="Test">{}</Page>);
 
 		expect(container).toBeInTheDocument();
 		expect(asFragment()).toMatchSnapshot();

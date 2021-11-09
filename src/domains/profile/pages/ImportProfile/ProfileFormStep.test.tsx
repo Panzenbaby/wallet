@@ -39,7 +39,13 @@ describe("Import Profile - Profile Form Step", () => {
 
 		const { container, getByTestId } = render(
 			<EnvironmentProvider env={env}>
-				<ImportProfileForm env={env} profile={profile} />
+				<ImportProfileForm
+					env={env}
+					profile={profile}
+					onSubmit={jest.fn()}
+					shouldValidate={false}
+					onBack={jest.fn()}
+				/>
 			</EnvironmentProvider>,
 		);
 
@@ -54,7 +60,13 @@ describe("Import Profile - Profile Form Step", () => {
 
 		const { container, getByTestId } = render(
 			<EnvironmentProvider env={env}>
-				<ImportProfileForm env={env} profile={profile} />
+				<ImportProfileForm
+					env={env}
+					profile={profile}
+					onSubmit={jest.fn()}
+					shouldValidate={false}
+					onBack={jest.fn()}
+				/>
 			</EnvironmentProvider>,
 		);
 
@@ -70,7 +82,13 @@ describe("Import Profile - Profile Form Step", () => {
 
 		const { container, getByTestId } = render(
 			<EnvironmentProvider env={env}>
-				<ImportProfileForm env={env} profile={emptyProfile} />
+				<ImportProfileForm
+					env={env}
+					profile={emptyProfile}
+					onSubmit={jest.fn()}
+					shouldValidate={false}
+					onBack={jest.fn()}
+				/>
 			</EnvironmentProvider>,
 		);
 
@@ -83,7 +101,13 @@ describe("Import Profile - Profile Form Step", () => {
 		const emptyProfile = env.profiles().create("test3");
 		const { asFragment, getAllByTestId, getByTestId } = render(
 			<EnvironmentProvider env={env}>
-				<ImportProfileForm env={env} profile={emptyProfile} />
+				<ImportProfileForm
+					env={env}
+					profile={emptyProfile}
+					onSubmit={jest.fn()}
+					shouldValidate={false}
+					onBack={jest.fn()}
+				/>
 			</EnvironmentProvider>,
 		);
 
@@ -122,54 +146,17 @@ describe("Import Profile - Profile Form Step", () => {
 		expect(asFragment()).toMatchSnapshot();
 	});
 
-	it("should store new profile with password", async () => {
-		const profilesCount = env.profiles().count();
-
-		const { asFragment, getAllByTestId, getByTestId } = render(
-			<EnvironmentProvider env={env}>
-				<ImportProfileForm env={env} />
-			</EnvironmentProvider>,
-		);
-
-		await waitFor(() => expect(getByTestId("CreateProfile__submit-button")).toHaveAttribute("disabled"));
-
-		// Upload avatar image
-		fireEvent.click(getByTestId("SelectProfileImage__upload-button"));
-
-		expect(showOpenDialogMock).toHaveBeenCalledWith(showOpenDialogParameters);
-
-		fireEvent.input(getAllByTestId("Input")[0], { target: { value: "test profile 1" } });
-
-		const selectDropdown = getByTestId("SelectDropdown__input");
-
-		fireEvent.focus(selectDropdown);
-
-		fireEvent.click(getByTestId("SelectDropdown__option--0"));
-
-		fireEvent.click(getByTestId("CreateProfile__submit-button"));
-
-		fireEvent.input(getAllByTestId("Input")[0], { target: { value: "profile2" } });
-		fireEvent.click(screen.getByRole("checkbox"));
-
-		fireEvent.change(getAllByTestId("InputPassword")[0], { target: { value: "S3cUrePa$sword" } });
-		fireEvent.change(getAllByTestId("InputPassword")[1], { target: { value: "S3cUrePa$sword" } });
-
-		await waitFor(() => {
-			expect(getByTestId("CreateProfile__submit-button")).toBeEnabled();
-		});
-
-		fireEvent.click(getByTestId("CreateProfile__submit-button"));
-
-		await waitFor(() => expect(env.profiles().count()).toBe(profilesCount + 1));
-
-		expect(asFragment()).toMatchSnapshot();
-	});
-
 	it("should fail password confirmation", async () => {
 		const emptyProfile = env.profiles().create("test4");
 		const { asFragment, getAllByTestId, getByTestId } = render(
 			<EnvironmentProvider env={env}>
-				<ImportProfileForm env={env} profile={emptyProfile} />
+				<ImportProfileForm
+					env={env}
+					profile={emptyProfile}
+					onSubmit={jest.fn()}
+					shouldValidate={false}
+					onBack={jest.fn()}
+				/>
 			</EnvironmentProvider>,
 		);
 
@@ -205,7 +192,13 @@ describe("Import Profile - Profile Form Step", () => {
 
 		const { asFragment, getAllByTestId, getByTestId } = render(
 			<EnvironmentProvider env={env}>
-				<ImportProfileForm env={env} profile={emptyProfile} shouldValidate />
+				<ImportProfileForm
+					env={env}
+					profile={emptyProfile}
+					onSubmit={jest.fn()}
+					shouldValidate={true}
+					onBack={jest.fn()}
+				/>
 			</EnvironmentProvider>,
 		);
 

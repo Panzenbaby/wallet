@@ -46,7 +46,7 @@ export const SendTransfer = () => {
 
 	const shouldResetForm = queryParameters.get("reset") === "1";
 
-	const deepLinkParameters = useMemo(() => {
+	const deepLinkParameters = useMemo<Record<string, string>>(() => {
 		const result: Record<string, string> = {};
 		for (const [key, value] of queryParameters.entries()) {
 			if (key !== "reset") {
@@ -83,18 +83,21 @@ export const SendTransfer = () => {
 		return sortBy(Object.values(results), (network) => network.displayName());
 	}, [activeProfile]);
 
-	const defaultValues = {
-		amount: 0,
-		recipients: [],
-		remainingBalance: wallet?.balance?.(),
-	};
+	const defaultValues = useMemo(
+		() => ({
+			amount: 0,
+			recipients: [],
+			remainingBalance: wallet?.balance(),
+		}),
+		[wallet],
+	);
 
 	const form = useForm<any>({
 		defaultValues,
 		mode: "onChange",
 	});
 
-	const { clearErrors, formState, getValues, register, setValue, handleSubmit, watch, reset } = form;
+	const { clearErrors, formState, getValues, register, setValue, handleSubmit, watch, reset, trigger } = form;
 	const { isDirty, isValid, isSubmitting } = formState;
 
 	const { senderAddress, fees, fee, remainingBalance, amount, isSendAllSelected, network } = watch();
@@ -209,7 +212,7 @@ export const SendTransfer = () => {
 	}, [deepLinkParameters, setValue, networks]);
 
 	useEffect(() => {
-		if (!wallet?.address?.()) {
+		if (!wallet) {
 			return;
 		}
 
@@ -230,18 +233,11 @@ export const SendTransfer = () => {
 			return;
 		}
 
-		/* istanbul ignore next */
-		if (amount <= fee) {
-			// @TODO remove ignore coverage after BigNumber refactor
-			return;
-		}
-
 		const remaining = remainingBalance - fee;
 
-		setValue("displayAmount", remaining);
 		setValue("amount", remaining);
 
-		form.trigger(["fee", "amount"]);
+		void trigger(["fee", "amount"]);
 	}, [fee]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const submitForm = async (skipUnconfirmedCheck = false) => {
@@ -414,20 +410,19 @@ export const SendTransfer = () => {
 							</TabPanel>
 
 							<TabPanel tabId={Step.SummaryStep}>
-								{!!transaction && (
-									<SummaryStep
-										transaction={transaction}
-										senderWallet={wallet!}
-										profile={activeProfile}
-									/>
-								)}
+								<SummaryStep
+									transaction={transaction!}
+									senderWallet={wallet!}
+									profile={activeProfile}
+								/>
 							</TabPanel>
 
 							<TabPanel tabId={Step.ErrorStep}>
 								<ErrorStep
-									onBack={() =>
-										history.push(`/profiles/${activeProfile.id()}/wallets/${wallet!.id()}`)
-									}
+									onBack={() => {
+										assertWallet(wallet);
+										history.push(`/profiles/${activeProfile.id()}/wallets/${wallet.id()}`);
+									}}
 									isRepeatDisabled={isSubmitting}
 									onRepeat={handleSubmit(submitForm as any)}
 									errorMessage={errorMessage}
@@ -437,9 +432,10 @@ export const SendTransfer = () => {
 							{!hideStepNavigation && (
 								<StepNavigation
 									onBackClick={handleBack}
-									onBackToWalletClick={() =>
-										history.push(`/profiles/${activeProfile.id()}/wallets/${wallet?.id()}`)
-									}
+									onBackToWalletClick={() => {
+										assertWallet(wallet);
+										history.push(`/profiles/${activeProfile.id()}/wallets/${wallet.id()}`);
+									}}
 									onContinueClick={async () => await handleNext()}
 									isLoading={isSubmitting}
 									isNextDisabled={isNextDisabled}

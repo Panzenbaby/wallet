@@ -8,7 +8,7 @@ import { Input } from "app/components/Input";
 import { useWalletAlias } from "app/hooks";
 import { SearchWallet } from "domains/wallet/components/SearchWallet";
 import { SelectedWallet } from "domains/wallet/components/SearchWallet/SearchWallet.models";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type SelectAddressProperties = {
@@ -45,11 +45,14 @@ export const SelectAddress = React.forwardRef<HTMLInputElement, SelectAddressPro
 
 		const { t } = useTranslation();
 
-		const handleSelectWallet = (wallet: SelectedWallet) => {
-			setSelectedWallet(wallet);
-			setSearchWalletIsOpen(false);
-			onChange?.(wallet.address);
-		};
+		const handleSelectWallet = useCallback(
+			(wallet: SelectedWallet) => {
+				setSelectedWallet(wallet);
+				setSearchWalletIsOpen(false);
+				onChange?.(wallet.address);
+			},
+			[setSelectedWallet, setSearchWalletIsOpen, onChange],
+		);
 
 		const { getWalletAlias } = useWalletAlias();
 

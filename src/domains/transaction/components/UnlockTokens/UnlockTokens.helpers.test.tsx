@@ -6,7 +6,7 @@ import { toasts } from "app/services";
 import { env, getDefaultProfileId } from "utils/testing-library";
 
 import { POLLING_INTERVAL } from "./UnlockTokens.contracts";
-import { useColumns, useUnlockableBalances } from "./UnlockTokens.helpers";
+import { useUnlockableBalances, useUnlockTokensSelectTableColumns } from "./UnlockTokens.helpers";
 
 describe("useUnlockableBalances", () => {
 	let wallet: Contracts.IReadWriteWallet;
@@ -120,15 +120,9 @@ describe("useUnlockableBalances", () => {
 	});
 });
 
-describe("useColumns", () => {
+describe("useUnlockTokensSelectTableColumns", () => {
 	it("should return columns", () => {
-		const { result } = renderHook(() =>
-			useColumns({
-				canSelectAll: true,
-				isAllSelected: false,
-				onToggleAll: jest.fn(),
-			}),
-		);
+		const { result } = renderHook(() => useUnlockTokensSelectTableColumns(false, false, jest.fn()));
 
 		expect(result.current).toHaveLength(3);
 

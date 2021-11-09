@@ -3,6 +3,7 @@ import { Avatar } from "app/components/Avatar";
 import { Circle } from "app/components/Circle";
 import { Icon } from "app/components/Icon";
 import { RecipientList } from "domains/transaction/components/RecipientList";
+import { RecipientItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,12 +11,7 @@ import { TransactionDetail, TransactionDetailProperties } from "../TransactionDe
 
 type TransactionRecipientsProperties = {
 	currency: string;
-	recipients: {
-		address: string;
-		amount?: number;
-		alias?: string;
-		isDelegate?: boolean;
-	}[];
+	recipients: RecipientItem[];
 } & TransactionDetailProperties;
 
 export const TransactionRecipients: React.FC<TransactionRecipientsProperties> = ({
@@ -62,7 +58,14 @@ export const TransactionRecipients: React.FC<TransactionRecipientsProperties> = 
 			label={t("TRANSACTION.RECIPIENTS_COUNT", { count: recipients.length })}
 			{...properties}
 		>
-			<RecipientList recipients={recipients} assetSymbol={currency} variant="condensed" />
+			<RecipientList
+				isEditable={false}
+				recipients={recipients}
+				showAmount
+				showExchangeAmount={false}
+				ticker={currency}
+				variant="condensed"
+			/>
 		</TransactionDetail>
 	);
 };

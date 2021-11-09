@@ -1,14 +1,14 @@
 import { Contracts } from "@payvo/profiles";
 
-export interface Option {
+export interface ContactListItemOption {
 	label: string;
 	value: string | number;
 }
 
 export interface ContactListItemProperties {
 	item: any;
-	options?: Option[];
+	options?: ContactListItemOption[];
 	useTestNetworks: boolean;
-	onAction?: (action: Option, address: any) => void;
+	onAction?: (action: ContactListItemOption, address: any) => void;
 	onSend?: (address: Contracts.IContactAddress) => void;
 }

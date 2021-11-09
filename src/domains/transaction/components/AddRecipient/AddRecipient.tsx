@@ -12,7 +12,7 @@ import { useExchangeRate } from "app/hooks/use-exchange-rate";
 import cn from "classnames";
 import { SelectRecipient } from "domains/profile/components/SelectRecipient";
 import { RecipientList } from "domains/transaction/components/RecipientList";
-import { RecipientListItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
+import { RecipientItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -75,20 +75,18 @@ const InputButtonStyled = styled.button(() => [
 ]);
 
 export const AddRecipient = ({
-	assetSymbol = "ARK",
+	disableMultiPaymentOption,
+	onChange,
 	profile,
-	wallet,
 	recipients = [],
 	showMultiPaymentOption = true,
-	disableMultiPaymentOption,
+	wallet,
 	withDeeplink,
-	onChange,
 }: AddRecipientProperties) => {
 	const { t } = useTranslation();
-	const [addedRecipients, setAddedRecipients] = useState<RecipientListItem[]>([]);
-	// @ts-ignore
+	const [addedRecipients, setAddedRecipients] = useState<RecipientItem[]>([]);
 	const [isSingle, setIsSingle] = useState(recipients.length <= 1);
-	const [recipientsAmount, setRecipientsAmount] = useState<any>();
+	const [recipientsAmount, setRecipientsAmount] = useState<string>();
 	const isMountedReference = useRef(false);
 
 	const {
@@ -130,7 +128,6 @@ export const AddRecipient = ({
 
 	const clearFields = useCallback(() => {
 		setValue("amount", undefined);
-		setValue("displayAmount", undefined);
 		setValue("recipientAddress", undefined);
 	}, [setValue]);
 
@@ -160,7 +157,6 @@ export const AddRecipient = ({
 
 	useEffect(() => {
 		register("amount", sendTransfer.amount(network, remainingNetBalance!, addedRecipients, isSingle));
-		register("displayAmount");
 		register("recipientAddress", sendTransfer.recipientAddress(profile, network, addedRecipients, isSingle));
 	}, [register, network, sendTransfer, addedRecipients, isSingle, profile, remainingNetBalance]);
 
@@ -171,15 +167,14 @@ export const AddRecipient = ({
 	}, [network, recipientAddress, trigger]);
 
 	useEffect(() => {
-		if (getValues("displayAmount")) {
+		if (getValues("amount")) {
 			trigger("amount");
 		}
 	}, [fee, senderAddress, getValues, trigger]);
 
 	useEffect(() => {
-		//region added Timeout to prevent show error for recipientAddress when switch between transfer type
+		// Timeout prevents from showing error for recipientAddress when switching between transfer type
 		setTimeout(() => clearErrors(), 0);
-		//endregion
 
 		if (!isMountedReference.current) {
 			return;
@@ -187,29 +182,28 @@ export const AddRecipient = ({
 
 		if (isSingle && addedRecipients.length === 1) {
 			setValue("amount", addedRecipients[0].amount);
-			setValue("displayAmount", addedRecipients[0].amount);
 			setValue("recipientAddress", addedRecipients[0].address);
 			return;
 		}
 
-		//region Clear the fields and update the recipient item(s) when switch between transfer type, to prevent enable/disable continue button
-		if (isSingle && recipients?.length !== 1) {
+		// Clear the fields and update the recipient item(s) when switch between transfer type.
+		// This is made to prevent enabling or disabling the "continue" button.
+		if (isSingle && recipients.length !== 1) {
 			clearFields();
-			onChange?.([]);
+			onChange([]);
 			return;
 		}
 
-		/* istanbul ignore next */
+		/* istanbul ignore else */
 		if (!isSingle) {
 			if (addedRecipients.length > 0) {
 				clearFields();
-				onChange?.(addedRecipients);
+				onChange(addedRecipients);
 				return;
 			}
 
-			onChange?.([]);
+			onChange([]);
 		}
-		//endregion
 	}, [isSingle, clearErrors, clearFields, addedRecipients, setValue]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
@@ -218,13 +212,13 @@ export const AddRecipient = ({
 		}
 	}, [isSingle, setValue]);
 
-	//region Update AddedRecipients state when comes back to the current page
+	// Update AddedRecipients state when comes back to the current page
 	useEffect(() => {
 		if (isMountedReference.current) {
 			return;
 		}
 
-		if (!recipients?.length) {
+		if (recipients.length === 0) {
 			return;
 		}
 
@@ -234,7 +228,6 @@ export const AddRecipient = ({
 	useEffect(() => {
 		isMountedReference.current = true;
 	}, []);
-	//endregion
 
 	useEffect(() => {
 		if (!isSendAllSelected) {
@@ -243,7 +236,6 @@ export const AddRecipient = ({
 
 		const remaining = remainingBalance > fee ? remainingNetBalance : remainingBalance;
 
-		setValue("displayAmount", remaining);
 		setValue("amount", remaining, {
 			shouldDirty: true,
 			shouldValidate: true,
@@ -271,10 +263,10 @@ export const AddRecipient = ({
 		}
 
 		if (!address || !amount) {
-			return onChange?.([]);
+			return onChange([]);
 		}
 
-		onChange?.([
+		onChange([
 			{
 				address,
 				alias: alias?.alias,
@@ -287,27 +279,17 @@ export const AddRecipient = ({
 	const handleAddRecipient = () => {
 		const amount = getValues("amount");
 
-		let newRecipient: RecipientListItem = {
+		let newRecipient: RecipientItem = {
 			address: recipientAddress,
 			alias: recipientAlias?.alias,
 			amount: +amount,
-			displayAmount: amount,
 			isDelegate: recipientAlias?.isDelegate,
 		};
-
-		/* istanbul ignore next */
-		if (!wallet?.network().isTest()) {
-			newRecipient = {
-				...newRecipient,
-				exchangeAmount: convert(+amount),
-				exchangeTicker: exchangeTicker,
-			};
-		}
 
 		const newRecipients = [...addedRecipients, newRecipient];
 
 		setAddedRecipients(newRecipients);
-		onChange?.(newRecipients);
+		onChange(newRecipients);
 		clearFields();
 	};
 
@@ -394,11 +376,10 @@ export const AddRecipient = ({
 									disabled={!isSenderFilled}
 									data-testid="AddRecipient__amount"
 									placeholder={t("COMMON.AMOUNT_PLACEHOLDER")}
-									value={getValues("displayAmount") || recipientsAmount}
+									value={getValues("amount") || recipientsAmount}
 									addons={amountAddons}
 									onChange={(amount: string) => {
 										setValue("isSendAllSelected", false);
-										setValue("displayAmount", amount);
 										setValue("amount", amount, { shouldDirty: true, shouldValidate: true });
 										singleRecipientOnChange({
 											address: recipientAddress,
@@ -450,10 +431,11 @@ export const AddRecipient = ({
 			{!isSingle && addedRecipients.length > 0 && (
 				<div className="mt-3 border-b border-dashed border-theme-secondary-300 dark:border-theme-secondary-800">
 					<RecipientList
-						network={network}
 						recipients={addedRecipients}
 						onRemove={handleRemoveRecipient}
-						assetSymbol={assetSymbol}
+						ticker={ticker}
+						showAmount
+						showExchangeAmount={network.isLive()}
 						isEditable
 					/>
 				</div>

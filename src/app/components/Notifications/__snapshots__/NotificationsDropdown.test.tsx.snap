@@ -10,7 +10,7 @@ exports[`Notifications should open and cancel wallet update notification modal 1
         data-testid="dropdown__toggle"
       >
         <div
-          class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+          class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
         >
           <button
             class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -523,7 +523,7 @@ exports[`Notifications should open and cancel wallet update notification modal 2
         data-testid="dropdown__toggle"
       >
         <div
-          class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+          class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
         >
           <button
             class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -940,7 +940,7 @@ exports[`Notifications should open and close transaction details modal 1`] = `
         data-testid="dropdown__toggle"
       >
         <div
-          class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+          class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
         >
           <button
             class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -1755,7 +1755,7 @@ exports[`Notifications should open and close wallet update notification modal 1`
         data-testid="dropdown__toggle"
       >
         <div
-          class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+          class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
         >
           <button
             class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2268,7 +2268,7 @@ exports[`Notifications should open and close wallet update notification modal 2`
         data-testid="dropdown__toggle"
       >
         <div
-          class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+          class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
         >
           <button
             class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"
@@ -2685,7 +2685,7 @@ exports[`Notifications should render with transactions and plugins 1`] = `
         data-testid="dropdown__toggle"
       >
         <div
-          class="NavigationBar__NavigationButtonWrapper-sc-1nkmx4c-2 jTnlvd group"
+          class="NavigationBarblocks__NavigationButtonWrapper-sc-nciu2a-1 hAcKQs group"
         >
           <button
             class="OriginalButton__StyledButton-sc-o0fs2j-0 hDDKXm"

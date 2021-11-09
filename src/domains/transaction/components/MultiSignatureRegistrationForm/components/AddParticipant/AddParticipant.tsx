@@ -182,14 +182,15 @@ export const AddParticipant = ({
 
 			<div className="mt-3 border-b border-dashed border-theme-secondary-300 dark:border-theme-secondary-800">
 				<RecipientList
-					recipients={participants}
-					assetSymbol={wallet.network().ticker()}
-					tooltipDisabled={t("TRANSACTION.MULTISIGNATURE.REMOVE_NOT_ALLOWED")}
 					disableButton={(address: string) => address === wallet.address()}
-					onRemove={removeParticipant}
-					label="TRANSACTION.MULTISIGNATURE.PARTICIPANT_#"
-					showAmount={false}
 					isEditable
+					label="TRANSACTION.MULTISIGNATURE.PARTICIPANT_#"
+					onRemove={removeParticipant}
+					recipients={participants}
+					showAmount={false}
+					showExchangeAmount={wallet.network().isLive()}
+					ticker={wallet.currency()}
+					tooltipDisabled={t("TRANSACTION.MULTISIGNATURE.REMOVE_NOT_ALLOWED")}
 				/>
 			</div>
 		</div>

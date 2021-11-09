@@ -1,31 +1,24 @@
-import { Contracts } from "@payvo/profiles";
 import { Button } from "app/components/Button";
 import { EmptyBlock } from "app/components/EmptyBlock";
 import { Header } from "app/components/Header";
 import { Table } from "app/components/Table";
 import { useFees } from "app/hooks";
-import React, { useEffect, useMemo, useState } from "react";
+import {
+	UnlockableBalance,
+	UnlockTokensFormState,
+} from "domains/transaction/components/UnlockTokens/UnlockTokens.contracts";
+import { useUnlockTokensSelectTableColumns } from "domains/transaction/components/UnlockTokens/UnlockTokens.helpers";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { UnlockableBalance, UnlockableBalanceSkeleton, UnlockTokensFormState } from "../../UnlockTokens.contracts";
-import { useColumns } from "../../UnlockTokens.helpers";
 import { UnlockTokensRow } from "./UnlockTokensRow";
+import { UnlockTokensSelectProperties } from "./UnlockTokensSelect.contracts";
 import { UnlockTokensTotal } from "./UnlockTokensTotal";
 
-interface Properties {
-	items: UnlockableBalance[];
-	loading: boolean;
-	wallet: Contracts.IReadWriteWallet;
-	profile: Contracts.IProfile;
-	onClose: () => void;
-	onUnlock: () => void;
-	isFirstLoad?: boolean;
-}
+const SKELETON_ROWS = Array.from<UnlockableBalance>({ length: 3 }).fill({} as UnlockableBalance);
 
-const SKELETON_ROWS = Array.from<UnlockableBalanceSkeleton>({ length: 3 }).fill({});
-
-export const UnlockTokensSelect: React.FC<Properties> = ({
+export const UnlockTokensSelect: FC<UnlockTokensSelectProperties> = ({
 	wallet,
 	profile,
 	onClose,
@@ -33,7 +26,7 @@ export const UnlockTokensSelect: React.FC<Properties> = ({
 	items,
 	loading,
 	isFirstLoad,
-}: Properties) => {
+}) => {
 	const { t } = useTranslation();
 
 	const { setValue, watch } = useFormContext<UnlockTokensFormState>();
@@ -109,15 +102,28 @@ export const UnlockTokensSelect: React.FC<Properties> = ({
 		setSelectedIds((value) => (value.includes(itemId) ? value.filter((id) => id !== itemId) : [...value, itemId]));
 	};
 
-	const onToggleAll = (): void => {
+	const onToggleAll = useCallback(() => {
 		if (selectableObjects.some((item) => selectedIds.includes(item.id))) {
 			setSelectedIds([]);
-		} else {
-			setSelectedIds(selectableObjects.map((item) => item.id));
+			return;
 		}
-	};
+		setSelectedIds(selectableObjects.map((item) => item.id));
+	}, [selectableObjects, selectedIds, setSelectedIds]);
 
-	const columns = useColumns({ canSelectAll: selectableObjects.length > 0, isAllSelected, onToggleAll });
+	const columns = useUnlockTokensSelectTableColumns(selectableObjects.length === 0, isAllSelected, onToggleAll);
+
+	const renderTableRow = useCallback(
+		(item: UnlockableBalance) => (
+			<UnlockTokensRow
+				item={item}
+				loading={isLoading}
+				ticker={wallet.currency()}
+				onToggle={() => toggle(item.id)}
+				checked={selectedIds.includes(item.id)}
+			/>
+		),
+		[isLoading, wallet, selectedIds],
+	);
 
 	return (
 		<>
@@ -133,15 +139,7 @@ export const UnlockTokensSelect: React.FC<Properties> = ({
 					<>
 						<div className="relative border-b border-theme-secondary-300 dark:border-theme-secondary-800">
 							<Table columns={columns} data={data}>
-								{(item: UnlockableBalanceSkeleton | UnlockableBalance) => (
-									<UnlockTokensRow
-										item={item}
-										loading={isLoading}
-										ticker={wallet.currency()}
-										onToggle={() => toggle(item.id)}
-										checked={selectedIds.includes(item.id)}
-									/>
-								)}
+								{renderTableRow}
 							</Table>
 						</div>
 						<UnlockTokensTotal

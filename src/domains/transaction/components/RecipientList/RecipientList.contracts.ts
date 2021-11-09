@@ -1,33 +1,36 @@
 type RecipientListLabel = "TRANSACTION.MULTISIGNATURE.PARTICIPANT_#";
 
-export interface RecipientListItem {
+export interface RecipientItem {
 	address: string;
-	displayAmount?: string;
-	amount?: number;
-	exchangeAmount?: number;
-	exchangeTicker?: string;
-	assetSymbol?: string;
-	isEditable?: boolean;
-	label?: RecipientListLabel;
-	listIndex?: number;
-	variant?: "condensed";
 	alias?: string;
+	amount?: number;
 	isDelegate?: boolean;
-	showAmount?: boolean;
-	tooltipDisabled?: string;
-	disableButton?: (address: string) => boolean;
-	onRemove?: (index: number) => void;
 }
 
-export interface RecipientList {
-	network?: string;
-	assetSymbol?: string;
-	isEditable?: boolean;
-	recipients?: RecipientListItem[];
-	showAmount?: boolean;
-	label?: RecipientListLabel;
-	variant?: "condensed";
-	tooltipDisabled?: string;
+export interface RecipientListItemProperties {
 	disableButton?: (address: string) => boolean;
+	exchangeTicker: string;
+	isEditable?: boolean;
+	label?: RecipientListLabel;
+	listIndex: number;
 	onRemove?: (index: number) => void;
+	recipient: RecipientItem;
+	showAmount?: boolean;
+	showExchangeAmount?: boolean;
+	ticker: string;
+	tooltipDisabled?: string;
+	variant?: "condensed";
+}
+
+export interface RecipientListProperties {
+	disableButton?: (address: string) => boolean;
+	isEditable: boolean;
+	label?: RecipientListLabel;
+	onRemove?: (index: number) => void;
+	recipients: RecipientItem[];
+	showAmount: boolean;
+	showExchangeAmount: boolean;
+	ticker: string;
+	tooltipDisabled?: string;
+	variant?: "condensed";
 }

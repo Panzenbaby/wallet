@@ -56,20 +56,6 @@ exports[`RecipientList should conditionally disable remove button 1`] = `
                 class="flex flex-inline align-top hidden"
               >
                 <div>
-                  Amount
-                </div>
-              </div>
-            </th>
-            <th
-              class="group relative text-sm text-left select-none text-theme-secondary-500 border-theme-secondary-300 dark:text-theme-secondary-700 dark:border-theme-secondary-800 m-0 p-3 first:pl-0 last:pr-0 font-semibold hasBorder"
-              colspan="1"
-              data-testid="table__th--3"
-              role="columnheader"
-            >
-              <div
-                class="flex flex-inline align-top hidden"
-              >
-                <div>
                   Action
                 </div>
               </div>
@@ -130,27 +116,6 @@ exports[`RecipientList should conditionally disable remove button 1`] = `
                   data-testid="Address__address"
                 >
                   FJKDSALJFKASLJFKSDAJD333FKFKDSAJFKSAJFKLASJKDFJ
-                </span>
-              </div>
-            </td>
-            <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
                 </span>
               </div>
             </td>
@@ -242,27 +207,6 @@ exports[`RecipientList should conditionally disable remove button 1`] = `
               </div>
             </td>
             <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
-                </span>
-              </div>
-            </td>
-            <td
               class="flex-none py-6 ml-3"
             >
               <span
@@ -349,27 +293,6 @@ exports[`RecipientList should conditionally disable remove button 1`] = `
               </div>
             </td>
             <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
-                </span>
-              </div>
-            </td>
-            <td
               class="flex-none py-6 ml-3"
             >
               <span
@@ -441,27 +364,6 @@ exports[`RecipientList should conditionally disable remove button 1`] = `
                   data-testid="Address__address"
                 >
                   FAhFJKDSALJFKASLJFKSFDAJ333FKFKDSAJFKSAJFKLASJKDFJ
-                </span>
-              </div>
-            </td>
-            <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
                 </span>
               </div>
             </td>
@@ -560,20 +462,6 @@ exports[`RecipientList should render condensed variant 1`] = `
                 class="flex flex-inline align-top hidden"
               >
                 <div>
-                  Amount
-                </div>
-              </div>
-            </th>
-            <th
-              class="group relative text-sm text-left select-none text-theme-secondary-500 border-theme-secondary-300 dark:text-theme-secondary-700 dark:border-theme-secondary-800 m-0 p-3 first:pl-0 last:pr-0 font-semibold hasBorder"
-              colspan="1"
-              data-testid="table__th--3"
-              role="columnheader"
-            >
-              <div
-                class="flex flex-inline align-top hidden"
-              >
-                <div>
                   Action
                 </div>
               </div>
@@ -628,16 +516,6 @@ exports[`RecipientList should render condensed variant 1`] = `
                 </span>
               </div>
             </td>
-            <td
-              class="flex-1 flex-shrink-0 pl-3 text-right"
-            >
-              <span
-                class="whitespace-nowrap"
-                data-testid="AmountCrypto"
-              >
-                100 ARK
-              </span>
-            </td>
           </tr>
           <tr
             class="flex items-center py-4 border-b border-dashed last:border-b-0 border-theme-secondary-300 dark:border-theme-secondary-800"
@@ -683,16 +561,6 @@ exports[`RecipientList should render condensed variant 1`] = `
                   AhFJKDSALJFKASLJFKSDEAJ333FKFKDSAJFKSAJFKLASJKDFJ
                 </span>
               </div>
-            </td>
-            <td
-              class="flex-1 flex-shrink-0 pl-3 text-right"
-            >
-              <span
-                class="whitespace-nowrap"
-                data-testid="AmountCrypto"
-              >
-                100 ARK
-              </span>
             </td>
           </tr>
           <tr
@@ -740,16 +608,6 @@ exports[`RecipientList should render condensed variant 1`] = `
                 </span>
               </div>
             </td>
-            <td
-              class="flex-1 flex-shrink-0 pl-3 text-right"
-            >
-              <span
-                class="whitespace-nowrap"
-                data-testid="AmountCrypto"
-              >
-                100 ARK
-              </span>
-            </td>
           </tr>
           <tr
             class="flex items-center py-4 border-b border-dashed last:border-b-0 border-theme-secondary-300 dark:border-theme-secondary-800"
@@ -784,16 +642,6 @@ exports[`RecipientList should render condensed variant 1`] = `
                   FAhFJKDSALJFKASLJFKSFDAJ333FKFKDSAJFKSAJFKLASJKDFJ
                 </span>
               </div>
-            </td>
-            <td
-              class="flex-1 flex-shrink-0 pl-3 text-right"
-            >
-              <span
-                class="whitespace-nowrap"
-                data-testid="AmountCrypto"
-              >
-                100 ARK
-              </span>
             </td>
           </tr>
         </tbody>
@@ -853,20 +701,6 @@ exports[`RecipientList should render editable 1`] = `
               class="group relative text-sm text-left select-none text-theme-secondary-500 border-theme-secondary-300 dark:text-theme-secondary-700 dark:border-theme-secondary-800 m-0 p-3 first:pl-0 last:pr-0 font-semibold hasBorder"
               colspan="1"
               data-testid="table__th--2"
-              role="columnheader"
-            >
-              <div
-                class="flex flex-inline align-top hidden"
-              >
-                <div>
-                  Amount
-                </div>
-              </div>
-            </th>
-            <th
-              class="group relative text-sm text-left select-none text-theme-secondary-500 border-theme-secondary-300 dark:text-theme-secondary-700 dark:border-theme-secondary-800 m-0 p-3 first:pl-0 last:pr-0 font-semibold hasBorder"
-              colspan="1"
-              data-testid="table__th--3"
               role="columnheader"
             >
               <div
@@ -933,27 +767,6 @@ exports[`RecipientList should render editable 1`] = `
                   data-testid="Address__address"
                 >
                   FJKDSALJFKASLJFKSDAJD333FKFKDSAJFKSAJFKLASJKDFJ
-                </span>
-              </div>
-            </td>
-            <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
                 </span>
               </div>
             </td>
@@ -1044,27 +857,6 @@ exports[`RecipientList should render editable 1`] = `
               </div>
             </td>
             <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
-                </span>
-              </div>
-            </td>
-            <td
               class="flex-none py-6 ml-3"
             >
               <span
@@ -1151,27 +943,6 @@ exports[`RecipientList should render editable 1`] = `
               </div>
             </td>
             <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
-                </span>
-              </div>
-            </td>
-            <td
               class="flex-none py-6 ml-3"
             >
               <span
@@ -1243,27 +1014,6 @@ exports[`RecipientList should render editable 1`] = `
                   data-testid="Address__address"
                 >
                   FAhFJKDSALJFKASLJFKSFDAJ333FKFKDSAJFKSAJFKLASJKDFJ
-                </span>
-              </div>
-            </td>
-            <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
                 </span>
               </div>
             </td>
@@ -1352,20 +1102,6 @@ exports[`RecipientList should render non-editable 1`] = `
                 </div>
               </div>
             </th>
-            <th
-              class="group relative text-sm text-left select-none text-theme-secondary-500 border-theme-secondary-300 dark:text-theme-secondary-700 dark:border-theme-secondary-800 m-0 p-3 first:pl-0 last:pr-0 font-semibold hasBorder"
-              colspan="1"
-              data-testid="table__th--2"
-              role="columnheader"
-            >
-              <div
-                class="flex flex-inline align-top hidden"
-              >
-                <div>
-                  Amount
-                </div>
-              </div>
-            </th>
           </tr>
         </thead>
         <tbody
@@ -1425,27 +1161,6 @@ exports[`RecipientList should render non-editable 1`] = `
                 </span>
               </div>
             </td>
-            <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
-                </span>
-              </div>
-            </td>
           </tr>
           <tr
             class="flex border-b border-dashed last:border-b-0 border-theme-secondary-300 dark:border-theme-secondary-800"
@@ -1498,27 +1213,6 @@ exports[`RecipientList should render non-editable 1`] = `
                   data-testid="Address__address"
                 >
                   AhFJKDSALJFKASLJFKSDEAJ333FKFKDSAJFKSAJFKLASJKDFJ
-                </span>
-              </div>
-            </td>
-            <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
                 </span>
               </div>
             </td>
@@ -1577,27 +1271,6 @@ exports[`RecipientList should render non-editable 1`] = `
                 </span>
               </div>
             </td>
-            <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
-                </span>
-              </div>
-            </td>
           </tr>
           <tr
             class="flex border-b border-dashed last:border-b-0 border-theme-secondary-300 dark:border-theme-secondary-800"
@@ -1639,27 +1312,6 @@ exports[`RecipientList should render non-editable 1`] = `
                   data-testid="Address__address"
                 >
                   FAhFJKDSALJFKASLJFKSFDAJ333FKFKDSAJFKSAJFKLASJKDFJ
-                </span>
-              </div>
-            </td>
-            <td
-              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
-            >
-              <div
-                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
-              >
-                <span>
-                  Amount
-                </span>
-              </div>
-              <div
-                class="font-semibold"
-              >
-                <span
-                  class="whitespace-nowrap"
-                  data-testid="AmountCrypto"
-                >
-                  100 ARK
                 </span>
               </div>
             </td>
@@ -1727,7 +1379,7 @@ exports[`RecipientList should render without amount column 1`] = `
                 class="flex flex-inline align-top hidden"
               >
                 <div>
-                  Action
+                  Amount
                 </div>
               </div>
             </th>
@@ -1791,35 +1443,25 @@ exports[`RecipientList should render without amount column 1`] = `
               </div>
             </td>
             <td
-              class="flex-none py-6 ml-3"
+              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
             >
-              <span
-                class="inline-block"
+              <div
+                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
               >
-                <button
-                  class="OriginalButton__StyledButton-sc-o0fs2j-0 bAsnxQ"
-                  data-testid="recipient-list__remove-recipient"
-                  type="button"
+                <span>
+                  Amount
+                </span>
+              </div>
+              <div
+                class="font-semibold"
+              >
+                <span
+                  class="whitespace-nowrap"
+                  data-testid="AmountCrypto"
                 >
-                  <div
-                    class="flex items-center space-x-2"
-                  >
-                    <div
-                      class="py-1"
-                    >
-                      <div
-                        class="sc-bdnxRM AFVmm"
-                        height="16"
-                        width="16"
-                      >
-                        <svg>
-                          trash.svg
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </button>
-              </span>
+                  100 ARK
+                </span>
+              </div>
             </td>
           </tr>
           <tr
@@ -1877,35 +1519,25 @@ exports[`RecipientList should render without amount column 1`] = `
               </div>
             </td>
             <td
-              class="flex-none py-6 ml-3"
+              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
             >
-              <span
-                class="inline-block"
+              <div
+                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
               >
-                <button
-                  class="OriginalButton__StyledButton-sc-o0fs2j-0 bAsnxQ"
-                  data-testid="recipient-list__remove-recipient"
-                  type="button"
+                <span>
+                  Amount
+                </span>
+              </div>
+              <div
+                class="font-semibold"
+              >
+                <span
+                  class="whitespace-nowrap"
+                  data-testid="AmountCrypto"
                 >
-                  <div
-                    class="flex items-center space-x-2"
-                  >
-                    <div
-                      class="py-1"
-                    >
-                      <div
-                        class="sc-bdnxRM AFVmm"
-                        height="16"
-                        width="16"
-                      >
-                        <svg>
-                          trash.svg
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </button>
-              </span>
+                  100 ARK
+                </span>
+              </div>
             </td>
           </tr>
           <tr
@@ -1963,35 +1595,25 @@ exports[`RecipientList should render without amount column 1`] = `
               </div>
             </td>
             <td
-              class="flex-none py-6 ml-3"
+              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
             >
-              <span
-                class="inline-block"
+              <div
+                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
               >
-                <button
-                  class="OriginalButton__StyledButton-sc-o0fs2j-0 bAsnxQ"
-                  data-testid="recipient-list__remove-recipient"
-                  type="button"
+                <span>
+                  Amount
+                </span>
+              </div>
+              <div
+                class="font-semibold"
+              >
+                <span
+                  class="whitespace-nowrap"
+                  data-testid="AmountCrypto"
                 >
-                  <div
-                    class="flex items-center space-x-2"
-                  >
-                    <div
-                      class="py-1"
-                    >
-                      <div
-                        class="sc-bdnxRM AFVmm"
-                        height="16"
-                        width="16"
-                      >
-                        <svg>
-                          trash.svg
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </button>
-              </span>
+                  100 ARK
+                </span>
+              </div>
             </td>
           </tr>
           <tr
@@ -2038,35 +1660,25 @@ exports[`RecipientList should render without amount column 1`] = `
               </div>
             </td>
             <td
-              class="flex-none py-6 ml-3"
+              class="flex-1 flex-shrink-0 py-6 pl-3 text-right"
             >
-              <span
-                class="inline-block"
+              <div
+                class="mb-1 text-sm font-semibold text-theme-secondary-500 dark:text-theme-secondary-700"
               >
-                <button
-                  class="OriginalButton__StyledButton-sc-o0fs2j-0 bAsnxQ"
-                  data-testid="recipient-list__remove-recipient"
-                  type="button"
+                <span>
+                  Amount
+                </span>
+              </div>
+              <div
+                class="font-semibold"
+              >
+                <span
+                  class="whitespace-nowrap"
+                  data-testid="AmountCrypto"
                 >
-                  <div
-                    class="flex items-center space-x-2"
-                  >
-                    <div
-                      class="py-1"
-                    >
-                      <div
-                        class="sc-bdnxRM AFVmm"
-                        height="16"
-                        width="16"
-                      >
-                        <svg>
-                          trash.svg
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </button>
-              </span>
+                  100 ARK
+                </span>
+              </div>
             </td>
           </tr>
         </tbody>

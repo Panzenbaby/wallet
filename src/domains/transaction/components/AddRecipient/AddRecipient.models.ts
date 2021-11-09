@@ -1,19 +1,14 @@
 import { Contracts } from "@payvo/profiles";
-import { RecipientListItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
+import { RecipientItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
 
 export interface AddRecipientProperties {
-	assetSymbol?: string;
-	singleLabel?: string;
-	multipleLabel?: string;
-	recipients?: RecipientListItem[];
-	profile: Contracts.IProfile;
-	wallet?: Contracts.IReadWriteWallet;
-	labelText?: string;
-	helpText?: string;
-	showMultiPaymentOption?: boolean;
 	disableMultiPaymentOption?: boolean;
+	onChange: (recipients: RecipientItem[]) => void;
+	profile: Contracts.IProfile;
+	recipients: RecipientItem[];
+	showMultiPaymentOption?: boolean;
+	wallet?: Contracts.IReadWriteWallet;
 	withDeeplink?: boolean;
-	onChange?: (recipients: RecipientListItem[]) => void;
 }
 
 export interface ToggleButtonProperties {

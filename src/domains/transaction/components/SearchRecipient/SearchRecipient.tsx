@@ -5,14 +5,23 @@ import { EmptyResults } from "app/components/EmptyResults";
 import { HeaderSearchBar } from "app/components/Header/HeaderSearchBar";
 import { Modal } from "app/components/Modal";
 import { Table, TableCell, TableRow } from "app/components/Table";
-import { TableColumn } from "app/components/Table/TableColumn.models";
 import { useSearchWallet } from "app/hooks/use-search-wallet";
-import React from "react";
+import React, { FC, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { Column } from "react-table";
 
-import { RecipientListItemProperties, RecipientProperties, SearchRecipientProperties } from "./SearchRecipient.models";
+import {
+	RecipientProperties,
+	SearchRecipientListItemProperties,
+	SearchRecipientProperties,
+} from "./SearchRecipient.contracts";
 
-const RecipientListItem = ({ index, recipient, onAction, selectedAddress }: RecipientListItemProperties) => {
+const SearchRecipientListItem: FC<SearchRecipientListItemProperties> = ({
+	index,
+	recipient,
+	onAction,
+	selectedAddress,
+}) => {
 	const { t } = useTranslation();
 
 	const renderButton = () => {
@@ -59,7 +68,7 @@ const RecipientListItem = ({ index, recipient, onAction, selectedAddress }: Reci
 	);
 };
 
-export const SearchRecipient = ({
+export const SearchRecipient: FC<SearchRecipientProperties> = ({
 	title,
 	description,
 	isOpen,
@@ -67,38 +76,53 @@ export const SearchRecipient = ({
 	onAction,
 	recipients,
 	selectedAddress,
-}: SearchRecipientProperties) => {
+}) => {
 	const { setSearchKeyword, filteredList: filteredRecipients, isEmptyResults } = useSearchWallet({
 		wallets: recipients,
 	});
 
 	const { t } = useTranslation();
 
-	const columns: TableColumn[] = [
-		{
-			Header: t("COMMON.WALLET_ADDRESS"),
-			accessor: (recipient: RecipientProperties) => recipient.alias,
-		},
-		{
-			Header: t("COMMON.TYPE"),
-			accessor: "type",
-		},
-		{
-			Header: (
-				<HeaderSearchBar
-					placeholder={t("TRANSACTION.MODAL_SEARCH_RECIPIENT.SEARCH_PLACEHOLDER")}
-					offsetClassName="top-1/3 -translate-y-16 -translate-x-6"
-					onSearch={setSearchKeyword}
-					onReset={() => setSearchKeyword("")}
-					debounceTimeout={100}
-					noToggleBorder
-				/>
-			),
-			accessor: "search",
-			className: "justify-end no-border",
-			disableSortBy: true,
-		},
-	];
+	const columns = useMemo<Column<RecipientProperties>[]>(
+		() => [
+			{
+				Header: t("COMMON.WALLET_ADDRESS"),
+				accessor: "alias",
+			},
+			{
+				Header: t("COMMON.TYPE"),
+				accessor: "type",
+			},
+			{
+				Header: (
+					<HeaderSearchBar
+						placeholder={t("TRANSACTION.MODAL_SEARCH_RECIPIENT.SEARCH_PLACEHOLDER")}
+						offsetClassName="top-1/3 -translate-y-16 -translate-x-6"
+						onSearch={setSearchKeyword}
+						onReset={() => setSearchKeyword("")}
+						debounceTimeout={100}
+						noToggleBorder
+					/>
+				),
+				accessor: "id",
+				className: "justify-end no-border",
+				disableSortBy: true,
+			},
+		],
+		[t, setSearchKeyword],
+	);
+
+	const renderTableRow = useCallback(
+		(recipient: RecipientProperties, index: number) => (
+			<SearchRecipientListItem
+				index={index}
+				selectedAddress={selectedAddress}
+				recipient={recipient}
+				onAction={onAction}
+			/>
+		),
+		[selectedAddress, onAction],
+	);
 
 	return (
 		<Modal
@@ -109,17 +133,9 @@ export const SearchRecipient = ({
 			onClose={onClose}
 		>
 			<div className="mt-8">
-				<Table columns={columns} data={filteredRecipients}>
-					{(recipient: RecipientProperties, index: number) => (
-						<RecipientListItem
-							index={index}
-							selectedAddress={selectedAddress}
-							recipient={recipient}
-							onAction={onAction}
-						/>
-					)}
+				<Table columns={columns} data={filteredRecipients as RecipientProperties[]}>
+					{renderTableRow}
 				</Table>
-
 				{isEmptyResults && (
 					<EmptyResults
 						className="mt-16"

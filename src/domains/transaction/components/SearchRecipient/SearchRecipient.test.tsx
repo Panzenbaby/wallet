@@ -5,7 +5,7 @@ import { act, env, getDefaultProfileId, render, screen } from "utils/testing-lib
 
 import { translations } from "../../i18n";
 import { SearchRecipient } from "./SearchRecipient";
-import { RecipientProperties } from "./SearchRecipient.models";
+import { RecipientProperties } from "./SearchRecipient.contracts";
 
 let recipients: RecipientProperties[];
 

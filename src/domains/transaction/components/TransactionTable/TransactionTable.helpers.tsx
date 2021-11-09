@@ -1,61 +1,92 @@
 import { DTO } from "@payvo/profiles";
-import { TableColumn } from "app/components/Table/TableColumn.models";
+import { PendingTransaction } from "domains/transaction/components/TransactionTable/PendingTransactionsTable/PendingTransactionsTable.contracts";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { Column } from "react-table";
 
-interface UseColumnProperties {
-	exchangeCurrency: string | undefined;
-}
-
-export const useColumns = ({ exchangeCurrency }: UseColumnProperties) => {
+export const useTransactionTableColumns = (exchangeCurrency?: string) => {
 	const { t } = useTranslation();
 
-	return useMemo<TableColumn[]>(() => {
-		const columnId: TableColumn = {
-			Header: t("COMMON.ID"),
-			minimumWidth: true,
-		};
+	return useMemo<Column<DTO.ExtendedConfirmedTransactionData>[]>(() => {
+		const templateColumns: Column<DTO.ExtendedConfirmedTransactionData>[] = [
+			{
+				Header: t("COMMON.ID"),
+				minimumWidth: true,
+			},
+			{
+				Header: t("COMMON.DATE"),
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+				accessor: (transaction) => transaction.timestamp?.()?.toUNIX(),
+				cellWidth: "w-50",
+				id: "date",
+				sortDescFirst: true,
+			},
+			{
+				Header: t("COMMON.SENDER"),
+				cellWidth: "w-96",
+			},
+			{
+				Header: t("COMMON.RECIPIENT"),
+				cellWidth: "w-96",
+			},
+			{
+				Header: t("COMMON.AMOUNT"),
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+				accessor: (transaction) => transaction.total?.(),
+				className: "justify-end",
+				id: "amount",
+				sortDescFirst: true,
+			},
+		];
 
-		const columnDate: TableColumn = {
-			Header: t("COMMON.DATE"),
-			accessor: (transaction: DTO.ExtendedConfirmedTransactionData) => transaction.timestamp?.()?.toUNIX(),
-			cellWidth: "w-50",
-			id: "date",
-			sortDescFirst: true,
-		};
+		if (exchangeCurrency) {
+			templateColumns.push({
+				Header: t("COMMON.CURRENCY"),
+				cellWidth: "w-28",
+				className: "justify-end float-right",
+				responsiveClass: "hidden xl:table-cell",
+			});
+		}
 
-		const columnRecipient: TableColumn = {
-			Header: t("COMMON.RECIPIENT"),
-			cellWidth: "w-96",
-		};
-
-		const columnSender: TableColumn = {
-			Header: t("COMMON.SENDER"),
-			cellWidth: "w-96",
-		};
-
-		const columnAmount: TableColumn = {
-			Header: t("COMMON.AMOUNT"),
-			accessor: (transaction: DTO.ExtendedConfirmedTransactionData) => transaction.total?.(),
-			className: "justify-end",
-			id: "amount",
-			sortDescFirst: true,
-		};
-
-		const columnCurrency: TableColumn = {
-			Header: t("COMMON.CURRENCY"),
-			cellWidth: "w-28",
-			className: "justify-end float-right",
-			responsiveClass: "hidden xl:table-cell",
-		};
-
-		return [
-			columnId,
-			columnDate,
-			columnSender,
-			columnRecipient,
-			columnAmount,
-			exchangeCurrency && columnCurrency,
-		].filter(Boolean) as TableColumn[];
+		return templateColumns;
 	}, [t, exchangeCurrency]);
+};
+
+export const usePendingTransactionTableColumns = () => {
+	const { t } = useTranslation();
+
+	return useMemo<Column<PendingTransaction>[]>(
+		() => [
+			{
+				Header: t("COMMON.ID"),
+				minimumWidth: true,
+			},
+			{
+				Header: t("COMMON.DATE"),
+				accessor: () => "timestamp",
+				cellWidth: "w-50",
+				sortDescFirst: true,
+			},
+			{
+				Header: t("COMMON.RECIPIENT"),
+				cellWidth: "w-96",
+			},
+			{
+				Header: t("COMMON.STATUS"),
+				cellWidth: "w-20",
+				className: "justify-center",
+			},
+			{
+				Header: t("COMMON.AMOUNT"),
+				accessor: () => "amount",
+				className: "justify-end",
+			},
+			{
+				Header: t("COMMON.SIGN"),
+				cellWidth: "w-24",
+				className: "hidden no-border",
+			},
+		],
+		[t],
+	);
 };

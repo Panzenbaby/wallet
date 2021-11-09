@@ -8,11 +8,12 @@ import { SelectNetwork } from "domains/network/components/SelectNetwork";
 import { SelectAddress } from "domains/profile/components/SelectAddress";
 import { AddRecipient } from "domains/transaction/components/AddRecipient";
 import { FeeField } from "domains/transaction/components/FeeField";
-import { RecipientListItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
+import { RecipientItem } from "domains/transaction/components/RecipientList/RecipientList.contracts";
 import { buildTransferData } from "domains/transaction/pages/SendTransfer/SendTransfer.helpers";
 import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { assertNetwork } from "utils/assertions";
 
 export const FormStep = ({
 	networks,
@@ -21,7 +22,7 @@ export const FormStep = ({
 }: {
 	networks: Networks.Network[];
 	profile: Contracts.IProfile;
-	deeplinkProps: any;
+	deeplinkProps: Record<string, string>;
 }) => {
 	const isMounted = useRef(true);
 
@@ -37,6 +38,7 @@ export const FormStep = ({
 
 	let senderWallet: Contracts.IReadWriteWallet | undefined;
 	if (network) {
+		assertNetwork(network);
 		senderWallet = profile.wallets().findByAddressWithNetwork(senderAddress, network.id());
 	}
 
@@ -79,12 +81,12 @@ export const FormStep = ({
 		[],
 	);
 
-	const getRecipients = () => {
-		if (deeplinkProps?.recipient && deeplinkProps?.amount) {
+	const getRecipients = (): RecipientItem[] => {
+		if (deeplinkProps.recipient && deeplinkProps.amount) {
 			return [
 				{
 					address: deeplinkProps.recipient,
-					amount: senderWallet?.coin().bigNumber().make(deeplinkProps.amount),
+					amount: +deeplinkProps.amount,
 				},
 			];
 		}
@@ -147,16 +149,15 @@ export const FormStep = ({
 
 				<div data-testid="recipient-address">
 					<AddRecipient
-						assetSymbol={senderWallet?.currency()}
+						disableMultiPaymentOption={senderWallet?.isLedger()}
+						onChange={(value: RecipientItem[]) => {
+							setValue("recipients", value, { shouldDirty: true, shouldValidate: true });
+						}}
 						profile={profile}
-						wallet={senderWallet}
 						recipients={getRecipients()}
 						showMultiPaymentOption={network?.allows(Enums.FeatureFlag.TransactionMultiPayment)}
-						disableMultiPaymentOption={senderWallet?.isLedger()}
-						withDeeplink={!!deeplinkProps?.recipient}
-						onChange={(value: RecipientListItem[]) =>
-							setValue("recipients", value, { shouldDirty: true, shouldValidate: true })
-						}
+						wallet={senderWallet}
+						withDeeplink={!!deeplinkProps.recipient}
 					/>
 				</div>
 

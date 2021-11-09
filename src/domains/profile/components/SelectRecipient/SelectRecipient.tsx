@@ -148,6 +148,14 @@ export const SelectRecipient = React.forwardRef<HTMLInputElement, SelectRecipien
 			setIsRecipientSearchOpen(true);
 		};
 
+		const onAction = useCallback(
+			(changedAddress: string) => {
+				onChangeAddress(changedAddress);
+				setIsRecipientSearchOpen(false);
+			},
+			[onChangeAddress, setIsRecipientSearchOpen],
+		);
+
 		return (
 			<div>
 				<div data-testid="SelectRecipient__wrapper" className="flex relative items-center w-full text-left">
@@ -199,10 +207,7 @@ export const SelectRecipient = React.forwardRef<HTMLInputElement, SelectRecipien
 				<SearchRecipient
 					isOpen={isRecipientSearchOpen}
 					recipients={allAddresses}
-					onAction={(changedAddress: string) => {
-						onChangeAddress(changedAddress);
-						setIsRecipientSearchOpen(false);
-					}}
+					onAction={onAction}
 					onClose={() => setIsRecipientSearchOpen(false)}
 					selectedAddress={selectedAddress}
 				/>

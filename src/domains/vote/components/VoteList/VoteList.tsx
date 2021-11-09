@@ -4,17 +4,18 @@ import { AmountCrypto } from "app/components/Amount";
 import { Avatar } from "app/components/Avatar";
 import React from "react";
 import tw, { styled } from "twin.macro";
+import { assertReadOnlyWallet } from "utils/assertions";
 
 interface VoteListProperties {
 	votes: Contracts.VoteRegistryItem[] | Contracts.IReadOnlyWallet[];
-	currency?: string;
+	currency: string;
 	isNegativeAmount?: boolean;
 }
 
 interface VoteItemProperties {
 	wallet: Contracts.IReadOnlyWallet;
 	amount?: number;
-	currency?: string;
+	currency: string;
 	isNegativeAmount?: boolean;
 }
 
@@ -24,10 +25,10 @@ const ListWrapper = styled.div`
 
 const VoteItem = ({ wallet, amount = 0, currency, isNegativeAmount }: VoteItemProperties) => (
 	<div className="flex items-center py-4 border-b border-dashed last:border-b-0 border-theme-secondary-300 dark:border-theme-secondary-800">
-		<Avatar size="sm" address={wallet?.address()} />
+		<Avatar size="sm" address={wallet.address()} />
 
 		<div className="flex-1 ml-4 w-28">
-			<Address address={wallet?.address()} walletName={wallet?.username()} />
+			<Address address={wallet.address()} walletName={wallet.username()} />
 		</div>
 
 		{amount > 0 && (
@@ -46,24 +47,32 @@ export const VoteList = ({ votes, currency, isNegativeAmount = false }: VoteList
 	if ((votes[0] as Contracts.VoteRegistryItem).amount === undefined) {
 		return (
 			<ListWrapper>
-				{(votes as Contracts.IReadOnlyWallet[])?.map((vote: Contracts.IReadOnlyWallet, index: number) => (
-					<VoteItem key={index} wallet={vote} />
+				{(votes as Contracts.IReadOnlyWallet[]).map((vote: Contracts.IReadOnlyWallet, index: number) => (
+					<VoteItem currency={currency} key={index} wallet={vote} />
 				))}
 			</ListWrapper>
 		);
 	}
 
+	const renderVoteItem = (vote: Contracts.VoteRegistryItem, index: number) => {
+		assertReadOnlyWallet(vote.wallet);
+
+		return (
+			<VoteItem
+				key={index}
+				wallet={vote.wallet}
+				amount={vote.amount}
+				currency={currency}
+				isNegativeAmount={isNegativeAmount}
+			/>
+		);
+	};
+
 	return (
 		<ListWrapper>
-			{(votes as Contracts.VoteRegistryItem[])?.map((vote: Contracts.VoteRegistryItem, index: number) => (
-				<VoteItem
-					key={index}
-					wallet={vote.wallet!}
-					amount={vote.amount}
-					currency={currency}
-					isNegativeAmount={isNegativeAmount}
-				/>
-			))}
+			{(votes as Contracts.VoteRegistryItem[]).map((vote: Contracts.VoteRegistryItem, index: number) =>
+				renderVoteItem(vote, index),
+			)}
 		</ListWrapper>
 	);
 };

@@ -52,11 +52,11 @@ export const InputFee: React.FC<InputFeeProperties> = memo(
 			setDefaultAdvancedValue();
 		}, [avg, advancedValue]); // eslint-disable-line react-hooks/exhaustive-deps
 
-		const ticker = network?.ticker();
-		const exchangeTicker = profile?.settings().get<string>(Contracts.ProfileSetting.ExchangeCurrency);
+		const ticker = network.ticker();
+		const exchangeTicker = profile.settings().get<string>(Contracts.ProfileSetting.ExchangeCurrency);
 		const { convert } = useExchangeRate({ exchangeTicker, ticker });
 
-		const showConvertedValues = !!network?.isLive();
+		const showConvertedValues = network.isLive();
 
 		const options: InputFeeSimpleOptions = {
 			[InputFeeSimpleValue.Slow]: {
@@ -140,7 +140,7 @@ export const InputFee: React.FC<InputFeeProperties> = memo(
 					<InputFeeSimple
 						options={options}
 						loading={loading || !ticker || !exchangeTicker}
-						ticker={ticker!}
+						ticker={ticker}
 						exchangeTicker={exchangeTicker!}
 						showConvertedValues={showConvertedValues}
 						value={simpleValue}

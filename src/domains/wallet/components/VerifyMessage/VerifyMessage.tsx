@@ -129,14 +129,14 @@ export const VerifyMessage = ({ profileId, walletId, onSubmit, onCancel, isOpen,
 	const isJson = verificationMethod === VerificationMethod.Json;
 
 	const handleSubmit = async () => {
-		const profile = env?.profiles().findById(profileId);
-		const wallet = profile?.wallets().findById(walletId);
+		const profile = env.profiles().findById(profileId);
+		const wallet = profile.wallets().findById(walletId);
 
 		try {
 			const signedMessage = isJson
 				? JSON.parse(getValues("jsonString"))
 				: getValues(["signatory", "message", "signature"]);
-			const isVerified = await wallet?.message().verify(signedMessage);
+			const isVerified = await wallet.message().verify(signedMessage);
 
 			setIsSubmitted(true);
 			setIsMessageVerified(isVerified);

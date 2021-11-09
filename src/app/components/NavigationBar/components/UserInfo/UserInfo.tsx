@@ -18,7 +18,7 @@ export const UserInfo: FC<UserInfoProperties> = ({ onUserAction, avatarImage, us
 				data-testid="navbar__useractions"
 			>
 				<Avatar size="lg" highlight={isOpen}>
-					{avatarImage?.endsWith("</svg>") ? (
+					{avatarImage.endsWith("</svg>") ? (
 						<>
 							<img alt="Profile Avatar" src={`data:image/svg+xml;utf8,${avatarImage}`} />
 							<span className="absolute text-sm font-semibold text-theme-background dark:text-theme-text">
