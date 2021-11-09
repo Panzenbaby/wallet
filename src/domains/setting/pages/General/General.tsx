@@ -9,7 +9,7 @@ import { Select } from "app/components/SelectDropdown";
 import { SelectProfileImage } from "app/components/SelectProfileImage";
 import { Toggle } from "app/components/Toggle";
 import { useEnvironmentContext } from "app/contexts";
-import { useActiveProfile, useProfileJobs, useValidation } from "app/hooks";
+import { useAccentColor, useActiveProfile, useProfileJobs, useTheme, useValidation } from "app/hooks";
 import { useCurrencyOptions } from "app/hooks/use-currency-options";
 import { toasts } from "app/services";
 import { PlatformSdkChoices } from "data";
@@ -44,6 +44,9 @@ export const GeneralSettings: React.FC = () => {
 
 	const { persist } = useEnvironmentContext();
 	const { syncExchangeRates } = useProfileJobs(profile);
+
+	const { setProfileTheme } = useTheme();
+	const { setProfileAccentColor } = useAccentColor();
 
 	const history = useHistory();
 	const { t } = useTranslation();
@@ -98,9 +101,9 @@ export const GeneralSettings: React.FC = () => {
 		register("useTestNetworks");
 	}, [register]);
 
-	const formattedName = name?.trim();
+	const formattedName = name.trim();
 
-	const hasDefaultAvatar = !!avatar?.endsWith("</svg>");
+	const hasDefaultAvatar = !!avatar.endsWith("</svg>");
 
 	/* istanbul ignore next */
 	const isUseTestNetworksChecked = useTestNetworks ?? false;
@@ -140,7 +143,11 @@ export const GeneralSettings: React.FC = () => {
 
 	const handleOnReset = () => {
 		setIsResetProfileOpen(false);
+
 		reset(getDefaultValues());
+
+		setProfileTheme(profile);
+		setProfileAccentColor(profile);
 
 		window.scrollTo({ behavior: "smooth", top: 0 });
 	};
