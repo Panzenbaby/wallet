@@ -19,7 +19,7 @@ export interface PluginAPI {
 		post: (url: string, data?: object) => Promise<Http.HttpResponse>;
 	};
 	filesystem(): {
-		askUserToSaveFile(content: string, suggestedFileName?: string): Promise<void>;
+		askUserToSaveFile(content: string, suggestedFileName?: string): Promise<boolean>;
 		askUserToOpenFile(): Promise<string | undefined>;
 	};
 	events(): {

@@ -52,25 +52,60 @@ describe("FileSystemPluginService", () => {
 		expect(content).toBe("test mnemonic");
 	});
 
-	it("should save file", async () => {
-		const content = "test";
+	describe("save file", async () => {
 
-		const saveSpy = jest
-			.spyOn(electron.remote.dialog, "showSaveDialog")
-			.mockResolvedValue({ canceled: false, filePath: "filePath" });
+		describe("successfully", async () => {
 
-		const fixture = (api: PluginAPI) => {
-			api.filesystem().askUserToSaveFile(content);
-		};
+			it("returns true", async () => {
+				const content = "test";
 
-		ctrl = new PluginController(config, fixture);
-		ctrl.enable(profile);
+				const saveSpy = jest
+					.spyOn(electron.remote.dialog, "showSaveDialog")
+					.mockResolvedValue({ canceled: false, filePath: "filePath" });
 
-		manager.plugins().push(ctrl);
-		manager.plugins().runAllEnabled(profile);
+				let result = null
+				const fixture = async (api: PluginAPI) => {
+					result = await api.filesystem().askUserToSaveFile(content);
+				};
 
-		await new Promise((r) => setTimeout(r, 200));
+				ctrl = new PluginController(config, fixture);
+				ctrl.enable(profile);
 
-		expect(saveSpy).toHaveBeenCalled();
+				manager.plugins().push(ctrl);
+				manager.plugins().runAllEnabled(profile);
+
+				await new Promise((r) => setTimeout(r, 200));
+
+				expect(saveSpy).toHaveBeenCalled();
+				expect(result).toBe(true);
+			});
+		});
+
+		describe("cancel dialog", () => {
+
+			it("returns false", async () => {
+				const content = "test";
+
+				const saveSpy = jest
+					.spyOn(electron.remote.dialog, "showSaveDialog")
+					.mockResolvedValue({ canceled: true, filePath: "filePath" });
+
+				let result = null
+				const fixture = async (api: PluginAPI) => {
+					result = await api.filesystem().askUserToSaveFile(content);
+				};
+
+				ctrl = new PluginController(config, fixture);
+				ctrl.enable(profile);
+
+				manager.plugins().push(ctrl);
+				manager.plugins().runAllEnabled(profile);
+
+				await new Promise((r) => setTimeout(r, 200));
+
+				expect(saveSpy).toHaveBeenCalled();
+				expect(result).toBe(false);
+			});
+		});
 	});
 });
