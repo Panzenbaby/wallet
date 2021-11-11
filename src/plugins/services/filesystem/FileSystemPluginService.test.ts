@@ -76,7 +76,7 @@ describe("FileSystemPluginService", () => {
 
 				await new Promise((r) => setTimeout(r, 200));
 
-				expect(saveSpy).toHaveBeenCalled();
+				expect(saveSpy).toHaveBeenCalledWith(expect.any(Object));
 				expect(result).toBe(true);
 			});
 		});
@@ -103,7 +103,7 @@ describe("FileSystemPluginService", () => {
 
 				await new Promise((r) => setTimeout(r, 200));
 
-				expect(saveSpy).toHaveBeenCalled();
+				expect(saveSpy).toHaveBeenCalledWith(expect.any(Object));
 				expect(result).toBe(false);
 			});
 		});
