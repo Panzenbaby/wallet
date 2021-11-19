@@ -57,4 +57,41 @@ describe("ProfilePluginService", () => {
 		// @ts-ignore
 		expect(wallets[0].data.ADDRESS).toBe("D8rr7B1d6TL6pf14LgMz4sKp1VBMs6YUYD");
 	});
+
+	it("should get exchangeCurrency from settings", () => {
+		const desireExchangeCurrency = 'BTC'
+		profile.settings().set(Contracts.ProfileSetting.ExchangeCurrency, desireExchangeCurrency)
+
+		let currency
+		const fixture = (api: PluginAPI) => {
+			currency = api.profile().exchangeCurrency();
+		};
+
+		ctrl = new PluginController(config, fixture);
+		ctrl.enable(profile);
+
+		manager.plugins().push(ctrl);
+		manager.plugins().runAllEnabled(profile);
+
+		expect(currency).toBe(desireExchangeCurrency)
+	});
+
+	it("should get locale from settings", () => {
+		const desireLocale = 'en-EN'
+		profile.settings().set(Contracts.ProfileSetting.Locale, desireLocale)
+
+
+		let locale
+		const fixture = (api: PluginAPI) => {
+			locale = api.profile().locale();
+		};
+
+		ctrl = new PluginController(config, fixture);
+		ctrl.enable(profile);
+
+		manager.plugins().push(ctrl);
+		manager.plugins().runAllEnabled(profile);
+
+		expect(locale).toBe(desireLocale)
+	});
 });

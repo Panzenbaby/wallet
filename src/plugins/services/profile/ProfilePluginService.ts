@@ -19,7 +19,15 @@ export class ProfilePluginService implements PluginService {
 
 	api(): Record<string, Function> {
 		return {
+			exchangeCurrency: () =>
+				this.#profile
+					?.settings()
+					.get(Contracts.ProfileSetting.ExchangeCurrency),
 			id: () => this.#profile?.id(),
+			locale: () =>
+				this.#profile
+					?.settings()
+					.get(Contracts.ProfileSetting.Locale),
 			// TODO: return ReadOnlyWallet[]
 			wallets: () =>
 				this.#profile

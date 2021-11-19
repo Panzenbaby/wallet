@@ -24,6 +24,8 @@ export interface PluginAPI {
 		on: (channel: string, callback: () => void) => void;
 	};
 	profile(): {
+		exchangeCurrency: () => string,
+		locale: () => string,
 		wallets: () => Record<string, any>[];
 	};
 	store(): {
