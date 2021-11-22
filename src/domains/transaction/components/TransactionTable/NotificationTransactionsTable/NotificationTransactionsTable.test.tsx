@@ -1,7 +1,15 @@
 import { Contracts, DTO } from "@payvo/sdk-profiles";
 import nock from "nock";
 import React from "react";
-import { env, fireEvent, getDefaultProfileId, getDefaultWalletId, render, waitFor } from "utils/testing-library";
+import {
+	env,
+	fireEvent,
+	getDefaultProfileId,
+	getDefaultWalletId,
+	render,
+	screen,
+	waitFor,
+} from "utils/testing-library";
 
 import { NotificationTransactionsTable } from "./NotificationTransactionsTable";
 
@@ -26,24 +34,20 @@ describe("NotificationsTransactionTable", () => {
 	});
 
 	it("should render", () => {
-		const { getAllByTestId } = render(
-			<NotificationTransactionsTable transactions={transactions} profile={profile} isLoading={false} />,
-		);
+		render(<NotificationTransactionsTable transactions={transactions} profile={profile} isLoading={false} />);
 
-		expect(getAllByTestId("TableRow")).toHaveLength(transactions.length);
+		expect(screen.getAllByTestId("TableRow")).toHaveLength(transactions.length);
 	});
 
 	it("should render loading state", () => {
-		const { getAllByTestId } = render(
-			<NotificationTransactionsTable transactions={transactions} profile={profile} />,
-		);
+		render(<NotificationTransactionsTable transactions={transactions} profile={profile} />);
 
-		expect(getAllByTestId("TableRow")).toHaveLength(10);
+		expect(screen.getAllByTestId("TableRow")).toHaveLength(10);
 	});
 
 	it("should emit on visibility change event", async () => {
 		const onVisibilityChange = jest.fn();
-		const { getAllByTestId } = render(
+		render(
 			<NotificationTransactionsTable
 				transactions={transactions}
 				profile={profile}
@@ -52,14 +56,14 @@ describe("NotificationsTransactionTable", () => {
 			/>,
 		);
 
-		expect(getAllByTestId("TableRow")).toHaveLength(transactions.length);
+		expect(screen.getAllByTestId("TableRow")).toHaveLength(transactions.length);
 
 		await waitFor(() => expect(onVisibilityChange).toHaveBeenCalledWith(false));
 	});
 
 	it("should emit on click event", async () => {
 		const onClick = jest.fn();
-		const { getAllByTestId } = render(
+		render(
 			<NotificationTransactionsTable
 				transactions={transactions}
 				profile={profile}
@@ -68,9 +72,9 @@ describe("NotificationsTransactionTable", () => {
 			/>,
 		);
 
-		expect(getAllByTestId("TableRow")).toHaveLength(transactions.length);
+		expect(screen.getAllByTestId("TableRow")).toHaveLength(transactions.length);
 
-		fireEvent.click(getAllByTestId("TableRow")[0]);
+		fireEvent.click(screen.getAllByTestId("TableRow")[0]);
 
 		await waitFor(() => expect(onClick).toHaveBeenCalledWith(expect.any(DTO.ExtendedConfirmedTransactionData)));
 	});

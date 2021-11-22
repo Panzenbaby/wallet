@@ -1,6 +1,6 @@
 import { Contracts } from "@payvo/sdk-profiles";
 import React from "react";
-import { env, fireEvent, getDefaultProfileId, render } from "utils/testing-library";
+import { env, fireEvent, getDefaultProfileId, render, screen } from "utils/testing-library";
 
 import { FilterTransactions } from "./FilterTransactions";
 
@@ -13,31 +13,27 @@ describe("FilterTransactions", () => {
 	});
 
 	it("should render", () => {
-		const { container, getByRole } = render(<FilterTransactions />);
+		const { container } = render(<FilterTransactions />);
 
-		expect(getByRole("button", { name: /Type/ })).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: /Type/ })).toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should render with default selected option", () => {
-		const { container, getByRole } = render(
-			<FilterTransactions defaultSelected={{ label: "All", value: "all" }} />,
-		);
+		const { container } = render(<FilterTransactions defaultSelected={{ label: "All", value: "all" }} />);
 
-		expect(getByRole("button", { name: /Type/ })).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: /Type/ })).toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should open dropdown list with all transaction types", async () => {
-		const { container, getByRole, findByTestId } = render(
-			<FilterTransactions wallets={profile.wallets().values()} />,
-		);
+		const { container } = render(<FilterTransactions wallets={profile.wallets().values()} />);
 
-		expect(getByRole("button", { name: /Type/ })).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: /Type/ })).toBeInTheDocument();
 
-		fireEvent.click(getByRole("button", { name: /Type/ }));
+		fireEvent.click(screen.getByRole("button", { name: /Type/ }));
 
-		await findByTestId("dropdown__option--core-0");
+		await screen.findByTestId("dropdown__option--core-0");
 
 		expect(container).toMatchSnapshot();
 	});
@@ -45,17 +41,15 @@ describe("FilterTransactions", () => {
 	it("should emit onChange", async () => {
 		const onSelect = jest.fn();
 
-		const { getByRole, getByTestId, findByTestId } = render(
-			<FilterTransactions wallets={profile.wallets().values()} onSelect={onSelect} />,
-		);
+		render(<FilterTransactions wallets={profile.wallets().values()} onSelect={onSelect} />);
 
-		expect(getByRole("button", { name: /Type/ })).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: /Type/ })).toBeInTheDocument();
 
-		fireEvent.click(getByRole("button", { name: /Type/ }));
+		fireEvent.click(screen.getByRole("button", { name: /Type/ }));
 
-		await findByTestId("dropdown__option--core-0");
+		await screen.findByTestId("dropdown__option--core-0");
 
-		fireEvent.click(getByTestId("dropdown__option--core-0"));
+		fireEvent.click(screen.getByTestId("dropdown__option--core-0"));
 
 		expect(onSelect).toHaveBeenCalledWith(
 			{

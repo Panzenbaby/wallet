@@ -1,7 +1,6 @@
 import { Contracts } from "@payvo/sdk-profiles";
-import { ContactAddress } from "@payvo/sdk-profiles/distribution/contact-address";
 import React from "react";
-import { env, fireEvent, getDefaultProfileId, render } from "utils/testing-library";
+import { env, fireEvent, getDefaultProfileId, render, screen } from "utils/testing-library";
 
 import { ContactListItem } from "./ContactListItem";
 
@@ -36,7 +35,7 @@ describe("ContactListItem", () => {
 			network: "ark.mainnet",
 		});
 
-		const { asFragment, getAllByTestId, getByTestId } = render(
+		const { asFragment } = render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} useTestNetworks={false} />
@@ -44,8 +43,8 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		expect(getAllByTestId("TableRow")).toHaveLength(1);
-		expect(getByTestId("TableRow")).toHaveTextContent(address.address());
+		expect(screen.getAllByTestId("TableRow")).toHaveLength(1);
+		expect(screen.getByTestId("TableRow")).toHaveTextContent(address.address());
 
 		expect(asFragment()).toMatchSnapshot();
 
@@ -133,7 +132,7 @@ describe("ContactListItem", () => {
 	it("should call onAction callback if provided with one option", () => {
 		const onAction = jest.fn();
 
-		const { getByTestId } = render(
+		render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} onAction={onAction} options={singleOption} useTestNetworks />
@@ -141,7 +140,7 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		fireEvent.click(getByTestId("ContactListItem__one-option-button-0"));
+		fireEvent.click(screen.getByTestId("ContactListItem__one-option-button-0"));
 
 		expect(onAction).toHaveBeenCalledWith(singleOption[0], contact.addresses().first().address());
 	});
@@ -149,7 +148,7 @@ describe("ContactListItem", () => {
 	it("should call onAction callback if provided with one option in my contacts", () => {
 		const onAction = jest.fn();
 
-		const { getByTestId } = render(
+		render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} onAction={onAction} options={singleOption} useTestNetworks />
@@ -157,7 +156,7 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		fireEvent.click(getByTestId("ContactListItem__one-option-button-0"));
+		fireEvent.click(screen.getByTestId("ContactListItem__one-option-button-0"));
 
 		expect(onAction).toHaveBeenCalledWith(singleOption[0], contact.addresses().first().address());
 	});
@@ -165,7 +164,7 @@ describe("ContactListItem", () => {
 	it("should call onAction callback if provided with multiple options", () => {
 		const onAction = jest.fn();
 
-		const { getAllByTestId, getByTestId } = render(
+		render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} onAction={onAction} options={multiOptions} useTestNetworks />
@@ -173,8 +172,8 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		fireEvent.click(getAllByTestId("dropdown__toggle")[0]);
-		fireEvent.click(getByTestId("dropdown__option--0"));
+		fireEvent.click(screen.getAllByTestId("dropdown__toggle")[0]);
+		fireEvent.click(screen.getByTestId("dropdown__option--0"));
 
 		expect(onAction).toHaveBeenCalledWith(singleOption[0], contact.addresses().first().address());
 	});
@@ -182,7 +181,7 @@ describe("ContactListItem", () => {
 	it("should call onAction callback if provided with multiple options in my contacts", () => {
 		const onAction = jest.fn();
 
-		const { getAllByTestId, getByTestId } = render(
+		render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} onAction={onAction} options={multiOptions} useTestNetworks />
@@ -190,8 +189,8 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		fireEvent.click(getAllByTestId("dropdown__toggle")[0]);
-		fireEvent.click(getByTestId("dropdown__option--0"));
+		fireEvent.click(screen.getAllByTestId("dropdown__toggle")[0]);
+		fireEvent.click(screen.getByTestId("dropdown__option--0"));
 
 		expect(onAction).toHaveBeenCalledWith(singleOption[0], contact.addresses().first().address());
 	});
@@ -199,7 +198,7 @@ describe("ContactListItem", () => {
 	it("should not call onAction callback if not provided with multiple options", () => {
 		const onAction = jest.fn();
 
-		const { getAllByTestId, getByTestId } = render(
+		render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} options={multiOptions} useTestNetworks />
@@ -207,8 +206,8 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		fireEvent.click(getAllByTestId("dropdown__toggle")[0]);
-		fireEvent.click(getByTestId("dropdown__option--0"));
+		fireEvent.click(screen.getAllByTestId("dropdown__toggle")[0]);
+		fireEvent.click(screen.getByTestId("dropdown__option--0"));
 
 		expect(onAction).not.toHaveBeenCalled();
 	});
@@ -216,7 +215,7 @@ describe("ContactListItem", () => {
 	it("should not call onAction callback if not provided with multiple options in my contacts", () => {
 		const onAction = jest.fn();
 
-		const { getAllByTestId, getByTestId } = render(
+		render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} options={multiOptions} useTestNetworks />
@@ -224,8 +223,8 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		fireEvent.click(getAllByTestId("dropdown__toggle")[0]);
-		fireEvent.click(getByTestId("dropdown__option--0"));
+		fireEvent.click(screen.getAllByTestId("dropdown__toggle")[0]);
+		fireEvent.click(screen.getByTestId("dropdown__option--0"));
 
 		expect(onAction).not.toHaveBeenCalled();
 	});
@@ -233,7 +232,7 @@ describe("ContactListItem", () => {
 	it("should call onAction callback with given values", () => {
 		const onAction = jest.fn();
 
-		const { getByTestId } = render(
+		render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} onAction={onAction} options={singleOption} useTestNetworks />
@@ -241,7 +240,7 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		fireEvent.click(getByTestId("ContactListItem__one-option-button-0"));
+		fireEvent.click(screen.getByTestId("ContactListItem__one-option-button-0"));
 
 		expect(onAction).toHaveBeenCalledWith(
 			{ label: "Option 1", value: "option_1" },
@@ -252,7 +251,7 @@ describe("ContactListItem", () => {
 	it("should call onAction callback with given values in my contacts", () => {
 		const onAction = jest.fn();
 
-		const { getByTestId } = render(
+		render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} onAction={onAction} options={singleOption} useTestNetworks />
@@ -260,7 +259,7 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		fireEvent.click(getByTestId("ContactListItem__one-option-button-0"));
+		fireEvent.click(screen.getByTestId("ContactListItem__one-option-button-0"));
 
 		expect(onAction).toHaveBeenCalledWith(
 			{ label: "Option 1", value: "option_1" },
@@ -271,7 +270,7 @@ describe("ContactListItem", () => {
 	it("should call send", () => {
 		const onSend = jest.fn();
 
-		const { getAllByTestId } = render(
+		render(
 			<table>
 				<tbody>
 					<ContactListItem item={contact} onSend={onSend} options={singleOption} useTestNetworks />
@@ -279,8 +278,8 @@ describe("ContactListItem", () => {
 			</table>,
 		);
 
-		fireEvent.click(getAllByTestId("ContactListItem__send-button")[0]);
+		fireEvent.click(screen.getAllByTestId("ContactListItem__send-button")[0]);
 
-		expect(onSend).toHaveBeenCalledWith(expect.any(ContactAddress));
+		expect(onSend).toHaveBeenCalledWith(contact);
 	});
 });
